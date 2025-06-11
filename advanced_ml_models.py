@@ -28,18 +28,17 @@ class AdvancedRealEstatePredictor:
             ),
             'xgboost': xgb.XGBRegressor(
                 random_state=42, 
-                n_estimators=400,  # More estimators for better accuracy
-                max_depth=12,      # Deeper for complex relationships
-                learning_rate=0.06, # Lower for better convergence
-                subsample=0.87,
-                colsample_bytree=0.85,
+                n_estimators=300,  # Reduced to avoid early stopping issues in CV
+                max_depth=10,      # Slightly reduced for stability
+                learning_rate=0.08, # Slightly higher to compensate
+                subsample=0.85,
+                colsample_bytree=0.8,
                 reg_alpha=0.05,    # Fine-tuned regularization
                 reg_lambda=0.8,    
                 min_child_weight=2,
                 gamma=0.05,
                 objective='reg:squarederror',
                 eval_metric='rmse',
-                early_stopping_rounds=75,
                 n_jobs=-1
             ),
             'gradient_boosting': GradientBoostingRegressor(
@@ -290,8 +289,26 @@ class AdvancedRealEstatePredictor:
             r2 = r2_score(y_test, y_pred)
             rmse = np.sqrt(mean_squared_error(y_test, y_pred))
             
-            # Cross-validation score
+            # Cross-validation score (handle XGBoost separately to avoid early stopping issues)
             if model_name == 'xgboost':
+                # Create XGBoost model without early stopping for CV
+                xgb_cv_model = xgb.XGBRegressor(
+                    random_state=42, 
+                    n_estimators=300,
+                    max_depth=10,
+                    learning_rate=0.08,
+                    subsample=0.85,
+                    colsample_bytree=0.8,
+                    reg_alpha=0.05,
+                    reg_lambda=0.8,
+                    min_child_weight=2,
+                    gamma=0.05,
+                    objective='reg:squarederror',
+                    eval_metric='rmse',
+                    n_jobs=-1
+                )
+                cv_scores = cross_val_score(xgb_cv_model, X_train_scaled, y_train, cv=5, scoring='r2')
+            elif model_name == 'gradient_boosting':
                 cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
             else:
                 cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
