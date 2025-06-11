@@ -10,6 +10,8 @@ from emi_calculator import EMICalculator
 from advanced_ml_models import AdvancedRealEstatePredictor
 from live_data_scraper import LivePropertyDataScraper
 from market_analysis import ComparativeMarketAnalyzer
+from database import db_manager
+import uuid
 import warnings
 warnings.filterwarnings('ignore')
 
