@@ -1,0 +1,201 @@
+District,Sub_District,Area_SqFt,BHK,Property_Type,Furnishing,Price_INR
+Sector 14,Old Gurugram,1200,2,Apartment,Semi-Furnished,9500000
+Sector 14,Sector 15,1150,2,Apartment,Fully Furnished,8800000
+Sector 14,Sector 17,1100,2,Apartment,Unfurnished,8200000
+DLF City,Phase 1,1400,3,Apartment,Fully Furnished,18500000
+DLF City,Phase 2,1350,3,Apartment,Semi-Furnished,16800000
+DLF City,Phase 3,1300,3,Apartment,Semi-Furnished,15500000
+DLF City,Phase 4,1450,3,Apartment,Fully Furnished,19500000
+DLF City,Phase 5,1400,3,Apartment,Semi-Furnished,17800000
+Golf Course Road,Sector 54,1600,3,Apartment,Fully Furnished,24500000
+Golf Course Road,Sector 53,1550,3,Apartment,Semi-Furnished,22500000
+Golf Course Road,DLF Golf Links,1800,4,Apartment,Fully Furnished,35500000
+Sohna Road,Sector 47,1250,3,Apartment,Semi-Furnished,12500000
+Sohna Road,Sector 48,1200,2,Apartment,Unfurnished,9800000
+Sohna Road,Sector 49,1300,3,Apartment,Semi-Furnished,13200000
+New Gurugram,Sector 37C,1350,3,Apartment,Semi-Furnished,14500000
+New Gurugram,Sector 37D,1300,3,Apartment,Unfurnished,13500000
+New Gurugram,Sector 82,1400,3,Apartment,Semi-Furnished,15800000
+New Gurugram,Sector 83,1350,3,Apartment,Semi-Furnished,15200000
+New Gurugram,Sector 84,1300,3,Apartment,Unfurnished,14200000
+Cyber City,DLF Cyber City,1100,2,Apartment,Fully Furnished,16500000
+Cyber City,Phase 2,1050,2,Apartment,Semi-Furnished,14800000
+Cyber City,Phase 3,1000,2,Apartment,Unfurnished,13500000
+MG Road,Sector 28,1200,2,Apartment,Semi-Furnished,12500000
+MG Road,Sector 29,1150,2,Apartment,Semi-Furnished,11800000
+MG Road,IFFCO Chowk,1100,2,Apartment,Unfurnished,10800000
+Udyog Vihar,Phase 1,1000,2,Apartment,Unfurnished,8500000
+Udyog Vihar,Phase 2,950,2,Apartment,Semi-Furnished,7800000
+Udyog Vihar,Phase 3,1050,2,Apartment,Semi-Furnished,8800000
+Udyog Vihar,Phase 4,1000,2,Apartment,Unfurnished,8200000
+Udyog Vihar,Phase 5,1100,2,Apartment,Semi-Furnished,9200000
+South City,South City 1,1300,3,Apartment,Semi-Furnished,14500000
+South City,South City 2,1250,3,Apartment,Unfurnished,13200000
+IMT Manesar,Sector 1,1200,2,Apartment,Unfurnished,6800000
+IMT Manesar,Sector 2,1150,2,Apartment,Semi-Furnished,6500000
+IMT Manesar,Sector 3,1100,2,Apartment,Unfurnished,6200000
+Palam Vihar,Sector 2,1250,3,Apartment,Semi-Furnished,9800000
+Palam Vihar,Sector 6,1200,2,Apartment,Unfurnished,8500000
+Palam Vihar,Sector 7,1150,2,Apartment,Semi-Furnished,8200000
+Nirvana Country,Sector 50,1800,4,Apartment,Fully Furnished,28500000
+Nirvana Country,South City,1750,4,Apartment,Semi-Furnished,25500000
+Sector 14,Old Gurugram,2400,4,Independent House,Semi-Furnished,28500000
+Sector 14,Sector 15,2300,4,Independent House,Fully Furnished,26500000
+Sector 14,Sector 17,2200,4,Independent House,Unfurnished,24500000
+DLF City,Phase 1,3000,5,Independent House,Fully Furnished,68500000
+DLF City,Phase 2,2900,5,Independent House,Semi-Furnished,62500000
+DLF City,Phase 3,2800,5,Independent House,Semi-Furnished,58500000
+DLF City,Phase 4,3100,5,Independent House,Fully Furnished,72500000
+DLF City,Phase 5,3000,5,Independent House,Semi-Furnished,65500000
+Golf Course Road,Sector 54,3500,6,Independent House,Fully Furnished,125000000
+Golf Course Road,Sector 53,3400,6,Independent House,Semi-Furnished,115000000
+Golf Course Road,DLF Golf Links,4000,6,Independent House,Fully Furnished,185000000
+Sohna Road,Sector 47,2600,4,Builder Floor,Semi-Furnished,35500000
+Sohna Road,Sector 48,2500,4,Builder Floor,Unfurnished,28500000
+Sohna Road,Sector 49,2700,4,Builder Floor,Semi-Furnished,38500000
+New Gurugram,Sector 37C,2800,5,Independent House,Semi-Furnished,48500000
+New Gurugram,Sector 37D,2700,5,Independent House,Unfurnished,45500000
+New Gurugram,Sector 82,2900,5,Independent House,Semi-Furnished,52500000
+New Gurugram,Sector 83,2800,5,Independent House,Semi-Furnished,49500000
+New Gurugram,Sector 84,2700,5,Independent House,Unfurnished,46500000
+Cyber City,DLF Cyber City,2200,4,Builder Floor,Fully Furnished,48500000
+Cyber City,Phase 2,2100,4,Builder Floor,Semi-Furnished,42500000
+Cyber City,Phase 3,2000,4,Builder Floor,Unfurnished,38500000
+MG Road,Sector 28,2400,4,Builder Floor,Semi-Furnished,36500000
+MG Road,Sector 29,2300,4,Builder Floor,Semi-Furnished,34500000
+MG Road,IFFCO Chowk,2200,4,Builder Floor,Unfurnished,32500000
+Udyog Vihar,Phase 1,2000,4,Builder Floor,Unfurnished,28500000
+Udyog Vihar,Phase 2,1900,3,Builder Floor,Semi-Furnished,24500000
+Udyog Vihar,Phase 3,2100,4,Builder Floor,Semi-Furnished,32500000
+Udyog Vihar,Phase 4,2000,4,Builder Floor,Unfurnished,29500000
+Udyog Vihar,Phase 5,2200,4,Builder Floor,Semi-Furnished,35500000
+South City,South City 1,2700,5,Independent House,Semi-Furnished,48500000
+South City,South City 2,2600,4,Independent House,Unfurnished,42500000
+IMT Manesar,Sector 1,2400,4,Builder Floor,Unfurnished,22500000
+IMT Manesar,Sector 2,2300,4,Builder Floor,Semi-Furnished,21500000
+IMT Manesar,Sector 3,2200,4,Builder Floor,Unfurnished,20500000
+Palam Vihar,Sector 2,2600,4,Builder Floor,Semi-Furnished,32500000
+Palam Vihar,Sector 6,2500,4,Builder Floor,Unfurnished,28500000
+Palam Vihar,Sector 7,2400,4,Builder Floor,Semi-Furnished,29500000
+Nirvana Country,Sector 50,3800,6,Independent House,Fully Furnished,128000000
+Nirvana Country,South City,3700,6,Independent House,Semi-Furnished,118000000
+Sector 14,Old Gurugram,800,1,Apartment,Semi-Furnished,6200000
+Sector 14,Sector 15,750,1,Apartment,Fully Furnished,5800000
+Sector 14,Sector 17,700,1,Apartment,Unfurnished,5200000
+DLF City,Phase 1,900,1,Apartment,Fully Furnished,12500000
+DLF City,Phase 2,850,1,Apartment,Semi-Furnished,11200000
+DLF City,Phase 3,850,1,Apartment,Semi-Furnished,10500000
+DLF City,Phase 4,950,1,Apartment,Fully Furnished,13200000
+DLF City,Phase 5,900,1,Apartment,Semi-Furnished,11800000
+Golf Course Road,Sector 54,1000,1,Apartment,Fully Furnished,16500000
+Golf Course Road,Sector 53,950,1,Apartment,Semi-Furnished,15200000
+Golf Course Road,DLF Golf Links,1100,2,Apartment,Fully Furnished,22500000
+Sohna Road,Sector 47,850,1,Apartment,Semi-Furnished,8500000
+Sohna Road,Sector 48,800,1,Apartment,Unfurnished,6800000
+Sohna Road,Sector 49,900,1,Apartment,Semi-Furnished,9200000
+New Gurugram,Sector 37C,900,1,Apartment,Semi-Furnished,9800000
+New Gurugram,Sector 37D,850,1,Apartment,Unfurnished,9200000
+New Gurugram,Sector 82,950,1,Apartment,Semi-Furnished,10500000
+New Gurugram,Sector 83,900,1,Apartment,Semi-Furnished,10200000
+New Gurugram,Sector 84,850,1,Apartment,Unfurnished,9500000
+Cyber City,DLF Cyber City,750,1,Apartment,Fully Furnished,11500000
+Cyber City,Phase 2,700,1,Apartment,Semi-Furnished,10200000
+Cyber City,Phase 3,700,1,Apartment,Unfurnished,9500000
+MG Road,Sector 28,800,1,Apartment,Semi-Furnished,8800000
+MG Road,Sector 29,750,1,Apartment,Semi-Furnished,8200000
+MG Road,IFFCO Chowk,750,1,Apartment,Unfurnished,7500000
+Udyog Vihar,Phase 1,700,1,Apartment,Unfurnished,5800000
+Udyog Vihar,Phase 2,650,1,Apartment,Semi-Furnished,5200000
+Udyog Vihar,Phase 3,700,1,Apartment,Semi-Furnished,6200000
+Udyog Vihar,Phase 4,700,1,Apartment,Unfurnished,5800000
+Udyog Vihar,Phase 5,750,1,Apartment,Semi-Furnished,6500000
+South City,South City 1,900,1,Apartment,Semi-Furnished,9800000
+South City,South City 2,850,1,Apartment,Unfurnished,9200000
+IMT Manesar,Sector 1,800,1,Apartment,Unfurnished,4500000
+IMT Manesar,Sector 2,750,1,Apartment,Semi-Furnished,4200000
+IMT Manesar,Sector 3,750,1,Apartment,Unfurnished,4000000
+Palam Vihar,Sector 2,850,1,Apartment,Semi-Furnished,6800000
+Palam Vihar,Sector 6,800,1,Apartment,Unfurnished,5800000
+Palam Vihar,Sector 7,800,1,Apartment,Semi-Furnished,6200000
+Nirvana Country,Sector 50,1200,2,Apartment,Fully Furnished,19500000
+Nirvana Country,South City,1150,2,Apartment,Semi-Furnished,17500000
+Sector 14,Old Gurugram,1600,3,Apartment,Semi-Furnished,15500000
+Sector 14,Sector 15,1550,3,Apartment,Fully Furnished,14500000
+Sector 14,Sector 17,1500,3,Apartment,Unfurnished,13500000
+DLF City,Phase 1,1800,4,Apartment,Fully Furnished,28500000
+DLF City,Phase 2,1750,4,Apartment,Semi-Furnished,26500000
+DLF City,Phase 3,1700,4,Apartment,Semi-Furnished,24500000
+DLF City,Phase 4,1850,4,Apartment,Fully Furnished,30500000
+DLF City,Phase 5,1800,4,Apartment,Semi-Furnished,27500000
+Golf Course Road,Sector 54,2200,4,Apartment,Fully Furnished,42500000
+Golf Course Road,Sector 53,2150,4,Apartment,Semi-Furnished,38500000
+Golf Course Road,DLF Golf Links,2500,5,Apartment,Fully Furnished,58500000
+Sohna Road,Sector 47,1700,3,Apartment,Semi-Furnished,20500000
+Sohna Road,Sector 48,1650,3,Apartment,Unfurnished,16800000
+Sohna Road,Sector 49,1750,3,Apartment,Semi-Furnished,22500000
+New Gurugram,Sector 37C,1800,4,Apartment,Semi-Furnished,23500000
+New Gurugram,Sector 37D,1750,4,Apartment,Unfurnished,22200000
+New Gurugram,Sector 82,1850,4,Apartment,Semi-Furnished,25500000
+New Gurugram,Sector 83,1800,4,Apartment,Semi-Furnished,24500000
+New Gurugram,Sector 84,1750,4,Apartment,Unfurnished,23200000
+Cyber City,DLF Cyber City,1500,3,Apartment,Fully Furnished,26500000
+Cyber City,Phase 2,1450,3,Apartment,Semi-Furnished,23500000
+Cyber City,Phase 3,1400,3,Apartment,Unfurnished,21500000
+MG Road,Sector 28,1650,3,Apartment,Semi-Furnished,20500000
+MG Road,Sector 29,1600,3,Apartment,Semi-Furnished,19500000
+MG Road,IFFCO Chowk,1550,3,Apartment,Unfurnished,18200000
+Udyog Vihar,Phase 1,1400,3,Apartment,Unfurnished,14500000
+Udyog Vihar,Phase 2,1350,3,Apartment,Semi-Furnished,13200000
+Udyog Vihar,Phase 3,1450,3,Apartment,Semi-Furnished,15500000
+Udyog Vihar,Phase 4,1400,3,Apartment,Unfurnished,14200000
+Udyog Vihar,Phase 5,1500,3,Apartment,Semi-Furnished,16500000
+South City,South City 1,1750,4,Apartment,Semi-Furnished,23500000
+South City,South City 2,1700,4,Apartment,Unfurnished,21500000
+IMT Manesar,Sector 1,1650,3,Apartment,Unfurnished,11200000
+IMT Manesar,Sector 2,1600,3,Apartment,Semi-Furnished,10800000
+IMT Manesar,Sector 3,1550,3,Apartment,Unfurnished,10200000
+Palam Vihar,Sector 2,1700,3,Apartment,Semi-Furnished,16500000
+Palam Vihar,Sector 6,1650,3,Apartment,Unfurnished,14200000
+Palam Vihar,Sector 7,1650,3,Apartment,Semi-Furnished,15200000
+Nirvana Country,Sector 50,2500,5,Apartment,Fully Furnished,48500000
+Nirvana Country,South City,2450,5,Apartment,Semi-Furnished,42500000
+Sector 14,Old Gurugram,2200,5,Apartment,Semi-Furnished,26500000
+Sector 14,Sector 15,2150,5,Apartment,Fully Furnished,24500000
+Sector 14,Sector 17,2100,5,Apartment,Unfurnished,22500000
+DLF City,Phase 1,2600,5,Apartment,Fully Furnished,48500000
+DLF City,Phase 2,2550,5,Apartment,Semi-Furnished,44500000
+DLF City,Phase 3,2500,5,Apartment,Semi-Furnished,41500000
+DLF City,Phase 4,2650,5,Apartment,Fully Furnished,51500000
+DLF City,Phase 5,2600,5,Apartment,Semi-Furnished,46500000
+Golf Course Road,Sector 54,3000,6,Apartment,Fully Furnished,78500000
+Golf Course Road,Sector 53,2950,6,Apartment,Semi-Furnished,72500000
+Golf Course Road,DLF Golf Links,3500,6,Apartment,Fully Furnished,125000000
+Sohna Road,Sector 47,2400,5,Apartment,Semi-Furnished,35500000
+Sohna Road,Sector 48,2350,5,Apartment,Unfurnished,28500000
+Sohna Road,Sector 49,2450,5,Apartment,Semi-Furnished,38500000
+New Gurugram,Sector 37C,2600,5,Apartment,Semi-Furnished,42500000
+New Gurugram,Sector 37D,2550,5,Apartment,Unfurnished,39500000
+New Gurugram,Sector 82,2650,5,Apartment,Semi-Furnished,45500000
+New Gurugram,Sector 83,2600,5,Apartment,Semi-Furnished,43500000
+New Gurugram,Sector 84,2550,5,Apartment,Unfurnished,41200000
+Cyber City,DLF Cyber City,2200,5,Apartment,Fully Furnished,48500000
+Cyber City,Phase 2,2150,5,Apartment,Semi-Furnished,42500000
+Cyber City,Phase 3,2100,5,Apartment,Unfurnished,38500000
+MG Road,Sector 28,2350,5,Apartment,Semi-Furnished,36500000
+MG Road,Sector 29,2300,5,Apartment,Semi-Furnished,34500000
+MG Road,IFFCO Chowk,2250,5,Apartment,Unfurnished,32200000
+Udyog Vihar,Phase 1,2100,5,Apartment,Unfurnished,26500000
+Udyog Vihar,Phase 2,2050,4,Apartment,Semi-Furnished,24200000
+Udyog Vihar,Phase 3,2150,5,Apartment,Semi-Furnished,28500000
+Udyog Vihar,Phase 4,2100,5,Apartment,Unfurnished,26200000
+Udyog Vihar,Phase 5,2200,5,Apartment,Semi-Furnished,30500000
+South City,South City 1,2500,5,Apartment,Semi-Furnished,42500000
+South City,South City 2,2450,5,Apartment,Unfurnished,38500000
+IMT Manesar,Sector 1,2350,5,Apartment,Unfurnished,20500000
+IMT Manesar,Sector 2,2300,5,Apartment,Semi-Furnished,19500000
+IMT Manesar,Sector 3,2250,5,Apartment,Unfurnished,18500000
+Palam Vihar,Sector 2,2450,5,Apartment,Semi-Furnished,29500000
+Palam Vihar,Sector 6,2400,5,Apartment,Unfurnished,25500000
+Palam Vihar,Sector 7,2400,5,Apartment,Semi-Furnished,27500000
+Nirvana Country,Sector 50,3200,6,Apartment,Fully Furnished,85000000
+Nirvana Country,South City,3150,6,Apartment,Semi-Furnished,78500000

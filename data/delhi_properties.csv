@@ -1,0 +1,186 @@
+District,Sub_District,Area_SqFt,BHK,Property_Type,Furnishing,Price_INR
+Central Delhi,Connaught Place,1200,2,Apartment,Semi-Furnished,28500000
+Central Delhi,Karol Bagh,1100,2,Apartment,Fully Furnished,22500000
+Central Delhi,Paharganj,1000,2,Apartment,Unfurnished,18500000
+South Delhi,Greater Kailash,1400,3,Apartment,Fully Furnished,35500000
+South Delhi,Defence Colony,1350,3,Apartment,Semi-Furnished,32500000
+South Delhi,Lajpat Nagar,1200,2,Apartment,Semi-Furnished,24500000
+South Delhi,Green Park,1300,3,Apartment,Unfurnished,28500000
+South Delhi,Saket,1250,3,Apartment,Semi-Furnished,26800000
+South Delhi,Vasant Kunj,1400,3,Apartment,Fully Furnished,32200000
+South Delhi,Hauz Khas,1300,3,Apartment,Semi-Furnished,29500000
+West Delhi,Rajouri Garden,1100,2,Apartment,Unfurnished,16500000
+West Delhi,Janakpuri,1050,2,Apartment,Semi-Furnished,15200000
+West Delhi,Tilak Nagar,1000,2,Apartment,Unfurnished,14500000
+West Delhi,Vikaspuri,1150,2,Apartment,Semi-Furnished,16800000
+West Delhi,Uttam Nagar,950,2,Apartment,Unfurnished,12500000
+North Delhi,Civil Lines,1200,2,Apartment,Semi-Furnished,22500000
+North Delhi,Model Town,1150,2,Apartment,Fully Furnished,20800000
+North Delhi,Kamla Nagar,1000,2,Apartment,Semi-Furnished,16500000
+North Delhi,GTB Nagar,950,2,Apartment,Unfurnished,15200000
+North Delhi,Mukherjee Nagar,1050,2,Apartment,Semi-Furnished,17200000
+East Delhi,Laxmi Nagar,1000,2,Apartment,Unfurnished,12800000
+East Delhi,Preet Vihar,1100,2,Apartment,Semi-Furnished,14500000
+East Delhi,Mayur Vihar,1150,2,Apartment,Semi-Furnished,15800000
+East Delhi,IP Extension,950,2,Apartment,Unfurnished,12200000
+East Delhi,Krishna Nagar,1000,2,Apartment,Semi-Furnished,13500000
+New Delhi,Chanakyapuri,1800,4,Apartment,Fully Furnished,65000000
+New Delhi,Lutyens Delhi,2000,4,Apartment,Fully Furnished,85000000
+New Delhi,Lodhi Road,1600,3,Apartment,Fully Furnished,48500000
+New Delhi,Khan Market,1400,3,Apartment,Semi-Furnished,42500000
+Southwest Delhi,Dwarka,1300,3,Apartment,Semi-Furnished,18500000
+Southwest Delhi,Vasant Vihar,1500,3,Apartment,Fully Furnished,38500000
+Southwest Delhi,RK Puram,1200,2,Apartment,Semi-Furnished,22500000
+Southwest Delhi,Mahipalpur,1100,2,Apartment,Unfurnished,16500000
+Northwest Delhi,Rohini,1200,2,Apartment,Semi-Furnished,15500000
+Northwest Delhi,Pitampura,1150,2,Apartment,Semi-Furnished,14800000
+Northwest Delhi,Shalimar Bagh,1100,2,Apartment,Unfurnished,13800000
+Northwest Delhi,Ashok Vihar,1050,2,Apartment,Semi-Furnished,13200000
+Central Delhi,Connaught Place,2500,5,Independent House,Semi-Furnished,85000000
+Central Delhi,Karol Bagh,2200,4,Independent House,Fully Furnished,65000000
+Central Delhi,Paharganj,2000,4,Independent House,Unfurnished,48500000
+South Delhi,Greater Kailash,3000,5,Independent House,Fully Furnished,125000000
+South Delhi,Defence Colony,2800,5,Independent House,Semi-Furnished,108000000
+South Delhi,Lajpat Nagar,2400,4,Independent House,Semi-Furnished,78500000
+South Delhi,Green Park,2600,5,Independent House,Unfurnished,95000000
+South Delhi,Saket,2500,4,Independent House,Semi-Furnished,85000000
+South Delhi,Vasant Kunj,2800,5,Independent House,Fully Furnished,118000000
+South Delhi,Hauz Khas,2600,5,Independent House,Semi-Furnished,98500000
+West Delhi,Rajouri Garden,2200,4,Builder Floor,Unfurnished,48500000
+West Delhi,Janakpuri,2100,4,Builder Floor,Semi-Furnished,42500000
+West Delhi,Tilak Nagar,2000,4,Builder Floor,Unfurnished,38500000
+West Delhi,Vikaspuri,2300,4,Builder Floor,Semi-Furnished,45500000
+West Delhi,Uttam Nagar,1900,3,Builder Floor,Unfurnished,32500000
+North Delhi,Civil Lines,2400,4,Builder Floor,Semi-Furnished,68500000
+North Delhi,Model Town,2300,4,Builder Floor,Fully Furnished,62500000
+North Delhi,Kamla Nagar,2000,4,Builder Floor,Semi-Furnished,48500000
+North Delhi,GTB Nagar,1900,3,Builder Floor,Unfurnished,42500000
+North Delhi,Mukherjee Nagar,2100,4,Builder Floor,Semi-Furnished,52500000
+East Delhi,Laxmi Nagar,2000,4,Builder Floor,Unfurnished,38500000
+East Delhi,Preet Vihar,2200,4,Builder Floor,Semi-Furnished,42500000
+East Delhi,Mayur Vihar,2300,4,Builder Floor,Semi-Furnished,45500000
+East Delhi,IP Extension,1900,3,Builder Floor,Unfurnished,35500000
+East Delhi,Krishna Nagar,2000,4,Builder Floor,Semi-Furnished,39500000
+New Delhi,Chanakyapuri,4000,6,Independent House,Fully Furnished,285000000
+New Delhi,Lutyens Delhi,4500,6,Independent House,Fully Furnished,385000000
+New Delhi,Lodhi Road,3500,5,Independent House,Fully Furnished,225000000
+New Delhi,Khan Market,3000,5,Independent House,Semi-Furnished,185000000
+Southwest Delhi,Dwarka,2600,4,Independent House,Semi-Furnished,58500000
+Southwest Delhi,Vasant Vihar,3200,5,Independent House,Fully Furnished,148000000
+Southwest Delhi,RK Puram,2400,4,Builder Floor,Semi-Furnished,78500000
+Southwest Delhi,Mahipalpur,2200,4,Builder Floor,Unfurnished,52500000
+Northwest Delhi,Rohini,2400,4,Builder Floor,Semi-Furnished,45500000
+Northwest Delhi,Pitampura,2300,4,Builder Floor,Semi-Furnished,42500000
+Northwest Delhi,Shalimar Bagh,2200,4,Builder Floor,Unfurnished,38500000
+Northwest Delhi,Ashok Vihar,2100,4,Builder Floor,Semi-Furnished,36500000
+Central Delhi,Connaught Place,800,1,Apartment,Semi-Furnished,18500000
+Central Delhi,Karol Bagh,750,1,Apartment,Fully Furnished,15500000
+Central Delhi,Paharganj,700,1,Apartment,Unfurnished,12500000
+South Delhi,Greater Kailash,900,1,Apartment,Fully Furnished,22500000
+South Delhi,Defence Colony,850,1,Apartment,Semi-Furnished,20500000
+South Delhi,Lajpat Nagar,800,1,Apartment,Semi-Furnished,16500000
+South Delhi,Green Park,850,1,Apartment,Unfurnished,18500000
+South Delhi,Saket,850,1,Apartment,Semi-Furnished,17800000
+South Delhi,Vasant Kunj,900,1,Apartment,Fully Furnished,21500000
+South Delhi,Hauz Khas,850,1,Apartment,Semi-Furnished,19500000
+West Delhi,Rajouri Garden,750,1,Apartment,Unfurnished,11500000
+West Delhi,Janakpuri,700,1,Apartment,Semi-Furnished,10500000
+West Delhi,Tilak Nagar,650,1,Apartment,Unfurnished,9500000
+West Delhi,Vikaspuri,750,1,Apartment,Semi-Furnished,11800000
+West Delhi,Uttam Nagar,650,1,Apartment,Unfurnished,8500000
+North Delhi,Civil Lines,800,1,Apartment,Semi-Furnished,15500000
+North Delhi,Model Town,750,1,Apartment,Fully Furnished,14200000
+North Delhi,Kamla Nagar,700,1,Apartment,Semi-Furnished,11500000
+North Delhi,GTB Nagar,650,1,Apartment,Unfurnished,10500000
+North Delhi,Mukherjee Nagar,700,1,Apartment,Semi-Furnished,12200000
+East Delhi,Laxmi Nagar,700,1,Apartment,Unfurnished,9200000
+East Delhi,Preet Vihar,750,1,Apartment,Semi-Furnished,10500000
+East Delhi,Mayur Vihar,800,1,Apartment,Semi-Furnished,11500000
+East Delhi,IP Extension,650,1,Apartment,Unfurnished,8800000
+East Delhi,Krishna Nagar,700,1,Apartment,Semi-Furnished,9800000
+New Delhi,Chanakyapuri,1200,2,Apartment,Fully Furnished,42500000
+New Delhi,Lutyens Delhi,1300,2,Apartment,Fully Furnished,55000000
+New Delhi,Lodhi Road,1100,2,Apartment,Fully Furnished,32500000
+New Delhi,Khan Market,1000,2,Apartment,Semi-Furnished,28500000
+Southwest Delhi,Dwarka,900,1,Apartment,Semi-Furnished,12500000
+Southwest Delhi,Vasant Vihar,1000,1,Apartment,Fully Furnished,25500000
+Southwest Delhi,RK Puram,850,1,Apartment,Semi-Furnished,15500000
+Southwest Delhi,Mahipalpur,750,1,Apartment,Unfurnished,11200000
+Northwest Delhi,Rohini,800,1,Apartment,Semi-Furnished,10500000
+Northwest Delhi,Pitampura,750,1,Apartment,Semi-Furnished,9800000
+Northwest Delhi,Shalimar Bagh,750,1,Apartment,Unfurnished,9200000
+Northwest Delhi,Ashok Vihar,700,1,Apartment,Semi-Furnished,8800000
+Central Delhi,Connaught Place,1600,3,Apartment,Semi-Furnished,42500000
+Central Delhi,Karol Bagh,1550,3,Apartment,Fully Furnished,36500000
+Central Delhi,Paharganj,1500,3,Apartment,Unfurnished,28500000
+South Delhi,Greater Kailash,1800,4,Apartment,Fully Furnished,58500000
+South Delhi,Defence Colony,1750,4,Apartment,Semi-Furnished,52500000
+South Delhi,Lajpat Nagar,1600,3,Apartment,Semi-Furnished,38500000
+South Delhi,Green Park,1700,3,Apartment,Unfurnished,42500000
+South Delhi,Saket,1650,3,Apartment,Semi-Furnished,39500000
+South Delhi,Vasant Kunj,1800,4,Apartment,Fully Furnished,52200000
+South Delhi,Hauz Khas,1700,3,Apartment,Semi-Furnished,45500000
+West Delhi,Rajouri Garden,1550,3,Apartment,Unfurnished,26500000
+West Delhi,Janakpuri,1500,3,Apartment,Semi-Furnished,24200000
+West Delhi,Tilak Nagar,1450,3,Apartment,Unfurnished,22500000
+West Delhi,Vikaspuri,1600,3,Apartment,Semi-Furnished,27800000
+West Delhi,Uttam Nagar,1400,3,Apartment,Unfurnished,19500000
+North Delhi,Civil Lines,1600,3,Apartment,Semi-Furnished,36500000
+North Delhi,Model Town,1550,3,Apartment,Fully Furnished,32500000
+North Delhi,Kamla Nagar,1500,3,Apartment,Semi-Furnished,26500000
+North Delhi,GTB Nagar,1450,3,Apartment,Unfurnished,24200000
+North Delhi,Mukherjee Nagar,1500,3,Apartment,Semi-Furnished,28500000
+East Delhi,Laxmi Nagar,1500,3,Apartment,Unfurnished,22500000
+East Delhi,Preet Vihar,1550,3,Apartment,Semi-Furnished,25500000
+East Delhi,Mayur Vihar,1600,3,Apartment,Semi-Furnished,27800000
+East Delhi,IP Extension,1450,3,Apartment,Unfurnished,21200000
+East Delhi,Krishna Nagar,1500,3,Apartment,Semi-Furnished,23500000
+New Delhi,Chanakyapuri,2200,4,Apartment,Fully Furnished,95000000
+New Delhi,Lutyens Delhi,2400,5,Apartment,Fully Furnished,128000000
+New Delhi,Lodhi Road,2000,4,Apartment,Fully Furnished,78500000
+New Delhi,Khan Market,1800,4,Apartment,Semi-Furnished,68500000
+Southwest Delhi,Dwarka,1700,3,Apartment,Semi-Furnished,28500000
+Southwest Delhi,Vasant Vihar,1900,4,Apartment,Fully Furnished,68500000
+Southwest Delhi,RK Puram,1600,3,Apartment,Semi-Furnished,36500000
+Southwest Delhi,Mahipalpur,1500,3,Apartment,Unfurnished,26500000
+Northwest Delhi,Rohini,1600,3,Apartment,Semi-Furnished,24500000
+Northwest Delhi,Pitampura,1550,3,Apartment,Semi-Furnished,22800000
+Northwest Delhi,Shalimar Bagh,1500,3,Apartment,Unfurnished,21200000
+Northwest Delhi,Ashok Vihar,1450,3,Apartment,Semi-Furnished,20500000
+Central Delhi,Connaught Place,2200,5,Apartment,Semi-Furnished,68500000
+Central Delhi,Karol Bagh,2100,4,Apartment,Fully Furnished,58500000
+Central Delhi,Paharganj,2000,4,Apartment,Unfurnished,45500000
+South Delhi,Greater Kailash,2500,5,Apartment,Fully Furnished,95000000
+South Delhi,Defence Colony,2400,5,Apartment,Semi-Furnished,85000000
+South Delhi,Lajpat Nagar,2200,4,Apartment,Semi-Furnished,62500000
+South Delhi,Green Park,2300,5,Apartment,Unfurnished,72500000
+South Delhi,Saket,2250,4,Apartment,Semi-Furnished,65500000
+South Delhi,Vasant Kunj,2500,5,Apartment,Fully Furnished,88500000
+South Delhi,Hauz Khas,2300,5,Apartment,Semi-Furnished,78500000
+West Delhi,Rajouri Garden,2100,4,Apartment,Unfurnished,42500000
+West Delhi,Janakpuri,2050,4,Apartment,Semi-Furnished,38500000
+West Delhi,Tilak Nagar,2000,4,Apartment,Unfurnished,36500000
+West Delhi,Vikaspuri,2150,4,Apartment,Semi-Furnished,44500000
+West Delhi,Uttam Nagar,1950,4,Apartment,Unfurnished,32500000
+North Delhi,Civil Lines,2200,4,Apartment,Semi-Furnished,58500000
+North Delhi,Model Town,2150,4,Apartment,Fully Furnished,52500000
+North Delhi,Kamla Nagar,2000,4,Apartment,Semi-Furnished,42500000
+North Delhi,GTB Nagar,1950,4,Apartment,Unfurnished,38500000
+North Delhi,Mukherjee Nagar,2050,4,Apartment,Semi-Furnished,45500000
+East Delhi,Laxmi Nagar,2000,4,Apartment,Unfurnished,36500000
+East Delhi,Preet Vihar,2100,4,Apartment,Semi-Furnished,40500000
+East Delhi,Mayur Vihar,2150,4,Apartment,Semi-Furnished,43500000
+East Delhi,IP Extension,1950,4,Apartment,Unfurnished,34500000
+East Delhi,Krishna Nagar,2000,4,Apartment,Semi-Furnished,37500000
+New Delhi,Chanakyapuri,3000,6,Apartment,Fully Furnished,185000000
+New Delhi,Lutyens Delhi,3200,6,Apartment,Fully Furnished,245000000
+New Delhi,Lodhi Road,2800,5,Apartment,Fully Furnished,148000000
+New Delhi,Khan Market,2500,5,Apartment,Semi-Furnished,125000000
+Southwest Delhi,Dwarka,2300,5,Apartment,Semi-Furnished,48500000
+Southwest Delhi,Vasant Vihar,2600,5,Apartment,Fully Furnished,118000000
+Southwest Delhi,RK Puram,2200,4,Apartment,Semi-Furnished,58500000
+Southwest Delhi,Mahipalpur,2100,4,Apartment,Unfurnished,42500000
+Northwest Delhi,Rohini,2200,4,Apartment,Semi-Furnished,38500000
+Northwest Delhi,Pitampura,2150,4,Apartment,Semi-Furnished,36500000
+Northwest Delhi,Shalimar Bagh,2100,4,Apartment,Unfurnished,34500000
+Northwest Delhi,Ashok Vihar,2050,4,Apartment,Semi-Furnished,33500000

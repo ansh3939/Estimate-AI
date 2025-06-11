@@ -1,0 +1,261 @@
+District,Sub_District,Area_SqFt,BHK,Property_Type,Furnishing,Price_INR
+Bandra,Bandra West,1200,2,Apartment,Semi-Furnished,18500000
+Bandra,Bandra East,950,2,Apartment,Fully Furnished,14200000
+Andheri,Andheri West,1100,2,Apartment,Unfurnished,12800000
+Andheri,Andheri East,1050,2,Apartment,Semi-Furnished,11200000
+Powai,Hiranandani Gardens,1400,3,Apartment,Fully Furnished,19500000
+Powai,Central Powai,1250,3,Apartment,Semi-Furnished,16800000
+Thane,Ghodbunder Road,1300,3,Apartment,Unfurnished,8900000
+Thane,Kasarvadavali,1150,2,Apartment,Semi-Furnished,7800000
+Malad,Malad West,1000,2,Apartment,Unfurnished,9800000
+Malad,Malad East,950,2,Apartment,Semi-Furnished,8600000
+Borivali,Borivali West,1200,2,Apartment,Unfurnished,9200000
+Borivali,Borivali East,1100,2,Apartment,Semi-Furnished,8400000
+Kandivali,Kandivali West,1050,2,Apartment,Unfurnished,8800000
+Kandivali,Kandivali East,1000,2,Apartment,Semi-Furnished,8200000
+Goregaon,Goregaon West,1300,3,Apartment,Semi-Furnished,14500000
+Goregaon,Goregaon East,1250,3,Apartment,Unfurnished,12800000
+Jogeshwari,Jogeshwari West,950,2,Apartment,Unfurnished,8500000
+Jogeshwari,Jogeshwari East,900,2,Apartment,Semi-Furnished,7800000
+Vile Parle,Vile Parle West,1100,2,Apartment,Semi-Furnished,13200000
+Vile Parle,Vile Parle East,1050,2,Apartment,Unfurnished,11800000
+Santacruz,Santacruz West,1200,2,Apartment,Fully Furnished,15800000
+Santacruz,Santacruz East,1150,2,Apartment,Semi-Furnished,13500000
+Khar,Khar West,1000,2,Apartment,Fully Furnished,16500000
+Khar,Khar East,950,2,Apartment,Semi-Furnished,14200000
+Juhu,Juhu Beach,1500,3,Apartment,Fully Furnished,28500000
+Juhu,Juhu Scheme,1400,3,Apartment,Semi-Furnished,24800000
+Versova,Versova Village,1100,2,Apartment,Semi-Furnished,12200000
+Versova,New Versova,1050,2,Apartment,Unfurnished,11500000
+Lokhandwala,Lokhandwala Complex,1200,2,Apartment,Fully Furnished,16800000
+Lokhandwala,New Lokhandwala,1150,2,Apartment,Semi-Furnished,15200000
+Worli,Lower Parel,1800,4,Apartment,Fully Furnished,45000000
+Worli,Worli Naka,1650,3,Apartment,Fully Furnished,38500000
+Prabhadevi,Prabhadevi Main,1400,3,Apartment,Semi-Furnished,28500000
+Prabhadevi,Siddhivinayak,1300,3,Apartment,Unfurnished,25200000
+Matunga,Matunga West,1200,2,Apartment,Semi-Furnished,16500000
+Matunga,Matunga East,1150,2,Apartment,Unfurnished,15200000
+Dadar,Dadar West,1100,2,Apartment,Semi-Furnished,18200000
+Dadar,Dadar East,1050,2,Apartment,Unfurnished,16800000
+Chembur,Chembur Colony,1300,3,Apartment,Semi-Furnished,14500000
+Chembur,RCF Colony,1250,3,Apartment,Unfurnished,13200000
+Ghatkopar,Ghatkopar West,1200,2,Apartment,Semi-Furnished,11800000
+Ghatkopar,Ghatkopar East,1150,2,Apartment,Unfurnished,10800000
+Kurla,Kurla West,1000,2,Apartment,Unfurnished,9200000
+Kurla,Kurla East,950,2,Apartment,Semi-Furnished,8600000
+Vikhroli,Vikhroli West,1250,3,Apartment,Semi-Furnished,13800000
+Vikhroli,Vikhroli East,1200,3,Apartment,Unfurnished,12600000
+Mulund,Mulund West,1300,3,Apartment,Semi-Furnished,12200000
+Mulund,Mulund East,1250,3,Apartment,Unfurnished,11500000
+Bhandup,Bhandup West,1150,2,Apartment,Unfurnished,9800000
+Bhandup,Bhandup East,1100,2,Apartment,Semi-Furnished,9200000
+Kanjurmarg,Kanjurmarg West,1200,2,Apartment,Semi-Furnished,10500000
+Kanjurmarg,Kanjurmarg East,1150,2,Apartment,Unfurnished,9800000
+Bandra,Bandra West,2200,4,Independent House,Semi-Furnished,52000000
+Bandra,Bandra East,2000,4,Independent House,Unfurnished,45000000
+Andheri,Andheri West,1800,3,Builder Floor,Semi-Furnished,28500000
+Andheri,Andheri East,1700,3,Builder Floor,Unfurnished,24800000
+Powai,Hiranandani Gardens,2500,5,Independent House,Fully Furnished,68000000
+Powai,Central Powai,2300,4,Independent House,Semi-Furnished,58500000
+Thane,Ghodbunder Road,2000,4,Independent House,Unfurnished,22500000
+Thane,Kasarvadavali,1800,3,Builder Floor,Semi-Furnished,18500000
+Malad,Malad West,1600,3,Builder Floor,Unfurnished,19500000
+Malad,Malad East,1500,3,Builder Floor,Semi-Furnished,17800000
+Borivali,Borivali West,1900,3,Builder Floor,Unfurnished,22800000
+Borivali,Borivali East,1800,3,Builder Floor,Semi-Furnished,20500000
+Kandivali,Kandivali West,1700,3,Builder Floor,Unfurnished,21200000
+Kandivali,Kandivali East,1600,3,Builder Floor,Semi-Furnished,19500000
+Goregaon,Goregaon West,2100,4,Independent House,Semi-Furnished,38500000
+Goregaon,Goregaon East,2000,4,Independent House,Unfurnished,34200000
+Jogeshwari,Jogeshwari West,1500,3,Builder Floor,Unfurnished,18200000
+Jogeshwari,Jogeshwari East,1400,3,Builder Floor,Semi-Furnished,16800000
+Vile Parle,Vile Parle West,1800,3,Builder Floor,Semi-Furnished,28500000
+Vile Parle,Vile Parle East,1700,3,Builder Floor,Unfurnished,25200000
+Santacruz,Santacruz West,1900,3,Builder Floor,Fully Furnished,32500000
+Santacruz,Santacruz East,1800,3,Builder Floor,Semi-Furnished,28800000
+Khar,Khar West,1600,3,Builder Floor,Fully Furnished,35200000
+Khar,Khar East,1500,3,Builder Floor,Semi-Furnished,31500000
+Juhu,Juhu Beach,3000,5,Independent House,Fully Furnished,95000000
+Juhu,Juhu Scheme,2800,5,Independent House,Semi-Furnished,82500000
+Versova,Versova Village,1700,3,Builder Floor,Semi-Furnished,26500000
+Versova,New Versova,1600,3,Builder Floor,Unfurnished,24200000
+Lokhandwala,Lokhandwala Complex,1900,3,Builder Floor,Fully Furnished,35800000
+Lokhandwala,New Lokhandwala,1800,3,Builder Floor,Semi-Furnished,32200000
+Worli,Lower Parel,3500,6,Independent House,Fully Furnished,125000000
+Worli,Worli Naka,3200,5,Independent House,Fully Furnished,108000000
+Prabhadevi,Prabhadevi Main,2500,4,Independent House,Semi-Furnished,78500000
+Prabhadevi,Siddhivinayak,2300,4,Independent House,Unfurnished,68500000
+Matunga,Matunga West,2000,4,Builder Floor,Semi-Furnished,42500000
+Matunga,Matunga East,1900,4,Builder Floor,Unfurnished,38200000
+Dadar,Dadar West,1800,3,Builder Floor,Semi-Furnished,45200000
+Dadar,Dadar East,1700,3,Builder Floor,Unfurnished,41500000
+Chembur,Chembur Colony,2200,4,Independent House,Semi-Furnished,38500000
+Chembur,RCF Colony,2100,4,Independent House,Unfurnished,35200000
+Ghatkopar,Ghatkopar West,2000,4,Builder Floor,Semi-Furnished,32500000
+Ghatkopar,Ghatkopar East,1900,4,Builder Floor,Unfurnished,29800000
+Kurla,Kurla West,1600,3,Builder Floor,Unfurnished,22500000
+Kurla,Kurla East,1500,3,Builder Floor,Semi-Furnished,20800000
+Vikhroli,Vikhroli West,2100,4,Independent House,Semi-Furnished,35800000
+Vikhroli,Vikhroli East,2000,4,Independent House,Unfurnished,32500000
+Mulund,Mulund West,2200,4,Independent House,Semi-Furnished,32200000
+Mulund,Mulund East,2100,4,Independent House,Unfurnished,29500000
+Bhandup,Bhandup West,1800,3,Builder Floor,Unfurnished,24800000
+Bhandup,Bhandup East,1700,3,Builder Floor,Semi-Furnished,22500000
+Kanjurmarg,Kanjurmarg West,1900,3,Builder Floor,Semi-Furnished,26800000
+Kanjurmarg,Kanjurmarg East,1800,3,Builder Floor,Unfurnished,24500000
+Bandra,Bandra West,850,1,Apartment,Semi-Furnished,12500000
+Bandra,Bandra East,800,1,Apartment,Fully Furnished,11200000
+Andheri,Andheri West,750,1,Apartment,Unfurnished,8800000
+Andheri,Andheri East,700,1,Apartment,Semi-Furnished,8200000
+Powai,Hiranandani Gardens,900,1,Apartment,Fully Furnished,13500000
+Powai,Central Powai,850,1,Apartment,Semi-Furnished,12200000
+Thane,Ghodbunder Road,950,1,Apartment,Unfurnished,6200000
+Thane,Kasarvadavali,900,1,Apartment,Semi-Furnished,5800000
+Malad,Malad West,750,1,Apartment,Unfurnished,6800000
+Malad,Malad East,700,1,Apartment,Semi-Furnished,6200000
+Borivali,Borivali West,800,1,Apartment,Unfurnished,6500000
+Borivali,Borivali East,750,1,Apartment,Semi-Furnished,6000000
+Kandivali,Kandivali West,750,1,Apartment,Unfurnished,6200000
+Kandivali,Kandivali East,700,1,Apartment,Semi-Furnished,5800000
+Goregaon,Goregaon West,850,1,Apartment,Semi-Furnished,8800000
+Goregaon,Goregaon East,800,1,Apartment,Unfurnished,8200000
+Jogeshwari,Jogeshwari West,700,1,Apartment,Unfurnished,6000000
+Jogeshwari,Jogeshwari East,650,1,Apartment,Semi-Furnished,5600000
+Vile Parle,Vile Parle West,800,1,Apartment,Semi-Furnished,9500000
+Vile Parle,Vile Parle East,750,1,Apartment,Unfurnished,8800000
+Santacruz,Santacruz West,850,1,Apartment,Fully Furnished,11200000
+Santacruz,Santacruz East,800,1,Apartment,Semi-Furnished,10200000
+Khar,Khar West,750,1,Apartment,Fully Furnished,12200000
+Khar,Khar East,700,1,Apartment,Semi-Furnished,11000000
+Juhu,Juhu Beach,950,1,Apartment,Fully Furnished,18500000
+Juhu,Juhu Scheme,900,1,Apartment,Semi-Furnished,16800000
+Versova,Versova Village,800,1,Apartment,Semi-Furnished,9200000
+Versova,New Versova,750,1,Apartment,Unfurnished,8600000
+Lokhandwala,Lokhandwala Complex,850,1,Apartment,Fully Furnished,12800000
+Lokhandwala,New Lokhandwala,800,1,Apartment,Semi-Furnished,11800000
+Worli,Lower Parel,1200,2,Apartment,Fully Furnished,32500000
+Worli,Worli Naka,1100,2,Apartment,Fully Furnished,28500000
+Prabhadevi,Prabhadevi Main,950,1,Apartment,Semi-Furnished,18200000
+Prabhadevi,Siddhivinayak,900,1,Apartment,Unfurnished,16500000
+Matunga,Matunga West,850,1,Apartment,Semi-Furnished,12200000
+Matunga,Matunga East,800,1,Apartment,Unfurnished,11200000
+Dadar,Dadar West,800,1,Apartment,Semi-Furnished,13500000
+Dadar,Dadar East,750,1,Apartment,Unfurnished,12500000
+Chembur,Chembur Colony,900,1,Apartment,Semi-Furnished,9800000
+Chembur,RCF Colony,850,1,Apartment,Unfurnished,9200000
+Ghatkopar,Ghatkopar West,850,1,Apartment,Semi-Furnished,8500000
+Ghatkopar,Ghatkopar East,800,1,Apartment,Unfurnished,7800000
+Kurla,Kurla West,750,1,Apartment,Unfurnished,6800000
+Kurla,Kurla East,700,1,Apartment,Semi-Furnished,6200000
+Vikhroli,Vikhroli West,900,1,Apartment,Semi-Furnished,9800000
+Vikhroli,Vikhroli East,850,1,Apartment,Unfurnished,9200000
+Mulund,Mulund West,950,1,Apartment,Semi-Furnished,8800000
+Mulund,Mulund East,900,1,Apartment,Unfurnished,8200000
+Bhandup,Bhandup West,850,1,Apartment,Unfurnished,7200000
+Bhandup,Bhandup East,800,1,Apartment,Semi-Furnished,6800000
+Kanjurmarg,Kanjurmarg West,900,1,Apartment,Semi-Furnished,7800000
+Kanjurmarg,Kanjurmarg East,850,1,Apartment,Unfurnished,7200000
+Bandra,Bandra West,1800,3,Apartment,Semi-Furnished,28500000
+Bandra,Bandra East,1700,3,Apartment,Fully Furnished,24800000
+Andheri,Andheri West,1600,3,Apartment,Unfurnished,21200000
+Andheri,Andheri East,1550,3,Apartment,Semi-Furnished,19500000
+Powai,Hiranandani Gardens,2000,4,Apartment,Fully Furnished,35000000
+Powai,Central Powai,1900,4,Apartment,Semi-Furnished,31500000
+Thane,Ghodbunder Road,1800,3,Apartment,Unfurnished,15500000
+Thane,Kasarvadavali,1700,3,Apartment,Semi-Furnished,14200000
+Malad,Malad West,1600,3,Apartment,Unfurnished,16800000
+Malad,Malad East,1550,3,Apartment,Semi-Furnished,15500000
+Borivali,Borivali West,1700,3,Apartment,Unfurnished,16200000
+Borivali,Borivali East,1650,3,Apartment,Semi-Furnished,15000000
+Kandivali,Kandivali West,1600,3,Apartment,Unfurnished,15800000
+Kandivali,Kandivali East,1550,3,Apartment,Semi-Furnished,14500000
+Goregaon,Goregaon West,1850,4,Apartment,Semi-Furnished,25500000
+Goregaon,Goregaon East,1800,4,Apartment,Unfurnished,23200000
+Jogeshwari,Jogeshwari West,1500,3,Apartment,Unfurnished,14500000
+Jogeshwari,Jogeshwari East,1450,3,Apartment,Semi-Furnished,13200000
+Vile Parle,Vile Parle West,1650,3,Apartment,Semi-Furnished,22500000
+Vile Parle,Vile Parle East,1600,3,Apartment,Unfurnished,20800000
+Santacruz,Santacruz West,1750,3,Apartment,Fully Furnished,26800000
+Santacruz,Santacruz East,1700,3,Apartment,Semi-Furnished,24200000
+Khar,Khar West,1600,3,Apartment,Fully Furnished,28500000
+Khar,Khar East,1550,3,Apartment,Semi-Furnished,25800000
+Juhu,Juhu Beach,2200,4,Apartment,Fully Furnished,48500000
+Juhu,Juhu Scheme,2100,4,Apartment,Semi-Furnished,42800000
+Versova,Versova Village,1650,3,Apartment,Semi-Furnished,21500000
+Versova,New Versova,1600,3,Apartment,Unfurnished,19800000
+Lokhandwala,Lokhandwala Complex,1750,3,Apartment,Fully Furnished,28800000
+Lokhandwala,New Lokhandwala,1700,3,Apartment,Semi-Furnished,26200000
+Worli,Lower Parel,2500,5,Apartment,Fully Furnished,75000000
+Worli,Worli Naka,2300,4,Apartment,Fully Furnished,65000000
+Prabhadevi,Prabhadevi Main,2000,4,Apartment,Semi-Furnished,48500000
+Prabhadevi,Siddhivinayak,1900,4,Apartment,Unfurnished,42500000
+Matunga,Matunga West,1750,3,Apartment,Semi-Furnished,28500000
+Matunga,Matunga East,1700,3,Apartment,Unfurnished,25800000
+Dadar,Dadar West,1650,3,Apartment,Semi-Furnished,31500000
+Dadar,Dadar East,1600,3,Apartment,Unfurnished,28800000
+Chembur,Chembur Colony,1800,4,Apartment,Semi-Furnished,24800000
+Chembur,RCF Colony,1750,4,Apartment,Unfurnished,22500000
+Ghatkopar,Ghatkopar West,1700,3,Apartment,Semi-Furnished,20500000
+Ghatkopar,Ghatkopar East,1650,3,Apartment,Unfurnished,18800000
+Kurla,Kurla West,1550,3,Apartment,Unfurnished,15800000
+Kurla,Kurla East,1500,3,Apartment,Semi-Furnished,14500000
+Vikhroli,Vikhroli West,1800,4,Apartment,Semi-Furnished,24200000
+Vikhroli,Vikhroli East,1750,4,Apartment,Unfurnished,22200000
+Mulund,Mulund West,1850,4,Apartment,Semi-Furnished,21500000
+Mulund,Mulund East,1800,4,Apartment,Unfurnished,19800000
+Bhandup,Bhandup West,1650,3,Apartment,Unfurnished,17200000
+Bhandup,Bhandup East,1600,3,Apartment,Semi-Furnished,15800000
+Kanjurmarg,Kanjurmarg West,1700,3,Apartment,Semi-Furnished,18500000
+Kanjurmarg,Kanjurmarg East,1650,3,Apartment,Unfurnished,17200000
+Bandra,Bandra West,2800,5,Apartment,Semi-Furnished,52000000
+Bandra,Bandra East,2650,5,Apartment,Fully Furnished,46500000
+Andheri,Andheri West,2400,4,Apartment,Unfurnished,38500000
+Andheri,Andheri East,2350,4,Apartment,Semi-Furnished,35200000
+Powai,Hiranandani Gardens,2800,5,Apartment,Fully Furnished,58500000
+Powai,Central Powai,2650,5,Apartment,Semi-Furnished,52500000
+Thane,Ghodbunder Road,2600,5,Apartment,Unfurnished,26500000
+Thane,Kasarvadavali,2450,4,Apartment,Semi-Furnished,24200000
+Malad,Malad West,2300,4,Apartment,Unfurnished,28500000
+Malad,Malad East,2250,4,Apartment,Semi-Furnished,26200000
+Borivali,Borivali West,2400,4,Apartment,Unfurnished,28800000
+Borivali,Borivali East,2350,4,Apartment,Semi-Furnished,26500000
+Kandivali,Kandivali West,2300,4,Apartment,Unfurnished,27500000
+Kandivali,Kandivali East,2250,4,Apartment,Semi-Furnished,25200000
+Goregaon,Goregaon West,2650,5,Apartment,Semi-Furnished,42500000
+Goregaon,Goregaon East,2600,5,Apartment,Unfurnished,38500000
+Jogeshwari,Jogeshwari West,2200,4,Apartment,Unfurnished,24800000
+Jogeshwari,Jogeshwari East,2150,4,Apartment,Semi-Furnished,22500000
+Vile Parle,Vile Parle West,2450,4,Apartment,Semi-Furnished,38500000
+Vile Parle,Vile Parle East,2400,4,Apartment,Unfurnished,35500000
+Santacruz,Santacruz West,2550,5,Apartment,Fully Furnished,45200000
+Santacruz,Santacruz East,2500,5,Apartment,Semi-Furnished,41500000
+Khar,Khar West,2400,4,Apartment,Fully Furnished,48500000
+Khar,Khar East,2350,4,Apartment,Semi-Furnished,44200000
+Juhu,Juhu Beach,3200,6,Apartment,Fully Furnished,85000000
+Juhu,Juhu Scheme,3100,6,Apartment,Semi-Furnished,76500000
+Versova,Versova Village,2450,4,Apartment,Semi-Furnished,36800000
+Versova,New Versova,2400,4,Apartment,Unfurnished,33500000
+Lokhandwala,Lokhandwala Complex,2550,5,Apartment,Fully Furnished,48500000
+Lokhandwala,New Lokhandwala,2500,5,Apartment,Semi-Furnished,44800000
+Worli,Lower Parel,3800,6,Apartment,Fully Furnished,125000000
+Worli,Worli Naka,3600,6,Apartment,Fully Furnished,108000000
+Prabhadevi,Prabhadevi Main,3000,5,Apartment,Semi-Furnished,82500000
+Prabhadevi,Siddhivinayak,2850,5,Apartment,Unfurnished,74500000
+Matunga,Matunga West,2650,5,Apartment,Semi-Furnished,48500000
+Matunga,Matunga East,2600,5,Apartment,Unfurnished,44200000
+Dadar,Dadar West,2500,4,Apartment,Semi-Furnished,52500000
+Dadar,Dadar East,2450,4,Apartment,Unfurnished,48500000
+Chembur,Chembur Colony,2700,5,Apartment,Semi-Furnished,42500000
+Chembur,RCF Colony,2650,5,Apartment,Unfurnished,38500000
+Ghatkopar,Ghatkopar West,2600,5,Apartment,Semi-Furnished,35200000
+Ghatkopar,Ghatkopar East,2550,5,Apartment,Unfurnished,32200000
+Kurla,Kurla West,2350,4,Apartment,Unfurnished,26500000
+Kurla,Kurla East,2300,4,Apartment,Semi-Furnished,24200000
+Vikhroli,Vikhroli West,2700,5,Apartment,Semi-Furnished,41500000
+Vikhroli,Vikhroli East,2650,5,Apartment,Unfurnished,38200000
+Mulund,Mulund West,2750,5,Apartment,Semi-Furnished,36800000
+Mulund,Mulund East,2700,5,Apartment,Unfurnished,33500000
+Bhandup,Bhandup West,2500,4,Apartment,Unfurnished,29500000
+Bhandup,Bhandup East,2450,4,Apartment,Semi-Furnished,27200000
+Kanjurmarg,Kanjurmarg West,2600,5,Apartment,Semi-Furnished,32500000
+Kanjurmarg,Kanjurmarg East,2550,5,Apartment,Unfurnished,29800000
