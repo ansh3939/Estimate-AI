@@ -5,7 +5,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from database import db_manager
 from ml_model import RealEstatePredictor
-from advanced_ml_models import AdvancedRealEstatePredictor
+from fast_ml_model import FastRealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
 from market_analysis import ComparativeMarketAnalyzer
@@ -180,17 +180,18 @@ def main():
     
     # Initialize models
     try:
-        predictor = RealEstatePredictor()
-        advanced_predictor = AdvancedRealEstatePredictor()
+        fast_predictor = FastRealEstatePredictor()
         investment_analyzer = InvestmentAnalyzer()
         emi_calculator = EMICalculator()
         market_analyzer = ComparativeMarketAnalyzer()
         
-        # Train models with database data
-        predictor.train_model(data)
-        advanced_predictor.train_models(data)
+        # Train fast model with database data
+        performance = fast_predictor.train_model(data)
         
-        st.success(f"Models trained successfully with {len(data)} properties")
+        if performance.get('cached', False):
+            st.info("Using cached model for instant predictions!")
+        else:
+            st.success(f"Fast model trained - R²: {performance['r2_score']:.3f}")
         
     except Exception as e:
         st.error(f"Model training error: {str(e)}")

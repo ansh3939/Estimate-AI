@@ -13,52 +13,42 @@ warnings.filterwarnings('ignore')
 
 class AdvancedRealEstatePredictor:
     def __init__(self):
-        # Advanced ensemble with four optimized models for superior accuracy
+        # Fast, optimized models for quick training and prediction
         self.models = {
             'random_forest': RandomForestRegressor(
                 random_state=42, 
-                n_estimators=250,  # Increased for better performance
-                max_depth=28,      # Deeper trees for complex patterns
-                min_samples_split=3,
-                min_samples_leaf=2,
-                max_features=0.8,  # Use more features
+                n_estimators=100,  # Reduced for speed
+                max_depth=15,      # Balanced depth
+                min_samples_split=5,
+                min_samples_leaf=3,
+                max_features=0.6,  
                 bootstrap=True,
-                oob_score=True,
                 n_jobs=-1          # Use all cores
             ),
             'xgboost': xgb.XGBRegressor(
                 random_state=42, 
-                n_estimators=300,  # Reduced to avoid early stopping issues in CV
-                max_depth=10,      # Slightly reduced for stability
-                learning_rate=0.08, # Slightly higher to compensate
-                subsample=0.85,
+                n_estimators=150,  # Reduced for speed
+                max_depth=8,       # Balanced depth
+                learning_rate=0.1, # Higher for faster convergence
+                subsample=0.8,
                 colsample_bytree=0.8,
-                reg_alpha=0.05,    # Fine-tuned regularization
-                reg_lambda=0.8,    
-                min_child_weight=2,
-                gamma=0.05,
+                reg_alpha=0.1,    
+                reg_lambda=1.0,    
+                min_child_weight=3,
                 objective='reg:squarederror',
                 eval_metric='rmse',
                 n_jobs=-1
             ),
             'gradient_boosting': GradientBoostingRegressor(
                 random_state=42,
-                n_estimators=200,
-                max_depth=8,
-                learning_rate=0.1,
+                n_estimators=100,  # Reduced for speed
+                max_depth=6,
+                learning_rate=0.12, # Higher for faster training
                 subsample=0.8,
-                min_samples_split=4,
-                min_samples_leaf=2,
+                min_samples_split=5,
+                min_samples_leaf=3,
                 max_features='sqrt',
                 loss='squared_error'
-            ),
-            'decision_tree': DecisionTreeRegressor(
-                random_state=42, 
-                max_depth=22,      # Increased depth
-                min_samples_split=4,
-                min_samples_leaf=2,
-                max_features=0.9,  # Use most features
-                splitter='best'
             )
         }
         self.label_encoders = {}
@@ -228,39 +218,7 @@ class AdvancedRealEstatePredictor:
         
         best_score = float('-inf')
         
-        print("Training and evaluating models with hyperparameter optimization...")
-        
-        # Hyperparameter tuning for Random Forest
-        if 'random_forest' in self.models:
-            rf_params = {
-                'n_estimators': [200, 250, 300],
-                'max_depth': [25, 28, 30],
-                'min_samples_split': [2, 3, 4],
-                'max_features': [0.7, 0.8, 0.9]
-            }
-            rf_search = RandomizedSearchCV(
-                RandomForestRegressor(random_state=42, n_jobs=-1),
-                rf_params, cv=3, n_iter=10, random_state=42, scoring='r2'
-            )
-            rf_search.fit(X_train, y_train)
-            self.models['random_forest'] = rf_search.best_estimator_
-            print(f"Random Forest optimized parameters: {rf_search.best_params_}")
-        
-        # Hyperparameter tuning for Gradient Boosting
-        if 'gradient_boosting' in self.models:
-            gb_params = {
-                'n_estimators': [150, 200, 250],
-                'max_depth': [6, 8, 10],
-                'learning_rate': [0.08, 0.1, 0.12],
-                'subsample': [0.75, 0.8, 0.85]
-            }
-            gb_search = RandomizedSearchCV(
-                GradientBoostingRegressor(random_state=42),
-                gb_params, cv=3, n_iter=10, random_state=42, scoring='r2'
-            )
-            gb_search.fit(X_train_scaled, y_train)
-            self.models['gradient_boosting'] = gb_search.best_estimator_
-            print(f"Gradient Boosting optimized parameters: {gb_search.best_params_}")
+        print("Training fast ensemble models...")
         
         for model_name, model in self.models.items():
             print(f"Training {model_name}...")
@@ -289,29 +247,13 @@ class AdvancedRealEstatePredictor:
             r2 = r2_score(y_test, y_pred)
             rmse = np.sqrt(mean_squared_error(y_test, y_pred))
             
-            # Cross-validation score (handle XGBoost separately to avoid early stopping issues)
+            # Simplified cross-validation for speed (3-fold instead of 5)
             if model_name == 'xgboost':
-                # Create XGBoost model without early stopping for CV
-                xgb_cv_model = xgb.XGBRegressor(
-                    random_state=42, 
-                    n_estimators=300,
-                    max_depth=10,
-                    learning_rate=0.08,
-                    subsample=0.85,
-                    colsample_bytree=0.8,
-                    reg_alpha=0.05,
-                    reg_lambda=0.8,
-                    min_child_weight=2,
-                    gamma=0.05,
-                    objective='reg:squarederror',
-                    eval_metric='rmse',
-                    n_jobs=-1
-                )
-                cv_scores = cross_val_score(xgb_cv_model, X_train_scaled, y_train, cv=5, scoring='r2')
+                cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=3, scoring='r2')
             elif model_name == 'gradient_boosting':
-                cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=5, scoring='r2')
+                cv_scores = cross_val_score(model, X_train_scaled, y_train, cv=3, scoring='r2')
             else:
-                cv_scores = cross_val_score(model, X_train, y_train, cv=5, scoring='r2')
+                cv_scores = cross_val_score(model, X_train, y_train, cv=3, scoring='r2')
             
             cv_mean = cv_scores.mean()
             
