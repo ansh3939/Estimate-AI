@@ -13,10 +13,43 @@ warnings.filterwarnings('ignore')
 
 class AdvancedRealEstatePredictor:
     def __init__(self):
+        # Optimized models with enhanced hyperparameters for better accuracy
         self.models = {
-            'decision_tree': DecisionTreeRegressor(random_state=42, max_depth=15, min_samples_split=10, min_samples_leaf=5),
-            'random_forest': RandomForestRegressor(random_state=42, n_estimators=100, max_depth=20, min_samples_split=5),
-            'xgboost': xgb.XGBRegressor(random_state=42, n_estimators=100, max_depth=8, learning_rate=0.1, subsample=0.8)
+            'random_forest': RandomForestRegressor(
+                random_state=42, 
+                n_estimators=200,  # Increased for better performance
+                max_depth=25,      # Deeper trees for complex patterns
+                min_samples_split=3,
+                min_samples_leaf=2,
+                max_features='sqrt',
+                bootstrap=True,
+                oob_score=True,
+                n_jobs=-1          # Use all cores
+            ),
+            'xgboost': xgb.XGBRegressor(
+                random_state=42, 
+                n_estimators=300,  # More estimators for better accuracy
+                max_depth=10,      # Deeper for complex relationships
+                learning_rate=0.08, # Slightly lower for better convergence
+                subsample=0.85,
+                colsample_bytree=0.8,
+                reg_alpha=0.1,     # L1 regularization
+                reg_lambda=1.0,    # L2 regularization
+                min_child_weight=3,
+                gamma=0.1,
+                objective='reg:squarederror',
+                eval_metric='rmse',
+                early_stopping_rounds=50,
+                n_jobs=-1
+            ),
+            'decision_tree': DecisionTreeRegressor(
+                random_state=42, 
+                max_depth=20,      # Increased depth
+                min_samples_split=5,
+                min_samples_leaf=3,
+                max_features='sqrt',
+                splitter='best'
+            )
         }
         self.label_encoders = {}
         self.scaler = StandardScaler()
@@ -28,6 +61,7 @@ class AdvancedRealEstatePredictor:
         self.best_model_name = None
         self.is_trained = False
         self.model_performance = {}
+        self.ensemble_weights = {}  # For weighted averaging
         
     def _encode_categorical_features(self, data: pd.DataFrame, fit: bool = False) -> pd.DataFrame:
         """Encode categorical features using label encoders"""
@@ -56,24 +90,67 @@ class AdvancedRealEstatePredictor:
         return data_encoded
     
     def _create_features(self, data: pd.DataFrame) -> pd.DataFrame:
-        """Create additional features for better prediction"""
+        """Create advanced features for superior prediction accuracy"""
+        print("Creating enhanced features...")
         data_features = data.copy()
         
         # Price per square foot (if price exists)
         if 'Price_INR' in data_features.columns:
             data_features['Price_per_SqFt'] = data_features['Price_INR'] / data_features['Area_SqFt']
         
-        # Area categories
+        # Advanced area categorization with more granularity
         data_features['Area_Category'] = pd.cut(data_features['Area_SqFt'], 
-                                               bins=[0, 800, 1200, 1800, 2500, 10000], 
-                                               labels=['Small', 'Medium', 'Large', 'XLarge', 'Luxury'])
+                                               bins=[0, 600, 1000, 1500, 2200, 3000, 10000], 
+                                               labels=['Compact', 'Medium', 'Large', 'Premium', 'Luxury', 'Ultra_Luxury'])
         
-        # BHK to Area ratio
+        # Sophisticated feature engineering
         data_features['BHK_Area_Ratio'] = data_features['BHK'] / data_features['Area_SqFt'] * 1000
+        data_features['Area_Per_Room'] = data_features['Area_SqFt'] / data_features['BHK']
+        data_features['Area_Squared'] = data_features['Area_SqFt'] ** 2
+        data_features['BHK_Squared'] = data_features['BHK'] ** 2
+        
+        # Market premium factors
+        city_premium = {
+            'Mumbai': 1.8,
+            'Delhi': 1.5, 
+            'Gurugram': 1.4,
+            'Bangalore': 1.3,
+            'Noida': 1.1
+        }
+        data_features['Location_Premium'] = data_features['City'].map(city_premium).fillna(1.0)
+        
+        # Property type multipliers
+        property_scores = {
+            'Villa': 1.4,
+            'House': 1.2,
+            'Apartment': 1.0,
+            'Studio': 0.7
+        }
+        data_features['Property_Score'] = data_features['Property_Type'].map(property_scores).fillna(1.0)
+        
+        # Furnishing impact
+        furnishing_scores = {
+            'Fully Furnished': 1.15,
+            'Semi-Furnished': 1.05,
+            'Unfurnished': 0.95
+        }
+        data_features['Furnishing_Score'] = data_features['Furnishing'].map(furnishing_scores).fillna(1.0)
+        
+        # Composite features
+        data_features['Premium_Factor'] = (data_features['Location_Premium'] * 
+                                         data_features['Property_Score'] * 
+                                         data_features['Furnishing_Score'])
+        
+        # Advanced transformations
+        data_features['Value_Index'] = data_features['Premium_Factor'] * data_features['Area_SqFt']
+        data_features['Log_Area'] = np.log1p(data_features['Area_SqFt'])
+        data_features['Sqrt_Area'] = np.sqrt(data_features['Area_SqFt'])
         
         # Encode new categorical features
-        if 'Area_Category' in data_features.columns:
-            data_features['Area_Category'] = data_features['Area_Category'].astype(str)
+        categorical_new = ['Area_Category']
+        for col in categorical_new:
+            if col in data_features.columns:
+                data_features[col] = data_features[col].astype(str)
         
         return data_features
     
@@ -85,8 +162,13 @@ class AdvancedRealEstatePredictor:
         print("Creating enhanced features...")
         data_enhanced = self._create_features(data)
         
-        # Prepare features and target
-        feature_cols = self.feature_columns + ['Area_Category', 'BHK_Area_Ratio']
+        # Prepare features and target with all advanced features
+        advanced_features = [
+            'Area_Category', 'BHK_Area_Ratio', 'Area_Per_Room', 'Area_Squared', 
+            'BHK_Squared', 'Location_Premium', 'Property_Score', 'Furnishing_Score',
+            'Premium_Factor', 'Value_Index', 'Log_Area', 'Sqrt_Area'
+        ]
+        feature_cols = self.feature_columns + advanced_features
         X = data_enhanced[feature_cols].copy()
         y = data_enhanced['Price_INR'].copy()
         
@@ -147,6 +229,24 @@ class AdvancedRealEstatePredictor:
                 self.best_model = model
                 self.best_model_name = model_name
         
+        # Calculate ensemble weights based on R² performance
+        r2_scores = {name: perf['r2_score'] for name, perf in self.model_performance.items()}
+        total_r2 = sum(max(0, score) for score in r2_scores.values())
+        
+        if total_r2 > 0:
+            self.ensemble_weights = {
+                model: max(0, r2_scores[model]) / total_r2 
+                for model in r2_scores.keys()
+            }
+        else:
+            # Equal weights fallback
+            self.ensemble_weights = {
+                model: 1.0 / len(r2_scores) 
+                for model in r2_scores.keys()
+            }
+        
+        print(f"Ensemble weights: {self.ensemble_weights}")
+        
         self.is_trained = True
         print(f"\nBest model: {self.best_model_name} with R² score: {best_score:.3f}")
         
@@ -163,16 +263,23 @@ class AdvancedRealEstatePredictor:
         # Create enhanced features
         input_enhanced = self._create_features(input_df)
         
-        # Ensure all required columns are present
-        feature_cols = self.feature_columns + ['Area_Category', 'BHK_Area_Ratio']
-        for col in feature_cols:
+        # Ensure all required columns are present with advanced features
+        advanced_features = [
+            'Area_Category', 'BHK_Area_Ratio', 'Area_Per_Room', 'Area_Squared', 
+            'BHK_Squared', 'Location_Premium', 'Property_Score', 'Furnishing_Score',
+            'Premium_Factor', 'Value_Index', 'Log_Area', 'Sqrt_Area'
+        ]
+        feature_cols = self.feature_columns + advanced_features
+        
+        # Fill missing advanced features if not created properly
+        for col in advanced_features:
             if col not in input_enhanced.columns:
                 if col == 'Area_Category':
                     input_enhanced[col] = 'Medium'
                 elif col == 'BHK_Area_Ratio':
                     input_enhanced[col] = input_data.get('BHK', 2) / input_data.get('Area_SqFt', 1000) * 1000
                 else:
-                    input_enhanced[col] = 0
+                    input_enhanced[col] = 1.0
         
         # Select and order columns
         input_enhanced = input_enhanced[feature_cols]
@@ -192,10 +299,21 @@ class AdvancedRealEstatePredictor:
             
             predictions[model_name] = max(pred, 100000)  # Minimum price of 1 lakh
         
-        # Use best model prediction as primary
-        best_prediction = predictions[self.best_model_name]
+        # Implement weighted ensemble averaging for better accuracy
+        if len(self.ensemble_weights) == len(predictions):
+            # Use performance-based weights
+            weighted_prediction = sum(
+                predictions[model] * self.ensemble_weights[model] 
+                for model in predictions.keys()
+            )
+        else:
+            # Fallback to equal weights if not available
+            weighted_prediction = np.mean(list(predictions.values()))
         
-        return best_prediction, predictions
+        # Use weighted ensemble as primary prediction for better accuracy
+        ensemble_prediction = max(weighted_prediction, 100000)
+        
+        return ensemble_prediction, predictions
     
     def get_feature_importance(self) -> Dict[str, float]:
         """Get feature importance from the best model"""
