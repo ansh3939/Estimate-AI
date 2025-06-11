@@ -509,13 +509,14 @@ def main():
                 # Area-wise pricing analysis
                 if len(market_data['Sub_District'].unique()) > 1:
                     st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-                    avg_price_area = market_data.groupby('Sub_District')['Price_per_SqFt'].mean().sort_values(ascending=False).head(10)
+                    avg_price_area = market_data.groupby('Sub_District')['Price_per_SqFt'].mean()
+                    sorted_areas = avg_price_area.nlargest(10)
                     fig = px.bar(
-                        x=avg_price_area.values,
-                        y=avg_price_area.index,
+                        x=sorted_areas.values,
+                        y=sorted_areas.index,
                         orientation='h',
                         title="Top 10 Sub-Districts by Price per Sq Ft",
-                        color=avg_price_area.values,
+                        color=sorted_areas.values,
                         color_continuous_scale='Viridis'
                     )
                     fig.update_layout(
@@ -692,47 +693,56 @@ def main():
                 st.markdown('</div>', unsafe_allow_html=True)
             
             # Property Type Distribution
-            st.markdown("#### 🏢 Property Type Distribution")
-            prop_type_dist = data_processor.combined_data['Property_Type'].value_counts().reset_index()
-            prop_type_dist.columns = ['Property_Type', 'Count']
-            
-            type_col1, type_col2 = st.columns(2)
-            
-            with type_col1:
-                st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-                fig = px.pie(
-                    prop_type_dist,
-                    values='Count',
-                    names='Property_Type',
-                    title="Property Type Distribution",
-                    color_discrete_sequence=['#2E7D32', '#1976D2', '#F57C00']
-                )
-                fig.update_layout(title_font_size=16)
-                st.plotly_chart(fig, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
-            
-            with type_col2:
-                # BHK Distribution
-                bhk_dist = data_processor.combined_data['BHK'].value_counts().sort_index().reset_index()
-                bhk_dist.columns = ['BHK', 'Count']
+            st.markdown("#### Property Type Distribution")
+            if 'Property_Type' in data_processor.combined_data.columns:
+                prop_type_series = data_processor.combined_data['Property_Type'].value_counts()
+                prop_type_dist = pd.DataFrame({
+                    'Property_Type': prop_type_series.index,
+                    'Count': prop_type_series.values
+                })
                 
-                st.markdown('<div class="chart-container">', unsafe_allow_html=True)
-                fig = px.bar(
-                    bhk_dist,
-                    x='BHK',
-                    y='Count',
-                    title="BHK Configuration Distribution",
-                    color='Count',
-                    color_continuous_scale='Blues'
-                )
-                fig.update_layout(
-                    title_font_size=16,
-                    showlegend=False,
-                    plot_bgcolor='rgba(0,0,0,0)',
-                    paper_bgcolor='rgba(0,0,0,0)'
-                )
-                st.plotly_chart(fig, use_container_width=True)
-                st.markdown('</div>', unsafe_allow_html=True)
+                type_col1, type_col2 = st.columns(2)
+                
+                with type_col1:
+                    st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+                    fig = px.pie(
+                        prop_type_dist,
+                        values='Count',
+                        names='Property_Type',
+                        title="Property Type Distribution",
+                        color_discrete_sequence=['#2E7D32', '#1976D2', '#F57C00']
+                    )
+                    fig.update_layout(title_font_size=16)
+                    st.plotly_chart(fig, use_container_width=True)
+                    st.markdown('</div>', unsafe_allow_html=True)
+                
+                with type_col2:
+                    # BHK Distribution
+                    if 'BHK' in data_processor.combined_data.columns:
+                        bhk_series = data_processor.combined_data['BHK'].value_counts()
+                        bhk_series = bhk_series.sort_index()
+                        bhk_dist = pd.DataFrame({
+                            'BHK': bhk_series.index,
+                            'Count': bhk_series.values
+                        })
+                        
+                        st.markdown('<div class="chart-container">', unsafe_allow_html=True)
+                        fig = px.bar(
+                            bhk_dist,
+                            x='BHK',
+                            y='Count',
+                            title="BHK Configuration Distribution",
+                            color='Count',
+                            color_continuous_scale='Blues'
+                        )
+                        fig.update_layout(
+                            title_font_size=16,
+                            showlegend=False,
+                            plot_bgcolor='rgba(0,0,0,0)',
+                            paper_bgcolor='rgba(0,0,0,0)'
+                        )
+                        st.plotly_chart(fig, use_container_width=True)
+                        st.markdown('</div>', unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
