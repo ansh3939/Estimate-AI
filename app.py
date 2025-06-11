@@ -193,12 +193,39 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Load components
+    # Load components with enhanced error handling
     try:
         data_processor, predictor, advanced_predictor, investment_analyzer, emi_calculator, market_analyzer, live_scraper = load_components()
     except Exception as e:
         st.error(f"Error loading application components: {str(e)}")
-        st.stop()
+        
+        # Try to load data from database only
+        try:
+            st.info("Attempting to load data from database...")
+            db_data = db_manager.get_properties_from_db()
+            if not db_data.empty:
+                # Create minimal components for database-only mode
+                data_processor = DataProcessor()
+                data_processor.combined_data = db_data
+                predictor = RealEstatePredictor()
+                advanced_predictor = AdvancedRealEstatePredictor()
+                investment_analyzer = InvestmentAnalyzer()
+                emi_calculator = EMICalculator()
+                market_analyzer = ComparativeMarketAnalyzer()
+                live_scraper = LivePropertyDataScraper()
+                
+                # Train models with database data
+                predictor.train_model(db_data)
+                advanced_predictor.train_models(db_data)
+                
+                st.success("Successfully loaded from database!")
+            else:
+                st.error("No data available in database. Please contact support.")
+                st.stop()
+        except Exception as db_error:
+            st.error(f"Database connection failed: {str(db_error)}")
+            st.error("Unable to load application. Please refresh the page or contact support.")
+            st.stop()
     
     # Enhanced Sidebar with Professional Styling
     with st.sidebar:

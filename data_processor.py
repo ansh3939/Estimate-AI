@@ -30,26 +30,40 @@ class DataProcessor:
     
     def _preprocess_data(self):
         """Preprocess the combined data"""
-        if self.combined_data is not None:
+        if self.combined_data is not None and not self.combined_data.empty:
+            # Ensure numeric columns are properly typed
+            numeric_columns = ['Area_SqFt', 'BHK', 'Price_INR']
+            for col in numeric_columns:
+                if col in self.combined_data.columns:
+                    self.combined_data[col] = pd.to_numeric(self.combined_data[col], errors='coerce')
+            
+            # Ensure categorical columns are strings
+            categorical_columns = ['City', 'District', 'Sub_District', 'Property_Type', 'Furnishing']
+            for col in categorical_columns:
+                if col in self.combined_data.columns:
+                    self.combined_data[col] = self.combined_data[col].astype(str)
+            
             # Calculate price per sq ft
-            self.combined_data['Price_per_SqFt'] = (
-                self.combined_data['Price_INR'] / self.combined_data['Area_SqFt']
-            )
+            if 'Price_per_SqFt' not in self.combined_data.columns:
+                self.combined_data['Price_per_SqFt'] = (
+                    self.combined_data['Price_INR'] / self.combined_data['Area_SqFt']
+                )
             
             # Handle missing values
             self.combined_data = self.combined_data.dropna()
             
-            # Remove outliers using IQR method
-            Q1 = self.combined_data['Price_INR'].quantile(0.25)
-            Q3 = self.combined_data['Price_INR'].quantile(0.75)
-            IQR = Q3 - Q1
-            lower_bound = Q1 - 1.5 * IQR
-            upper_bound = Q3 + 1.5 * IQR
-            
-            self.combined_data = self.combined_data[
-                (self.combined_data['Price_INR'] >= lower_bound) &
-                (self.combined_data['Price_INR'] <= upper_bound)
-            ]
+            # Remove outliers using IQR method for numeric data
+            if len(self.combined_data) > 0:
+                Q1 = self.combined_data['Price_INR'].quantile(0.25)
+                Q3 = self.combined_data['Price_INR'].quantile(0.75)
+                IQR = Q3 - Q1
+                lower_bound = Q1 - 1.5 * IQR
+                upper_bound = Q3 + 1.5 * IQR
+                
+                self.combined_data = self.combined_data[
+                    (self.combined_data['Price_INR'] >= lower_bound) &
+                    (self.combined_data['Price_INR'] <= upper_bound)
+                ]
     
     def get_districts(self, city: str) -> List[str]:
         """Get districts for a given city"""

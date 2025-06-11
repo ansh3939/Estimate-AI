@@ -34,16 +34,21 @@ class AdvancedRealEstatePredictor:
         data_encoded = data.copy()
         categorical_columns = ['City', 'District', 'Sub_District', 'Property_Type', 'Furnishing']
         
+        # Convert all categorical data to string first to handle mixed types
+        for column in categorical_columns:
+            if column in data_encoded.columns:
+                data_encoded[column] = data_encoded[column].astype(str)
+        
         for column in categorical_columns:
             if column in data_encoded.columns:
                 if fit:
                     self.label_encoders[column] = LabelEncoder()
-                    data_encoded[column] = self.label_encoders[column].fit_transform(data_encoded[column].astype(str))
+                    data_encoded[column] = self.label_encoders[column].fit_transform(data_encoded[column])
                 else:
                     if column in self.label_encoders:
                         # Handle unseen categories
                         unique_values = self.label_encoders[column].classes_
-                        data_encoded[column] = data_encoded[column].astype(str).apply(
+                        data_encoded[column] = data_encoded[column].apply(
                             lambda x: x if x in unique_values else unique_values[0]
                         )
                         data_encoded[column] = self.label_encoders[column].transform(data_encoded[column])

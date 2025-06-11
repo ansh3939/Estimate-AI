@@ -27,6 +27,11 @@ class RealEstatePredictor:
         data_encoded = data.copy()
         categorical_columns = ['City', 'District', 'Sub_District', 'Property_Type', 'Furnishing']
         
+        # Convert all data to string first to handle mixed types
+        for column in categorical_columns:
+            if column in data_encoded.columns:
+                data_encoded[column] = data_encoded[column].astype(str)
+        
         for column in categorical_columns:
             if column in data_encoded.columns:
                 if fit:
