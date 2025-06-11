@@ -171,14 +171,11 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Create tabs for different features
-    tab1, tab2 = st.tabs(["🔮 Price Prediction", "💬 AI Assistant"])
+    # Main prediction interface
+    show_prediction_interface()
     
-    with tab1:
-        show_prediction_interface()
-    
-    with tab2:
-        show_chatbot_interface()
+    # Floating AI assistant icon
+    show_floating_chat_icon()
 
 def show_chatbot_interface():
     """Display the AI chatbot interface"""
@@ -376,6 +373,103 @@ def show_prediction_interface():
                      title="Properties by City", color=city_counts.values,
                      color_continuous_scale='Greens')
         st.plotly_chart(fig, use_container_width=True)
+
+def show_floating_chat_icon():
+    """Display floating chat icon in bottom right corner"""
+    # Initialize chat state
+    if "chat_open" not in st.session_state:
+        st.session_state.chat_open = False
+    
+    # Floating chat button CSS
+    st.markdown("""
+    <style>
+    .floating-chat-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #2E7D32, #4CAF50);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
+        transition: all 0.3s ease;
+        color: white;
+        font-size: 24px;
+        text-decoration: none;
+        border: none;
+    }
+    
+    .floating-chat-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4);
+    }
+    
+    .chat-sidebar {
+        position: fixed;
+        top: 0;
+        right: -400px;
+        width: 400px;
+        height: 100vh;
+        background: white;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        transition: right 0.3s ease;
+        z-index: 1001;
+        border-left: 3px solid #2E7D32;
+    }
+    
+    .chat-sidebar.open {
+        right: 0;
+    }
+    
+    .stButton > button[data-testid="baseButton-primary"] {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 1000 !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #2E7D32, #4CAF50) !important;
+        border: none !important;
+        box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3) !important;
+        font-size: 24px !important;
+        padding: 0 !important;
+    }
+    
+    .stButton > button[data-testid="baseButton-primary"]:hover {
+        transform: scale(1.1) !important;
+        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4) !important;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+    
+    # Fixed position chat button
+    chat_button_container = st.empty()
+    
+    with chat_button_container.container():
+        if st.button("💬", key="floating_chat", help="Open AI Assistant"):
+            st.session_state.chat_open = not st.session_state.chat_open
+            st.rerun()
+    
+    # Show chat interface in sidebar when open
+    if st.session_state.chat_open:
+        with st.sidebar:
+            st.markdown("### AI Real Estate Assistant")
+            
+            # Close button
+            if st.button("✕ Close Chat", key="close_chat"):
+                st.session_state.chat_open = False
+                st.rerun()
+            
+            st.markdown("---")
+            
+            # Chat interface
+            show_chatbot_interface()
 
 if __name__ == "__main__":
     main()
