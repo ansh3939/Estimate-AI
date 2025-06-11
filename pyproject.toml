@@ -9,6 +9,7 @@ dependencies = [
     "chromedriver-autoinstaller>=0.6.4",
     "joblib>=1.5.1",
     "numpy>=2.3.0",
+    "openai>=1.86.0",
     "pandas>=2.3.0",
     "plotly>=6.1.2",
     "psycopg2-binary>=2.9.10",

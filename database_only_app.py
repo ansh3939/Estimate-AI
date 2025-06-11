@@ -8,6 +8,7 @@ from fast_ml_model import FastRealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
 from market_analysis import ComparativeMarketAnalyzer
+from real_estate_chatbot import RealEstateChatbot
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
@@ -160,7 +161,7 @@ def main():
     
     st.markdown(f"""
     <div class="main-header">
-        <h1 style="margin: 0; font-size: 2.5rem;">AI Real Estate Price Predictor</h1>
+        <h1 style="margin: 0; font-size: 2.5rem;">AI Real Estate Intelligence Platform</h1>
         <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">
             Professional Investment Analysis & Market Intelligence Platform
         </p>
@@ -169,6 +170,18 @@ def main():
         </div>
     </div>
     """, unsafe_allow_html=True)
+    
+    # Create tabs for different features
+    tab1, tab2 = st.tabs(["🔮 Price Prediction", "💬 AI Assistant"])
+    
+    with tab1:
+        show_prediction_interface()
+    
+    with tab2:
+        show_chatbot_interface()
+
+def show_prediction_interface():
+    """Display the main property prediction interface"""
     
     # Load data from database
     data = load_database_data()
@@ -346,6 +359,22 @@ def main():
                      title="Properties by City", color=city_counts.values,
                      color_continuous_scale='Greens')
         st.plotly_chart(fig, use_container_width=True)
+
+def show_chatbot_interface():
+    """Display the AI chatbot interface"""
+    try:
+        chatbot = RealEstateChatbot()
+        
+        # Render the chatbot interface
+        chatbot.render_chatbot_interface()
+        
+        # Add suggested questions
+        st.markdown("---")
+        chatbot.render_suggested_questions()
+        
+    except Exception as e:
+        st.error(f"Chatbot initialization error: {str(e)}")
+        st.info("Please ensure the OpenAI API key is properly configured.")
 
 if __name__ == "__main__":
     main()
