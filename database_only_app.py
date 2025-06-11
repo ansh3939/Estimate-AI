@@ -9,6 +9,7 @@ from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
 from market_analysis import ComparativeMarketAnalyzer
 from real_estate_chatbot import RealEstateChatbot
+from portfolio_analyzer import PropertyPortfolioAnalyzer
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
@@ -171,8 +172,17 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Main prediction interface
-    show_prediction_interface()
+    # Create main tabs
+    tab1, tab2, tab3 = st.tabs(["🔮 Price Prediction", "📊 Portfolio Tracker", "💰 Investment Analyzer"])
+    
+    with tab1:
+        show_prediction_interface()
+    
+    with tab2:
+        show_portfolio_tracker()
+    
+    with tab3:
+        show_investment_analyzer()
     
     # Floating AI assistant icon
     show_floating_chat_icon()
@@ -470,6 +480,248 @@ def show_floating_chat_icon():
             
             # Chat interface
             show_chatbot_interface()
+
+def show_portfolio_tracker():
+    """Display portfolio tracking interface for existing properties"""
+    st.header("📊 Property Portfolio Tracker")
+    st.markdown("Track your existing property values, analyze growth performance, and get buy/sell/hold recommendations.")
+    
+    # Initialize portfolio analyzer
+    portfolio_analyzer = PropertyPortfolioAnalyzer()
+    predictor = FastRealEstatePredictor()
+    
+    # Load data for training
+    data = load_database_data()
+    if data is not None and not data.empty:
+        predictor.train_model(data)
+    
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.subheader("Property Details")
+        
+        # Property information
+        city = st.selectbox("City", sorted(data['City'].unique()) if data is not None else ['Mumbai'])
+        district = st.selectbox("District", get_districts(data, city) if data is not None else ['Central'])
+        sub_district = st.selectbox("Sub District", get_sub_districts(data, city, district) if data is not None else ['Area 1'])
+        
+        area_sqft = st.number_input("Property Area (Sq Ft)", min_value=100, max_value=10000, value=1000, step=50)
+        bhk = st.selectbox("BHK", [1, 2, 3, 4, 5], index=1)
+        property_type = st.selectbox("Property Type", ['Apartment', 'Independent House', 'Builder Floor'])
+        furnishing = st.selectbox("Furnishing", ['Unfurnished', 'Semi-Furnished', 'Furnished'], index=1)
+        
+        st.subheader("Purchase Information")
+        purchase_price = st.number_input("Purchase Price (₹)", min_value=100000, max_value=50000000, value=5000000, step=100000)
+        purchase_date = st.date_input("Purchase Date", value=pd.to_datetime('2020-01-01'))
+        
+        analyze_button = st.button("📈 Analyze My Property", type="primary")
+    
+    with col2:
+        if analyze_button:
+            with st.spinner("Analyzing your property portfolio..."):
+                # Prepare property data for prediction
+                property_data = {
+                    'city': city,
+                    'district': district,
+                    'sub_district': sub_district,
+                    'area_sqft': area_sqft,
+                    'bhk': bhk,
+                    'property_type': property_type,
+                    'furnishing': furnishing,
+                    'purchase_price': purchase_price,
+                    'purchase_date': purchase_date.strftime('%Y-%m-%d')
+                }
+                
+                # Analyze current value
+                property_analysis = portfolio_analyzer.analyze_current_property_value(property_data, predictor)
+                
+                # Generate recommendation
+                recommendation = portfolio_analyzer.generate_hold_sell_recommendation(property_analysis, property_data)
+                
+                # Display results
+                st.subheader("📊 Property Analysis Results")
+                
+                # Key metrics
+                col_metric1, col_metric2, col_metric3 = st.columns(3)
+                
+                with col_metric1:
+                    st.metric(
+                        "Current Value", 
+                        f"₹{property_analysis['current_value']:,.0f}",
+                        f"₹{property_analysis['total_appreciation']:,.0f}"
+                    )
+                
+                with col_metric2:
+                    st.metric(
+                        "Total Growth", 
+                        f"{property_analysis['total_growth_percent']:.1f}%",
+                        f"{property_analysis['annual_growth_percent']:.1f}% annually"
+                    )
+                
+                with col_metric3:
+                    st.metric(
+                        "vs Market", 
+                        f"{property_analysis['performance_vs_market']:+.1f}%",
+                        "Performance difference"
+                    )
+                
+                # Recommendation
+                st.subheader("🎯 Investment Recommendation")
+                
+                rec_color = {
+                    "STRONG HOLD": "🟢", "HOLD": "🟢", 
+                    "CONDITIONAL HOLD": "🟡", "CONSIDER SELLING": "🟠", 
+                    "SELL": "🔴"
+                }.get(recommendation['recommendation'], "🟡")
+                
+                st.markdown(f"""
+                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
+                    <h4>{rec_color} {recommendation['recommendation']}</h4>
+                    <p>{recommendation['reasoning']}</p>
+                    <p><strong>Confidence Score:</strong> {recommendation['confidence_score']:.0f}%</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # Future projections
+                st.subheader("📈 Future Value Projections")
+                
+                proj_col1, proj_col2 = st.columns(2)
+                with proj_col1:
+                    st.metric("Next Year", f"₹{recommendation['next_year_projection']:,.0f}")
+                with proj_col2:
+                    st.metric("5-Year Projection", f"₹{recommendation['five_year_projection']:,.0f}")
+
+def show_investment_analyzer():
+    """Display investment opportunity analyzer"""
+    st.header("💰 Investment Opportunity Analyzer")
+    st.markdown("Evaluate whether a property at a specific price is a good investment opportunity.")
+    
+    # Initialize components
+    portfolio_analyzer = PropertyPortfolioAnalyzer()
+    predictor = FastRealEstatePredictor()
+    
+    # Load data for training
+    data = load_database_data()
+    if data is not None and not data.empty:
+        predictor.train_model(data)
+    
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        st.subheader("Property Under Consideration")
+        
+        # Property details
+        city = st.selectbox("Target City", sorted(data['City'].unique()) if data is not None else ['Mumbai'], key="inv_city")
+        district = st.selectbox("Target District", get_districts(data, city) if data is not None else ['Central'], key="inv_district")
+        sub_district = st.selectbox("Target Sub District", get_sub_districts(data, city, district) if data is not None else ['Area 1'], key="inv_sub_district")
+        
+        area_sqft = st.number_input("Area (Sq Ft)", min_value=100, max_value=10000, value=1000, step=50, key="inv_area")
+        bhk = st.selectbox("BHK", [1, 2, 3, 4, 5], index=1, key="inv_bhk")
+        property_type = st.selectbox("Property Type", ['Apartment', 'Independent House', 'Builder Floor'], key="inv_type")
+        furnishing = st.selectbox("Furnishing", ['Unfurnished', 'Semi-Furnished', 'Furnished'], index=1, key="inv_furnishing")
+        
+        st.subheader("Investment Parameters")
+        asking_price = st.number_input("Asking Price (₹)", min_value=100000, max_value=50000000, value=5000000, step=100000, key="inv_price")
+        
+        analyze_investment_button = st.button("🎯 Analyze Investment", type="primary")
+    
+    with col2:
+        if analyze_investment_button:
+            with st.spinner("Analyzing investment opportunity..."):
+                # Prepare target property data
+                target_property = {
+                    'city': city,
+                    'district': district,
+                    'sub_district': sub_district,
+                    'area_sqft': area_sqft,
+                    'bhk': bhk,
+                    'property_type': property_type,
+                    'furnishing': furnishing
+                }
+                
+                # Analyze investment opportunity
+                investment_analysis = portfolio_analyzer.analyze_investment_opportunity(
+                    target_property, asking_price, predictor
+                )
+                
+                # Display results
+                st.subheader("💡 Investment Analysis")
+                
+                # Value comparison
+                col_val1, col_val2 = st.columns(2)
+                with col_val1:
+                    st.metric("Asking Price", f"₹{investment_analysis['asking_price']:,.0f}")
+                with col_val2:
+                    st.metric(
+                        "Market Value", 
+                        f"₹{investment_analysis['predicted_market_value']:,.0f}",
+                        f"₹{investment_analysis['value_gap']:,.0f}"
+                    )
+                
+                # Value gap indicator
+                if investment_analysis['value_gap_percent'] > 0:
+                    gap_color = "🟢"
+                    gap_text = f"Undervalued by {investment_analysis['value_gap_percent']:.1f}%"
+                else:
+                    gap_color = "🔴"
+                    gap_text = f"Overvalued by {abs(investment_analysis['value_gap_percent']):.1f}%"
+                
+                st.markdown(f"**Value Assessment:** {gap_color} {gap_text}")
+                
+                # Investment recommendation
+                st.subheader("🎯 Investment Recommendation")
+                
+                rec_color = {
+                    "STRONG BUY": "🟢", "BUY": "🟢", 
+                    "CONDITIONAL BUY": "🟡", "AVOID": "🟠", 
+                    "STRONG AVOID": "🔴"
+                }.get(investment_analysis['investment_recommendation'], "🟡")
+                
+                st.markdown(f"""
+                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
+                    <h4>{rec_color} {investment_analysis['investment_recommendation']}</h4>
+                    <p>{investment_analysis['reasoning']}</p>
+                    <p><strong>Confidence Score:</strong> {investment_analysis['confidence_score']:.0f}%</p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                # ROI projections
+                st.subheader("📊 ROI Projections")
+                
+                roi_col1, roi_col2, roi_col3 = st.columns(3)
+                with roi_col1:
+                    st.metric("3-Year ROI", f"{investment_analysis['roi_projections']['three_year_roi']:.1f}%")
+                with roi_col2:
+                    st.metric("5-Year ROI", f"{investment_analysis['roi_projections']['five_year_roi']:.1f}%")
+                with roi_col3:
+                    st.metric("Annual Growth", f"{investment_analysis['roi_projections']['annual_growth_rate']:.1f}%")
+                
+                # Growth projections chart
+                years = [0, 1, 3, 5]
+                values = [
+                    asking_price,
+                    investment_analysis['growth_projections']['one_year'],
+                    investment_analysis['growth_projections']['three_year'],
+                    investment_analysis['growth_projections']['five_year']
+                ]
+                
+                fig = go.Figure()
+                fig.add_trace(go.Scatter(
+                    x=years, y=values,
+                    mode='lines+markers',
+                    name='Projected Value',
+                    line=dict(color='#2E7D32', width=3),
+                    marker=dict(size=8)
+                ))
+                
+                fig.update_layout(
+                    title="Investment Growth Projection",
+                    xaxis_title="Years",
+                    yaxis_title="Property Value (₹)",
+                    height=400
+                )
+                
+                st.plotly_chart(fig, use_container_width=True)
 
 if __name__ == "__main__":
     main()

@@ -5,6 +5,7 @@ description = "Add your description here"
 requires-python = ">=3.11"
 dependencies = [
     "alembic>=1.16.1",
+    "anthropic>=0.54.0",
     "beautifulsoup4>=4.13.4",
     "chromedriver-autoinstaller>=0.6.4",
     "joblib>=1.5.1",
