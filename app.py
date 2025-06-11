@@ -160,14 +160,36 @@ def load_components():
     
     return data_processor, predictor, advanced_predictor, investment_analyzer, emi_calculator, market_analyzer, live_scraper
 
+def get_session_id():
+    """Get or create session ID for user tracking"""
+    if 'session_id' not in st.session_state:
+        st.session_state.session_id = str(uuid.uuid4())
+    return st.session_state.session_id
+
 def main():
-    # Professional Header
-    st.markdown("""
+    # Initialize session
+    session_id = get_session_id()
+    
+    # Professional Header with Database Status
+    try:
+        analytics_data = db_manager.get_analytics_data()
+        db_status = "✅ Connected"
+        total_properties = analytics_data.get('total_properties', 0)
+        total_predictions = analytics_data.get('total_predictions', 0)
+    except:
+        db_status = "⚠️ Offline"
+        total_properties = 0
+        total_predictions = 0
+    
+    st.markdown(f"""
     <div class="main-header">
         <h1 style="margin: 0; font-size: 2.5rem;">AI Real Estate Price Predictor</h1>
         <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">
             Professional Investment Analysis & Market Intelligence Platform
         </p>
+        <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
+            Database: {db_status} | Properties: {total_properties:,} | Predictions Made: {total_predictions:,}
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -340,6 +362,18 @@ def main():
             investment_score, recommendation = investment_analyzer.analyze(
                 input_data, predicted_price
             )
+            
+            # Save prediction to database
+            try:
+                prediction_result = {
+                    'predicted_price': predicted_price,
+                    'investment_score': investment_score,
+                    'model_used': model_choice,
+                    'all_predictions': confidence_scores if model_choice == "Advanced Ensemble (Recommended)" and 'confidence_scores' in locals() else {}
+                }
+                prediction_id = db_manager.save_prediction(session_id, input_data, prediction_result)
+            except Exception as e:
+                pass  # Continue without database if error occurs
             
             # Enhanced Results Display
             st.markdown("### 📊 Property Valuation Results")
@@ -849,6 +883,145 @@ def main():
     else:
         # Default Dashboard when no prediction is made
         st.markdown("### 🏠 Welcome to AI Real Estate Intelligence Platform")
+        
+        # User Analytics Dashboard
+        st.markdown("---")
+        
+        # Create tabs for different sections
+        dash_tab1, dash_tab2, dash_tab3 = st.tabs([
+            "📊 Your Analytics", 
+            "📈 Market Overview", 
+            "🔍 Recent Activity"
+        ])
+        
+        with dash_tab1:
+            st.markdown("#### Personal Analytics Dashboard")
+            
+            # Get user prediction history
+            try:
+                user_history = db_manager.get_prediction_history(session_id, limit=20)
+                
+                if user_history:
+                    st.markdown(f"**Total Predictions Made:** {len(user_history)}")
+                    
+                    # Create summary metrics
+                    col1, col2, col3, col4 = st.columns(4)
+                    
+                    total_predictions = len(user_history)
+                    avg_price = sum(pred['predicted_price'] for pred in user_history) / total_predictions
+                    avg_investment_score = sum(pred.get('investment_score', 0) for pred in user_history if pred.get('investment_score')) / max(1, len([p for p in user_history if p.get('investment_score')]))
+                    favorite_city = max(set([pred['city'] for pred in user_history]), key=[pred['city'] for pred in user_history].count)
+                    
+                    with col1:
+                        st.metric("Total Predictions", total_predictions)
+                    
+                    with col2:
+                        st.metric("Average Price", f"₹{avg_price:,.0f}")
+                    
+                    with col3:
+                        st.metric("Avg Investment Score", f"{avg_investment_score:.1f}/10")
+                    
+                    with col4:
+                        st.metric("Favorite City", favorite_city)
+                    
+                    # Recent predictions table
+                    st.markdown("##### Recent Predictions")
+                    history_df = pd.DataFrame(user_history[:10])
+                    history_df['predicted_price'] = history_df['predicted_price'].apply(lambda x: f"₹{x:,.0f}")
+                    history_df = history_df[['city', 'district', 'bhk', 'area_sqft', 'predicted_price', 'investment_score', 'created_at']]
+                    history_df.columns = ['City', 'District', 'BHK', 'Area (SqFt)', 'Predicted Price', 'Investment Score', 'Date']
+                    st.dataframe(history_df, use_container_width=True)
+                    
+                else:
+                    st.info("No predictions made yet. Start by making your first property prediction above!")
+                    
+            except Exception as e:
+                st.warning("Analytics temporarily unavailable")
+        
+        with dash_tab2:
+            st.markdown("#### Market Overview")
+            
+            try:
+                analytics_data = db_manager.get_analytics_data()
+                
+                # Platform statistics
+                col1, col2, col3 = st.columns(3)
+                
+                with col1:
+                    st.metric("Total Properties", f"{analytics_data.get('total_properties', 0):,}")
+                
+                with col2:
+                    st.metric("Total Predictions", f"{analytics_data.get('total_predictions', 0):,}")
+                
+                with col3:
+                    st.metric("Active Users", analytics_data.get('active_users', 0))
+                
+                # Popular cities chart
+                if analytics_data.get('popular_cities'):
+                    st.markdown("##### Most Popular Cities")
+                    cities_data = analytics_data['popular_cities']
+                    cities_df = pd.DataFrame(cities_data, columns=['City', 'Predictions'])
+                    
+                    fig = px.bar(
+                        cities_df, 
+                        x='City', 
+                        y='Predictions',
+                        title="Prediction Activity by City",
+                        color='Predictions',
+                        color_continuous_scale='Greens'
+                    )
+                    fig.update_layout(
+                        plot_bgcolor='rgba(0,0,0,0)',
+                        paper_bgcolor='rgba(0,0,0,0)'
+                    )
+                    st.plotly_chart(fig, use_container_width=True)
+                
+            except Exception as e:
+                st.warning("Market data temporarily unavailable")
+        
+        with dash_tab3:
+            st.markdown("#### Recent Platform Activity")
+            
+            # Show sample market insights
+            combined_data = data_processor.get_combined_data()
+            if combined_data is not None and not combined_data.empty:
+                market_insights = market_analyzer.generate_market_insights(combined_data)
+                
+                insight_col1, insight_col2 = st.columns(2)
+                
+                with insight_col1:
+                    st.markdown(f"""
+                    <div class="info-section">
+                        <h5 style="margin-top: 0; color: #2E7D32;">Top Investment City</h5>
+                        <p><strong>{market_insights.get('best_investment_city', 'Mumbai')}</strong></p>
+                        <p style="font-size: 0.9rem; color: #666;">Highest growth potential</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    st.markdown(f"""
+                    <div class="warning-card">
+                        <h5 style="margin-top: 0; color: #F57C00;">Most Expensive</h5>
+                        <p><strong>{market_insights.get('most_expensive_city', 'Mumbai')}</strong></p>
+                        <p style="font-size: 0.9rem; color: #666;">Premium market</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with insight_col2:
+                    st.markdown(f"""
+                    <div class="success-card">
+                        <h5 style="margin-top: 0; color: #1976D2;">Most Affordable</h5>
+                        <p><strong>{market_insights.get('most_affordable_city', 'Noida')}</strong></p>
+                        <p style="font-size: 0.9rem; color: #666;">Entry-level opportunity</p>
+                    </div>
+                    """, unsafe_allow_html=True)
+                    
+                    st.markdown(f"""
+                    <div class="info-section">
+                        <h5 style="margin-top: 0; color: #2E7D32;">Best Value BHK</h5>
+                        <p><strong>{market_insights.get('most_value_bhk', 2)} BHK</strong></p>
+                        <p style="font-size: 0.9rem; color: #666;">Optimal investment size</p>
+                    </div>
+                    """, unsafe_allow_html=True)
         st.markdown("""
         <div class="info-section">
             <h4 style="margin-top: 0; color: #1976D2;">How to Use This Platform</h4>
