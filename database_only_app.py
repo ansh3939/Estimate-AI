@@ -180,6 +180,22 @@ def main():
     with tab2:
         show_chatbot_interface()
 
+def show_chatbot_interface():
+    """Display the AI chatbot interface"""
+    try:
+        chatbot = RealEstateChatbot()
+        
+        # Render the chatbot interface
+        chatbot.render_chatbot_interface()
+        
+        # Add suggested questions
+        st.markdown("---")
+        chatbot.render_suggested_questions()
+        
+    except Exception as e:
+        st.error(f"Chatbot initialization error: {str(e)}")
+        st.info("Please ensure the OpenAI API key is properly configured.")
+
 def show_prediction_interface():
     """Display the main property prediction interface"""
     
@@ -255,6 +271,7 @@ def show_prediction_interface():
             
             # Save prediction to database
             try:
+                session_id = get_session_id()
                 prediction_result = {
                     'predicted_price': predicted_price,
                     'investment_score': investment_score,
@@ -359,22 +376,6 @@ def show_prediction_interface():
                      title="Properties by City", color=city_counts.values,
                      color_continuous_scale='Greens')
         st.plotly_chart(fig, use_container_width=True)
-
-def show_chatbot_interface():
-    """Display the AI chatbot interface"""
-    try:
-        chatbot = RealEstateChatbot()
-        
-        # Render the chatbot interface
-        chatbot.render_chatbot_interface()
-        
-        # Add suggested questions
-        st.markdown("---")
-        chatbot.render_suggested_questions()
-        
-    except Exception as e:
-        st.error(f"Chatbot initialization error: {str(e)}")
-        st.info("Please ensure the OpenAI API key is properly configured.")
 
 if __name__ == "__main__":
     main()
