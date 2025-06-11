@@ -315,7 +315,7 @@ def main():
                     <h5 style="margin-top: 0;">Monthly EMI: ₹{emi_details['emi']:,.0f}</h5>
                     <p style="margin: 0.25rem 0;">Loan Amount: ₹{loan_amount:,.0f}</p>
                     <p style="margin: 0.25rem 0;">Total Interest: ₹{emi_details['total_interest']:,.0f}</p>
-                    <p style="margin: 0.25rem 0;">Total Payment: ₹{emi_details['total_payment']:,.0f}</p>
+                    <p style="margin: 0.25rem 0;">Total Payment: ₹{emi_details['total_amount']:,.0f}</p>
                 </div>
                 """, unsafe_allow_html=True)
             
