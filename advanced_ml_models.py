@@ -83,6 +83,8 @@ class AdvancedRealEstatePredictor:
         for column in categorical_columns:
             if column in data_encoded.columns:
                 data_encoded[column] = data_encoded[column].astype(str)
+                # Handle any NaN values
+                data_encoded[column] = data_encoded[column].fillna('Unknown')
         
         for column in categorical_columns:
             if column in data_encoded.columns:
@@ -92,11 +94,16 @@ class AdvancedRealEstatePredictor:
                 else:
                     if column in self.label_encoders:
                         # Handle unseen categories
-                        unique_values = self.label_encoders[column].classes_
+                        unique_values = set(self.label_encoders[column].classes_)
                         data_encoded[column] = data_encoded[column].apply(
-                            lambda x: x if x in unique_values else unique_values[0]
+                            lambda x: x if x in unique_values else self.label_encoders[column].classes_[0]
                         )
                         data_encoded[column] = self.label_encoders[column].transform(data_encoded[column])
+                    else:
+                        # If encoder doesn't exist, create a simple numeric mapping
+                        unique_vals = data_encoded[column].unique()
+                        mapping = {val: i for i, val in enumerate(unique_vals)}
+                        data_encoded[column] = data_encoded[column].map(mapping)
         
         return data_encoded
     
@@ -109,10 +116,22 @@ class AdvancedRealEstatePredictor:
         if 'Price_INR' in data_features.columns:
             data_features['Price_per_SqFt'] = data_features['Price_INR'] / data_features['Area_SqFt']
         
-        # Advanced area categorization with more granularity
-        data_features['Area_Category'] = pd.cut(data_features['Area_SqFt'], 
-                                               bins=[0, 600, 1000, 1500, 2200, 3000, 10000], 
-                                               labels=['Compact', 'Medium', 'Large', 'Premium', 'Luxury', 'Ultra_Luxury'])
+        # Advanced area categorization with more granularity (numeric encoding)
+        def categorize_area(area):
+            if area <= 600:
+                return 0  # Compact
+            elif area <= 1000:
+                return 1  # Medium
+            elif area <= 1500:
+                return 2  # Large
+            elif area <= 2200:
+                return 3  # Premium
+            elif area <= 3000:
+                return 4  # Luxury
+            else:
+                return 5  # Ultra_Luxury
+        
+        data_features['Area_Category'] = data_features['Area_SqFt'].apply(categorize_area)
         
         # Sophisticated feature engineering
         data_features['BHK_Area_Ratio'] = data_features['BHK'] / data_features['Area_SqFt'] * 1000
@@ -183,8 +202,21 @@ class AdvancedRealEstatePredictor:
         X = data_enhanced[feature_cols].copy()
         y = data_enhanced['Price_INR'].copy()
         
-        # Encode categorical features
+        # Encode categorical features (ensure Area_Category is properly encoded)
         X_encoded = self._encode_categorical_features(X, fit=True)
+        
+        # Verify all data is numeric
+        print(f"Data types after encoding: {X_encoded.dtypes}")
+        print(f"Any non-numeric values: {X_encoded.select_dtypes(include=['object']).columns.tolist()}")
+        
+        # Force convert any remaining object columns to numeric
+        for col in X_encoded.columns:
+            if X_encoded[col].dtype == 'object':
+                print(f"Converting {col} from object to numeric")
+                X_encoded[col] = pd.to_numeric(X_encoded[col], errors='coerce')
+        
+        # Remove any rows with NaN values after conversion
+        X_encoded = X_encoded.fillna(0)
         
         # Split the data
         X_train, X_test, y_train, y_test = train_test_split(
@@ -202,14 +234,22 @@ class AdvancedRealEstatePredictor:
         for model_name, model in self.models.items():
             print(f"Training {model_name}...")
             
-            if model_name == 'xgboost':
-                # Use scaled features for XGBoost
-                model.fit(X_train_scaled, y_train)
-                y_pred = model.predict(X_test_scaled)
-            else:
-                # Use original encoded features for tree-based models
-                model.fit(X_train, y_train)
-                y_pred = model.predict(X_test)
+            try:
+                if model_name == 'xgboost':
+                    # Use scaled features for XGBoost
+                    model.fit(X_train_scaled, y_train)
+                    y_pred = model.predict(X_test_scaled)
+                elif model_name == 'gradient_boosting':
+                    # Use scaled features for Gradient Boosting as well
+                    model.fit(X_train_scaled, y_train)
+                    y_pred = model.predict(X_test_scaled)
+                else:
+                    # Use original encoded features for tree-based models
+                    model.fit(X_train, y_train)
+                    y_pred = model.predict(X_test)
+            except Exception as e:
+                print(f"Error training {model_name}: {e}")
+                continue
             
             # Calculate metrics
             mae = mean_absolute_error(y_test, y_pred)
