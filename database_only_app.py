@@ -149,26 +149,12 @@ def main():
     # Initialize session
     session_id = get_session_id()
     
-    # Database status header
-    try:
-        analytics_data = db_manager.get_analytics_data()
-        db_status = "Connected"
-        total_properties = analytics_data.get('total_properties', 0)
-        total_predictions = analytics_data.get('total_predictions', 0)
-    except:
-        db_status = "Offline"
-        total_properties = 0
-        total_predictions = 0
-    
     st.markdown(f"""
     <div class="main-header">
         <h1 style="margin: 0; font-size: 2.5rem;">AI Real Estate Intelligence Platform</h1>
         <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">
             Professional Investment Analysis & Market Intelligence Platform
         </p>
-        <div style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">
-            Database: {db_status} | Properties: {total_properties:,} | Predictions: {total_predictions:,}
-        </div>
     </div>
     """, unsafe_allow_html=True)
     
