@@ -372,7 +372,7 @@ def main():
     st.markdown(f"""
     <div class="main-header">
         <h1 style="margin: 0; font-size: 3.2rem; font-weight: 700; position: relative; z-index: 2;">
-            🏢 AI Real Estate Intelligence Platform
+            AI Real Estate Intelligence Platform
         </h1>
         <p style="margin: 1rem 0 0 0; font-size: 1.4rem; opacity: 0.95; position: relative; z-index: 2;">
             Professional Investment Analysis & Market Intelligence Platform
@@ -384,7 +384,7 @@ def main():
     """, unsafe_allow_html=True)
     
     # Create main tabs
-    tab1, tab2, tab3 = st.tabs(["🔮 Price Prediction", "📊 Portfolio Tracker", "💰 Investment Analyzer"])
+    tab1, tab2, tab3 = st.tabs(["Price Prediction", "Portfolio Tracker", "Investment Analyzer"])
     
     with tab1:
         show_prediction_interface()
@@ -443,45 +443,45 @@ def show_prediction_interface():
     with st.sidebar:
         st.markdown("""
         <div class="sidebar-section">
-            <h3 style="color: #667eea; margin-bottom: 1rem; font-weight: 600;">🏠 Property Configuration</h3>
+            <h3 style="color: #667eea; margin-bottom: 1rem; font-weight: 600;">Property Configuration</h3>
         </div>
         """, unsafe_allow_html=True)
         
         # Location selection with enhanced styling
         st.markdown("""
         <div class="sidebar-section">
-            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">📍 Location Details</h4>
+            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">Location Details</h4>
         </div>
         """, unsafe_allow_html=True)
         
-        city = st.selectbox("🌆 Select City", ["Mumbai", "Delhi", "Gurugram", "Noida", "Bangalore"], 
+        city = st.selectbox("Select City", ["Mumbai", "Delhi", "Gurugram", "Noida", "Bangalore"], 
                            help="Choose the city for property analysis")
         
         districts = get_districts(data, city)
-        district = st.selectbox("🏘️ Select District", districts, 
+        district = st.selectbox("Select District", districts, 
                                help="District within the selected city")
         
         sub_districts = get_sub_districts(data, city, district)
-        sub_district = st.selectbox("📍 Select Sub-District", sub_districts,
+        sub_district = st.selectbox("Select Sub-District", sub_districts,
                                    help="Specific area within the district")
         
         # Property details with enhanced styling
         st.markdown("""
         <div class="sidebar-section">
-            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">🏗️ Property Specifications</h4>
+            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">Property Specifications</h4>
         </div>
         """, unsafe_allow_html=True)
         
-        area_sqft = st.number_input("📐 Area (Square Feet)", min_value=100, max_value=10000, 
+        area_sqft = st.number_input("Area (Square Feet)", min_value=100, max_value=10000, 
                                    value=1000, step=50, help="Property area in square feet")
-        bhk = st.selectbox("🛏️ BHK Configuration", [1, 2, 3, 4, 5, 6], index=1,
+        bhk = st.selectbox("BHK Configuration", [1, 2, 3, 4, 5, 6], index=1,
                           help="Number of bedrooms, hall, and kitchen")
-        property_type = st.selectbox("🏢 Property Type", ["Apartment", "Villa", "House", "Studio"], 
+        property_type = st.selectbox("Property Type", ["Apartment", "Villa", "House", "Studio"], 
                                     help="Type of property")
         furnishing = st.selectbox("Furnishing", ["Unfurnished", "Semi-Furnished", "Fully Furnished"])
         
         # Predict button
-        predict_button = st.button("🔮 Predict Property Price", type="primary", use_container_width=True)
+        predict_button = st.button("Predict Property Price", type="primary", use_container_width=True)
     
     # Main content area
     if predict_button:
@@ -519,7 +519,7 @@ def show_prediction_interface():
             # Enhanced results display
             st.markdown("""
             <div style="text-align: center; margin: 2rem 0;">
-                <h3 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">💎 Property Valuation Results</h3>
+                <h3 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">Property Valuation Results</h3>
             </div>
             """, unsafe_allow_html=True)
             
@@ -554,7 +554,7 @@ def show_prediction_interface():
                 
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h4 style="margin-top: 0; color: #2c3e50; font-weight: 600;">📊 Investment Analysis</h4>
+                    <h4 style="margin-top: 0; color: #2c3e50; font-weight: 600;">Investment Analysis</h4>
                     <div style="font-size: 2.5rem; font-weight: 700; color: {score_color}; text-align: center; margin: 1rem 0;">
                         {investment_score}/10
                     </div>
