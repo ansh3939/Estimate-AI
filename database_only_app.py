@@ -217,10 +217,6 @@ def main():
         property_type = st.selectbox("Property Type", ["Apartment", "Villa", "House", "Studio"])
         furnishing = st.selectbox("Furnishing", ["Unfurnished", "Semi-Furnished", "Fully Furnished"])
         
-        # Model info
-        st.markdown("#### AI Model: Fast Random Forest")
-        st.info("Using optimized Random Forest model for instant predictions")
-        
         # Predict button
         predict_button = st.button("🔮 Predict Property Price", type="primary", use_container_width=True)
     
