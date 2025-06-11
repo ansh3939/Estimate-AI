@@ -65,36 +65,7 @@ class UserPreferences(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
-class MarketTrends(Base):
-    __tablename__ = "market_trends"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    city = Column(String(100), nullable=False)
-    district = Column(String(100), nullable=False)
-    month_year = Column(String(20), nullable=False)  # Format: "2024-01"
-    avg_price = Column(Float, nullable=False)
-    avg_price_per_sqft = Column(Float, nullable=False)
-    total_properties = Column(Integer, nullable=False)
-    growth_rate = Column(Float, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
 
-class LiveDataCache(Base):
-    __tablename__ = "live_data_cache"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    city = Column(String(100), nullable=False)
-    district = Column(String(100), nullable=False)
-    sub_district = Column(String(100), nullable=False)
-    area_sqft = Column(Float, nullable=False)
-    bhk = Column(Integer, nullable=False)
-    property_type = Column(String(50), nullable=False)
-    furnishing = Column(String(50), nullable=False)
-    price_inr = Column(Float, nullable=False)
-    price_per_sqft = Column(Float, nullable=False)
-    source = Column(String(50), nullable=False)
-    scraped_date = Column(DateTime, nullable=False)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    is_valid = Column(Boolean, default=True)
 
 class DatabaseManager:
     def __init__(self):
@@ -199,31 +170,7 @@ class DatabaseManager:
         finally:
             self.close_session(db)
     
-    def save_live_data(self, live_data: pd.DataFrame):
-        """Save live scraped data to cache"""
-        db = self.get_session()
-        try:
-            for _, row in live_data.iterrows():
-                live_property = LiveDataCache(
-                    city=row['City'],
-                    district=row['District'],
-                    sub_district=row['Sub_District'],
-                    area_sqft=row['Area_SqFt'],
-                    bhk=row['BHK'],
-                    property_type=row['Property_Type'],
-                    furnishing=row['Furnishing'],
-                    price_inr=row['Price_INR'],
-                    price_per_sqft=row['Price_per_SqFt'],
-                    source=row['Source'],
-                    scraped_date=datetime.strptime(row['Scraped_Date'], '%Y-%m-%d')
-                )
-                db.add(live_property)
-            db.commit()
-        except Exception as e:
-            db.rollback()
-            raise e
-        finally:
-            self.close_session(db)
+
     
     def get_properties_from_db(self, city: str = None, limit: int = 1000) -> pd.DataFrame:
         """Get properties from database"""
@@ -270,69 +217,7 @@ class DatabaseManager:
         finally:
             self.close_session(db)
     
-    def update_market_trends(self, city: str, district: str, data: Dict):
-        """Update market trends data"""
-        db = self.get_session()
-        try:
-            current_month = datetime.now().strftime('%Y-%m')
-            
-            # Check if trend exists for current month
-            existing_trend = db.query(MarketTrends)\
-                .filter(MarketTrends.city == city)\
-                .filter(MarketTrends.district == district)\
-                .filter(MarketTrends.month_year == current_month)\
-                .first()
-            
-            if existing_trend:
-                # Update existing trend
-                existing_trend.avg_price = data['avg_price']
-                existing_trend.avg_price_per_sqft = data['avg_price_per_sqft']
-                existing_trend.total_properties = data['total_properties']
-                existing_trend.growth_rate = data.get('growth_rate')
-            else:
-                # Create new trend
-                trend = MarketTrends(
-                    city=city,
-                    district=district,
-                    month_year=current_month,
-                    avg_price=data['avg_price'],
-                    avg_price_per_sqft=data['avg_price_per_sqft'],
-                    total_properties=data['total_properties'],
-                    growth_rate=data.get('growth_rate')
-                )
-                db.add(trend)
-            
-            db.commit()
-        except Exception as e:
-            db.rollback()
-            raise e
-        finally:
-            self.close_session(db)
-    
-    def get_market_trends(self, city: str, months: int = 12) -> pd.DataFrame:
-        """Get market trends for analysis"""
-        db = self.get_session()
-        try:
-            trends = db.query(MarketTrends)\
-                .filter(MarketTrends.city == city)\
-                .order_by(MarketTrends.month_year.desc())\
-                .limit(months).all()
-            
-            data = []
-            for trend in trends:
-                data.append({
-                    'city': trend.city,
-                    'district': trend.district,
-                    'month_year': trend.month_year,
-                    'avg_price': trend.avg_price,
-                    'avg_price_per_sqft': trend.avg_price_per_sqft,
-                    'total_properties': trend.total_properties,
-                    'growth_rate': trend.growth_rate
-                })
-            
-            return pd.DataFrame(data)
-        finally:
-            self.close_session(db)
+
     
     def save_user_preferences(self, session_id: str, preferences: Dict):
         """Save user preferences"""

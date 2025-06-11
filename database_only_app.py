@@ -4,7 +4,6 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 from database import db_manager
-from ml_model import RealEstatePredictor
 from fast_ml_model import FastRealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
