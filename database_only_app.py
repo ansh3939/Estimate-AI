@@ -319,31 +319,7 @@ def main():
                 </div>
                 """, unsafe_allow_html=True)
             
-            # Model confidence display
-            if confidence_scores:
-                st.markdown("#### Model Confidence Analysis")
-                conf_col1, conf_col2 = st.columns([2, 1])
-                
-                with conf_col1:
-                    st.markdown(f"""
-                    <div class="info-section">
-                        <h5 style="margin-top: 0;">Fast Random Forest Model</h5>
-                        <p style="margin: 0.25rem 0;">Confidence Score: {confidence_scores.get('fast_model', 0.85):.0%}</p>
-                        <p style="margin: 0.25rem 0;">Model Type: Optimized Random Forest</p>
-                        <p style="margin: 0.25rem 0;">Training Data: {len(data)} properties</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with conf_col2:
-                    # Model performance info
-                    st.markdown(f"""
-                    <div class="success-card">
-                        <h5 style="margin-top: 0;">Model Performance</h5>
-                        <p style="margin: 0.25rem 0; font-weight: bold;">Fast Random Forest</p>
-                        <p style="margin: 0.25rem 0;">R² Score: 0.851</p>
-                        <p style="margin: 0.25rem 0;">Accuracy: 85.1%</p>
-                    </div>
-                    """, unsafe_allow_html=True)
+
         
         except Exception as e:
             st.error(f"Prediction error: {str(e)}")
