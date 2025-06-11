@@ -690,21 +690,17 @@ def show_prediction_interface():
         st.plotly_chart(fig, use_container_width=True)
 
 def show_floating_chat_icon():
-    """Display floating chat icon in bottom right corner"""
-    # Initialize chat state
-    if "chat_open" not in st.session_state:
-        st.session_state.chat_open = False
-    
-    # Enhanced floating chat button CSS
+    """Display static floating chat icon in bottom right corner"""
+    # Static floating chat icon CSS
     st.markdown("""
     <style>
-    .floating-chat-btn {
+    .floating-chat-icon {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 1000;
-        width: 70px;
-        height: 70px;
+        bottom: 30px;
+        right: 30px;
+        z-index: 9999;
+        width: 60px;
+        height: 60px;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 50%;
         display: flex;
@@ -714,20 +710,21 @@ def show_floating_chat_icon():
         box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         transition: all 0.3s ease;
         color: white;
-        font-size: 28px;
+        font-size: 24px;
         text-decoration: none;
         border: none;
         backdrop-filter: blur(10px);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     }
     
-    .floating-chat-btn:hover {
-        transform: scale(1.15);
-        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+    .floating-chat-icon:hover {
+        transform: scale(1.1);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
         background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
     }
     
-    .floating-chat-btn:active {
-        transform: scale(1.05);
+    .floating-chat-icon:active {
+        transform: scale(0.95);
     }
     
     .chat-sidebar {
@@ -747,50 +744,15 @@ def show_floating_chat_icon():
         right: 0;
     }
     
-    .stButton > button[data-testid="baseButton-primary"] {
-        position: fixed !important;
-        bottom: 20px !important;
-        right: 20px !important;
-        z-index: 1000 !important;
-        width: 60px !important;
-        height: 60px !important;
-        border-radius: 50% !important;
-        background: linear-gradient(135deg, #2E7D32, #4CAF50) !important;
-        border: none !important;
-        box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3) !important;
-        font-size: 24px !important;
-        padding: 0 !important;
-    }
-    
-    .stButton > button[data-testid="baseButton-primary"]:hover {
-        transform: scale(1.1) !important;
-        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4) !important;
-    }
     </style>
     """, unsafe_allow_html=True)
     
-    # Fixed position chat button
-    chat_button_container = st.empty()
-    
-    with chat_button_container.container():
-        if st.button("💬", key="floating_chat", help="Open AI Assistant"):
-            st.session_state.chat_open = not st.session_state.chat_open
-            st.rerun()
-    
-    # Show chat interface in sidebar when open
-    if st.session_state.chat_open:
-        with st.sidebar:
-            st.markdown("### AI Real Estate Assistant")
-            
-            # Close button
-            if st.button("✕ Close Chat", key="close_chat"):
-                st.session_state.chat_open = False
-                st.rerun()
-            
-            st.markdown("---")
-            
-            # Chat interface
-            show_chatbot_interface()
+    # Static floating chat icon HTML
+    st.markdown("""
+    <div class="floating-chat-icon" title="AI Assistant - Click for help">
+        ?
+    </div>
+    """, unsafe_allow_html=True)
 
 def show_portfolio_tracker():
     """Display portfolio tracking interface for existing properties"""
