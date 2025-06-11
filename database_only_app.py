@@ -614,30 +614,79 @@ def show_prediction_interface():
             st.error(f"Prediction error: {str(e)}")
     
     else:
-        # Default dashboard
-        st.markdown("### Welcome to AI Real Estate Intelligence")
+        # Enhanced default dashboard
+        st.markdown("""
+        <div style="text-align: center; margin: 2rem 0;">
+            <h3 style="color: #667eea; font-weight: 600; margin-bottom: 0.5rem;">Welcome to AI Real Estate Intelligence</h3>
+            <p style="color: #34495e; font-size: 1.1rem; margin: 0;">Configure your property parameters in the sidebar to get instant AI-powered valuations</p>
+        </div>
+        """, unsafe_allow_html=True)
         
-        # Show market insights
+        # Enhanced market insights with professional styling
         col1, col2, col3 = st.columns(3)
         
         with col1:
             avg_price = data['Price_INR'].mean()
-            st.metric("Average Property Price", f"₹{avg_price:,.0f}")
+            st.markdown(f"""
+            <div class="metric-card">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #667eea; margin-bottom: 0.5rem;">
+                        ₹{avg_price:,.0f}
+                    </div>
+                    <div style="color: #2c3e50; font-weight: 600;">Average Property Price</div>
+                    <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 0.3rem;">Across all cities</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col2:
             avg_sqft_price = data['Price_per_SqFt'].mean()
-            st.metric("Average Price per Sq Ft", f"₹{avg_sqft_price:,.0f}")
+            st.markdown(f"""
+            <div class="metric-card">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #764ba2; margin-bottom: 0.5rem;">
+                        ₹{avg_sqft_price:,.0f}
+                    </div>
+                    <div style="color: #2c3e50; font-weight: 600;">Price per Sq Ft</div>
+                    <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 0.3rem;">Market average</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
         with col3:
             total_properties = len(data)
-            st.metric("Total Properties in Database", f"{total_properties:,}")
+            st.markdown(f"""
+            <div class="metric-card">
+                <div style="text-align: center;">
+                    <div style="font-size: 1.8rem; font-weight: 700; color: #2c3e50; margin-bottom: 0.5rem;">
+                        {total_properties:,}
+                    </div>
+                    <div style="color: #2c3e50; font-weight: 600;">Properties Analyzed</div>
+                    <div style="color: #7f8c8d; font-size: 0.9rem; margin-top: 0.3rem;">Database coverage</div>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
         
-        # City-wise analysis
-        st.markdown("#### City-wise Property Distribution")
+        # Enhanced city-wise analysis
+        st.markdown("""
+        <div style="margin: 3rem 0 1rem 0;">
+            <h4 style="color: #667eea; font-weight: 600; text-align: center;">Market Distribution by City</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
         city_counts = data['City'].value_counts()
         fig = px.bar(x=city_counts.index, y=city_counts.values, 
-                     title="Properties by City", color=city_counts.values,
-                     color_continuous_scale='Greens')
+                     title="", color=city_counts.values,
+                     color_continuous_scale=['#667eea', '#764ba2'])
+        fig.update_layout(
+            showlegend=False,
+            plot_bgcolor='rgba(0,0,0,0)',
+            paper_bgcolor='rgba(0,0,0,0)',
+            font=dict(color='#2c3e50'),
+            xaxis=dict(title="Cities", showgrid=False),
+            yaxis=dict(title="Number of Properties", showgrid=True, gridcolor='#ecf0f1')
+        )
+        fig.update_traces(hovertemplate='<b>%{x}</b><br>Properties: %{y}<extra></extra>')
         st.plotly_chart(fig, use_container_width=True)
 
 def show_floating_chat_icon():
@@ -646,7 +695,7 @@ def show_floating_chat_icon():
     if "chat_open" not in st.session_state:
         st.session_state.chat_open = False
     
-    # Floating chat button CSS
+    # Enhanced floating chat button CSS
     st.markdown("""
     <style>
     .floating-chat-btn {
@@ -654,25 +703,31 @@ def show_floating_chat_icon():
         bottom: 20px;
         right: 20px;
         z-index: 1000;
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #2E7D32, #4CAF50);
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        box-shadow: 0 4px 20px rgba(46, 125, 50, 0.3);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
         transition: all 0.3s ease;
         color: white;
-        font-size: 24px;
+        font-size: 28px;
         text-decoration: none;
         border: none;
+        backdrop-filter: blur(10px);
     }
     
     .floating-chat-btn:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 25px rgba(46, 125, 50, 0.4);
+        transform: scale(1.15);
+        box-shadow: 0 12px 35px rgba(102, 126, 234, 0.5);
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    }
+    
+    .floating-chat-btn:active {
+        transform: scale(1.05);
     }
     
     .chat-sidebar {
