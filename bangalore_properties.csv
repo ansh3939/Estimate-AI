@@ -1,0 +1,366 @@
+city,district,sub_district,area_sqft,bhk,property_type,furnishing,price_inr,price_per_sqft
+Bangalore,BTM Layout,BTM 1st Stage,750.0,1,Apartment,Semi-Furnished,5800000.0,7733.333333333333
+Bangalore,BTM Layout,BTM 1st Stage,2200.0,4,Builder Floor,Semi-Furnished,28500000.0,12954.545454545454
+Bangalore,BTM Layout,BTM 1st Stage,2200.0,5,Apartment,Semi-Furnished,24500000.0,11136.363636363636
+Bangalore,BTM Layout,BTM 1st Stage,1500.0,3,Apartment,Semi-Furnished,14200000.0,9466.666666666666
+Bangalore,BTM Layout,BTM 1st Stage,1100.0,2,Apartment,Semi-Furnished,8500000.0,7727.272727272727
+Bangalore,BTM Layout,BTM 2nd Stage,2100.0,4,Builder Floor,Unfurnished,24500000.0,11666.666666666666
+Bangalore,BTM Layout,BTM 2nd Stage,700.0,1,Apartment,Unfurnished,5200000.0,7428.571428571428
+Bangalore,BTM Layout,BTM 2nd Stage,2150.0,5,Apartment,Unfurnished,22200000.0,10325.581395348838
+Bangalore,BTM Layout,BTM 2nd Stage,1450.0,3,Apartment,Unfurnished,12800000.0,8827.586206896553
+Bangalore,BTM Layout,BTM 2nd Stage,1050.0,2,Apartment,Unfurnished,7800000.0,7428.571428571428
+Bangalore,BTM Layout,Silk Board,2220.0,5,Apartment,Semi-Furnished,25500000.0,11486.486486486487
+Bangalore,BTM Layout,Silk Board,2250.0,4,Builder Floor,Semi-Furnished,29500000.0,13111.111111111111
+Bangalore,BTM Layout,Silk Board,1120.0,2,Apartment,Semi-Furnished,8800000.0,7857.142857142857
+Bangalore,BTM Layout,Silk Board,1520.0,3,Apartment,Semi-Furnished,14800000.0,9736.842105263158
+Bangalore,BTM Layout,Silk Board,780.0,1,Apartment,Semi-Furnished,6200000.0,7948.717948717948
+Bangalore,Bannerghatta Road,Arekere,2350.0,5,Apartment,Semi-Furnished,24500000.0,10425.531914893618
+Bangalore,Bannerghatta Road,Arekere,850.0,1,Apartment,Semi-Furnished,5800000.0,6823.529411764706
+Bangalore,Bannerghatta Road,Arekere,1650.0,4,Apartment,Semi-Furnished,14200000.0,8606.060606060606
+Bangalore,Bannerghatta Road,Arekere,1250.0,3,Apartment,Semi-Furnished,8500000.0,6800.0
+Bangalore,Bannerghatta Road,Arekere,2500.0,4,Builder Floor,Semi-Furnished,28500000.0,11400.0
+Bangalore,Bannerghatta Road,Bilekahalli,880.0,1,Apartment,Semi-Furnished,6200000.0,7045.454545454545
+Bangalore,Bannerghatta Road,Bilekahalli,1280.0,3,Apartment,Semi-Furnished,8800000.0,6875.0
+Bangalore,Bannerghatta Road,Bilekahalli,1680.0,4,Apartment,Semi-Furnished,15200000.0,9047.619047619048
+Bangalore,Bannerghatta Road,Bilekahalli,2380.0,5,Apartment,Semi-Furnished,26200000.0,11008.403361344537
+Bangalore,Bannerghatta Road,Bilekahalli,2550.0,5,Independent House,Semi-Furnished,29500000.0,11568.627450980392
+Bangalore,Bannerghatta Road,Gottigere,2350.0,4,Builder Floor,Semi-Furnished,22500000.0,9574.468085106382
+Bangalore,Bannerghatta Road,Gottigere,1180.0,2,Apartment,Semi-Furnished,7200000.0,6101.6949152542375
+Bangalore,Bannerghatta Road,Gottigere,2280.0,5,Apartment,Semi-Furnished,21200000.0,9298.245614035088
+Bangalore,Bannerghatta Road,Gottigere,780.0,1,Apartment,Semi-Furnished,4800000.0,6153.846153846154
+Bangalore,Bannerghatta Road,Gottigere,1580.0,3,Apartment,Semi-Furnished,12200000.0,7721.518987341772
+Bangalore,Bannerghatta Road,Hulimavu,1200.0,3,Apartment,Unfurnished,7800000.0,6500.0
+Bangalore,Bannerghatta Road,Hulimavu,1600.0,4,Apartment,Unfurnished,13200000.0,8250.0
+Bangalore,Bannerghatta Road,Hulimavu,2300.0,5,Apartment,Unfurnished,22500000.0,9782.608695652174
+Bangalore,Bannerghatta Road,Hulimavu,2400.0,4,Builder Floor,Unfurnished,24500000.0,10208.333333333334
+Bangalore,Bannerghatta Road,Hulimavu,800.0,1,Apartment,Unfurnished,5200000.0,6500.0
+Bangalore,Bannerghatta Road,JP Nagar 9th Phase,1350.0,3,Apartment,Fully Furnished,9500000.0,7037.037037037037
+Bangalore,Bannerghatta Road,JP Nagar 9th Phase,900.0,1,Apartment,Fully Furnished,6500000.0,7222.222222222223
+Bangalore,Bannerghatta Road,JP Nagar 9th Phase,1750.0,4,Apartment,Fully Furnished,16500000.0,9428.57142857143
+Bangalore,Bannerghatta Road,JP Nagar 9th Phase,2700.0,5,Independent House,Fully Furnished,32500000.0,12037.037037037036
+Bangalore,Bannerghatta Road,JP Nagar 9th Phase,2450.0,5,Apartment,Fully Furnished,28500000.0,11632.65306122449
+Bangalore,Basavanagudi,Basavanagudi Main Road,1150.0,2,Apartment,Semi-Furnished,9800000.0,8521.739130434782
+Bangalore,Basavanagudi,Basavanagudi Main Road,750.0,1,Apartment,Semi-Furnished,6500000.0,8666.666666666666
+Bangalore,Basavanagudi,Basavanagudi Main Road,2250.0,5,Apartment,Semi-Furnished,28500000.0,12666.666666666666
+Bangalore,Basavanagudi,Basavanagudi Main Road,1550.0,3,Apartment,Semi-Furnished,16200000.0,10451.612903225807
+Bangalore,Basavanagudi,Basavanagudi Main Road,2300.0,4,Builder Floor,Semi-Furnished,32500000.0,14130.434782608696
+Bangalore,Basavanagudi,Bull Temple Road,2200.0,4,Builder Floor,Unfurnished,28500000.0,12954.545454545454
+Bangalore,Basavanagudi,Bull Temple Road,2200.0,5,Apartment,Unfurnished,25500000.0,11590.90909090909
+Bangalore,Basavanagudi,Bull Temple Road,700.0,1,Apartment,Unfurnished,5800000.0,8285.714285714286
+Bangalore,Basavanagudi,Bull Temple Road,1100.0,2,Apartment,Unfurnished,9200000.0,8363.636363636364
+Bangalore,Basavanagudi,Bull Temple Road,1500.0,3,Apartment,Unfurnished,14800000.0,9866.666666666666
+Bangalore,Basavanagudi,Gandhi Bazaar,680.0,1,Apartment,Semi-Furnished,5500000.0,8088.235294117647
+Bangalore,Basavanagudi,Gandhi Bazaar,2180.0,5,Apartment,Semi-Furnished,24500000.0,11238.532110091743
+Bangalore,Basavanagudi,Gandhi Bazaar,1080.0,2,Apartment,Semi-Furnished,8800000.0,8148.148148148148
+Bangalore,Basavanagudi,Gandhi Bazaar,1480.0,3,Apartment,Semi-Furnished,14200000.0,9594.594594594595
+Bangalore,Basavanagudi,Gandhi Bazaar,2150.0,4,Builder Floor,Semi-Furnished,26500000.0,12325.581395348838
+Bangalore,Bellandur,Bellandur Main Road,2800.0,5,Independent House,Semi-Furnished,38500000.0,13750.0
+Bangalore,Bellandur,Bellandur Main Road,950.0,1,Apartment,Semi-Furnished,7800000.0,8210.526315789473
+Bangalore,Bellandur,Bellandur Main Road,2500.0,6,Apartment,Semi-Furnished,34500000.0,13800.0
+Bangalore,Bellandur,Bellandur Main Road,1400.0,3,Apartment,Semi-Furnished,11500000.0,8214.285714285714
+Bangalore,Bellandur,Bellandur Main Road,1800.0,4,Apartment,Semi-Furnished,19500000.0,10833.333333333334
+Bangalore,Bellandur,Kadubeesanahalli,2600.0,5,Independent House,Semi-Furnished,32500000.0,12500.0
+Bangalore,Bellandur,Kadubeesanahalli,2400.0,6,Apartment,Semi-Furnished,29500000.0,12291.666666666666
+Bangalore,Bellandur,Kadubeesanahalli,850.0,1,Apartment,Semi-Furnished,6800000.0,8000.0
+Bangalore,Bellandur,Kadubeesanahalli,1300.0,3,Apartment,Semi-Furnished,10200000.0,7846.153846153846
+Bangalore,Bellandur,Kadubeesanahalli,1700.0,4,Apartment,Semi-Furnished,17200000.0,10117.64705882353
+Bangalore,Bellandur,Sarjapur Road,2700.0,5,Independent House,Unfurnished,34500000.0,12777.777777777777
+Bangalore,Bellandur,Sarjapur Road,900.0,1,Apartment,Unfurnished,7200000.0,8000.0
+Bangalore,Bellandur,Sarjapur Road,2450.0,6,Apartment,Unfurnished,31500000.0,12857.142857142857
+Bangalore,Bellandur,Sarjapur Road,1750.0,4,Apartment,Unfurnished,18200000.0,10400.0
+Bangalore,Bellandur,Sarjapur Road,1350.0,3,Apartment,Unfurnished,10800000.0,8000.0
+Bangalore,Electronic City,Anekal,1600.0,4,Apartment,Semi-Furnished,10800000.0,6750.0
+Bangalore,Electronic City,Anekal,2300.0,5,Apartment,Semi-Furnished,19500000.0,8478.260869565218
+Bangalore,Electronic City,Anekal,2400.0,4,Independent House,Semi-Furnished,21500000.0,8958.333333333334
+Bangalore,Electronic City,Anekal,750.0,1,Apartment,Semi-Furnished,3800000.0,5066.666666666667
+Bangalore,Electronic City,Anekal,1200.0,3,Apartment,Semi-Furnished,6500000.0,5416.666666666667
+Bangalore,Electronic City,Bommasandra,850.0,1,Apartment,Semi-Furnished,4800000.0,5647.058823529412
+Bangalore,Electronic City,Bommasandra,1700.0,4,Apartment,Semi-Furnished,12500000.0,7352.941176470588
+Bangalore,Electronic City,Bommasandra,2400.0,5,Apartment,Semi-Furnished,22200000.0,9250.0
+Bangalore,Electronic City,Bommasandra,1300.0,3,Apartment,Semi-Furnished,7500000.0,5769.2307692307695
+Bangalore,Electronic City,Bommasandra,2600.0,5,Independent House,Semi-Furnished,24500000.0,9423.076923076924
+Bangalore,Electronic City,Chandapura,2500.0,4,Independent House,Unfurnished,22500000.0,9000.0
+Bangalore,Electronic City,Chandapura,1650.0,4,Apartment,Unfurnished,11500000.0,6969.69696969697
+Bangalore,Electronic City,Chandapura,1250.0,3,Apartment,Unfurnished,6800000.0,5440.0
+Bangalore,Electronic City,Chandapura,2350.0,5,Apartment,Unfurnished,20500000.0,8723.404255319148
+Bangalore,Electronic City,Chandapura,800.0,1,Apartment,Unfurnished,4200000.0,5250.0
+Bangalore,Electronic City,Phase 1,2500.0,5,Apartment,Semi-Furnished,25500000.0,10200.0
+Bangalore,Electronic City,Phase 1,1800.0,4,Apartment,Semi-Furnished,14500000.0,8055.555555555556
+Bangalore,Electronic City,Phase 1,950.0,1,Apartment,Semi-Furnished,5800000.0,6105.263157894737
+Bangalore,Electronic City,Phase 1,2800.0,5,Independent House,Semi-Furnished,28500000.0,10178.57142857143
+Bangalore,Electronic City,Phase 1,1400.0,3,Apartment,Semi-Furnished,8200000.0,5857.142857142857
+Bangalore,Electronic City,Phase 2,2450.0,5,Apartment,Unfurnished,23200000.0,9469.387755102041
+Bangalore,Electronic City,Phase 2,1350.0,3,Apartment,Unfurnished,7800000.0,5777.777777777777
+Bangalore,Electronic City,Phase 2,900.0,1,Apartment,Unfurnished,5200000.0,5777.777777777777
+Bangalore,Electronic City,Phase 2,2700.0,5,Independent House,Unfurnished,25500000.0,9444.444444444445
+Bangalore,Electronic City,Phase 2,1750.0,4,Apartment,Unfurnished,13200000.0,7542.857142857143
+Bangalore,HSR Layout,Sector 1,1750.0,4,Apartment,Fully Furnished,21500000.0,12285.714285714286
+Bangalore,HSR Layout,Sector 1,2700.0,5,Independent House,Fully Furnished,42500000.0,15740.74074074074
+Bangalore,HSR Layout,Sector 1,1350.0,3,Apartment,Fully Furnished,12500000.0,9259.25925925926
+Bangalore,HSR Layout,Sector 1,2450.0,6,Apartment,Fully Furnished,38500000.0,15714.285714285714
+Bangalore,HSR Layout,Sector 1,900.0,1,Apartment,Fully Furnished,8500000.0,9444.444444444445
+Bangalore,HSR Layout,Sector 2,2400.0,6,Apartment,Semi-Furnished,35500000.0,14791.666666666666
+Bangalore,HSR Layout,Sector 2,1700.0,4,Apartment,Semi-Furnished,19800000.0,11647.058823529413
+Bangalore,HSR Layout,Sector 2,2600.0,5,Independent House,Semi-Furnished,38500000.0,14807.692307692309
+Bangalore,HSR Layout,Sector 2,850.0,1,Apartment,Semi-Furnished,7800000.0,9176.470588235294
+Bangalore,HSR Layout,Sector 2,1300.0,3,Apartment,Semi-Furnished,11800000.0,9076.923076923076
+Bangalore,HSR Layout,Sector 3,1680.0,4,Apartment,Semi-Furnished,18800000.0,11190.47619047619
+Bangalore,HSR Layout,Sector 3,880.0,1,Apartment,Semi-Furnished,7500000.0,8522.727272727272
+Bangalore,HSR Layout,Sector 3,2380.0,6,Apartment,Semi-Furnished,33500000.0,14075.63025210084
+Bangalore,HSR Layout,Sector 3,1280.0,3,Apartment,Semi-Furnished,11200000.0,8750.0
+Bangalore,HSR Layout,Sector 3,2550.0,5,Independent House,Semi-Furnished,36500000.0,14313.725490196079
+Bangalore,HSR Layout,Sector 4,2420.0,6,Apartment,Unfurnished,32500000.0,13429.752066115703
+Bangalore,HSR Layout,Sector 4,1720.0,4,Apartment,Unfurnished,18200000.0,10581.39534883721
+Bangalore,HSR Layout,Sector 4,920.0,1,Apartment,Unfurnished,7200000.0,7826.086956521739
+Bangalore,HSR Layout,Sector 4,2650.0,5,Independent House,Unfurnished,35500000.0,13396.22641509434
+Bangalore,HSR Layout,Sector 4,1320.0,3,Apartment,Unfurnished,10800000.0,8181.818181818182
+Bangalore,HSR Layout,Sector 6,1350.0,3,Apartment,Semi-Furnished,12200000.0,9037.037037037036
+Bangalore,HSR Layout,Sector 6,900.0,1,Apartment,Semi-Furnished,8200000.0,9111.111111111111
+Bangalore,HSR Layout,Sector 6,2700.0,5,Independent House,Semi-Furnished,39500000.0,14629.62962962963
+Bangalore,HSR Layout,Sector 6,2450.0,6,Apartment,Semi-Furnished,36500000.0,14897.959183673469
+Bangalore,HSR Layout,Sector 6,1750.0,4,Apartment,Semi-Furnished,20500000.0,11714.285714285714
+Bangalore,HSR Layout,Sector 7,2480.0,6,Apartment,Fully Furnished,40500000.0,16330.645161290322
+Bangalore,HSR Layout,Sector 7,2750.0,5,Independent House,Fully Furnished,43500000.0,15818.181818181818
+Bangalore,HSR Layout,Sector 7,1380.0,3,Apartment,Fully Furnished,13200000.0,9565.217391304348
+Bangalore,HSR Layout,Sector 7,950.0,1,Apartment,Fully Furnished,9200000.0,9684.21052631579
+Bangalore,HSR Layout,Sector 7,1780.0,4,Apartment,Fully Furnished,22500000.0,12640.449438202248
+Bangalore,Hebbal,Hebbal Main Road,1600.0,3,Apartment,Semi-Furnished,15500000.0,9687.5
+Bangalore,Hebbal,Hebbal Main Road,1200.0,2,Apartment,Semi-Furnished,9500000.0,7916.666666666667
+Bangalore,Hebbal,Hebbal Main Road,2300.0,5,Apartment,Semi-Furnished,26500000.0,11521.739130434782
+Bangalore,Hebbal,Hebbal Main Road,2400.0,4,Builder Floor,Semi-Furnished,32500000.0,13541.666666666666
+Bangalore,Hebbal,Hebbal Main Road,800.0,1,Apartment,Semi-Furnished,6200000.0,7750.0
+Bangalore,Hebbal,RT Nagar,750.0,1,Apartment,Semi-Furnished,5500000.0,7333.333333333333
+Bangalore,Hebbal,RT Nagar,2300.0,4,Builder Floor,Semi-Furnished,26500000.0,11521.739130434782
+Bangalore,Hebbal,RT Nagar,1550.0,3,Apartment,Semi-Furnished,13800000.0,8903.225806451614
+Bangalore,Hebbal,RT Nagar,1150.0,2,Apartment,Semi-Furnished,8500000.0,7391.304347826087
+Bangalore,Hebbal,RT Nagar,2250.0,5,Apartment,Semi-Furnished,23200000.0,10311.111111111111
+Bangalore,Hebbal,Sahakarnagar,780.0,1,Apartment,Unfurnished,5800000.0,7435.897435897436
+Bangalore,Hebbal,Sahakarnagar,2280.0,5,Apartment,Unfurnished,24500000.0,10745.61403508772
+Bangalore,Hebbal,Sahakarnagar,1580.0,3,Apartment,Unfurnished,14500000.0,9177.215189873417
+Bangalore,Hebbal,Sahakarnagar,2350.0,4,Builder Floor,Unfurnished,28500000.0,12127.659574468085
+Bangalore,Hebbal,Sahakarnagar,1180.0,2,Apartment,Unfurnished,8800000.0,7457.627118644068
+Bangalore,Indiranagar,CMH Road,2120.0,5,Apartment,Semi-Furnished,40500000.0,19103.77358490566
+Bangalore,Indiranagar,CMH Road,2250.0,4,Builder Floor,Semi-Furnished,43500000.0,19333.333333333332
+Bangalore,Indiranagar,CMH Road,1120.0,2,Apartment,Semi-Furnished,13800000.0,12321.42857142857
+Bangalore,Indiranagar,CMH Road,1520.0,3,Apartment,Semi-Furnished,22800000.0,15000.0
+Bangalore,Indiranagar,CMH Road,780.0,1,Apartment,Semi-Furnished,10200000.0,13076.923076923076
+Bangalore,Indiranagar,Double Road,1600.0,3,Apartment,Fully Furnished,25500000.0,15937.5
+Bangalore,Indiranagar,Double Road,1200.0,2,Apartment,Fully Furnished,15200000.0,12666.666666666666
+Bangalore,Indiranagar,Double Road,2200.0,5,Apartment,Fully Furnished,45500000.0,20681.81818181818
+Bangalore,Indiranagar,Double Road,2400.0,4,Builder Floor,Fully Furnished,48500000.0,20208.333333333332
+Bangalore,Indiranagar,Double Road,850.0,1,Apartment,Fully Furnished,11500000.0,13529.411764705883
+Bangalore,Indiranagar,Indiranagar 100 Feet Road,2150.0,5,Apartment,Fully Furnished,42500000.0,19767.441860465115
+Bangalore,Indiranagar,Indiranagar 100 Feet Road,2300.0,4,Builder Floor,Fully Furnished,45500000.0,19782.608695652172
+Bangalore,Indiranagar,Indiranagar 100 Feet Road,1550.0,3,Apartment,Fully Furnished,23500000.0,15161.290322580646
+Bangalore,Indiranagar,Indiranagar 100 Feet Road,1150.0,2,Apartment,Fully Furnished,14500000.0,12608.695652173914
+Bangalore,Indiranagar,Indiranagar 100 Feet Road,800.0,1,Apartment,Fully Furnished,10500000.0,13125.0
+Bangalore,Indiranagar,Indiranagar 12th Main,1500.0,3,Apartment,Semi-Furnished,21500000.0,14333.333333333334
+Bangalore,Indiranagar,Indiranagar 12th Main,1100.0,2,Apartment,Semi-Furnished,13200000.0,12000.0
+Bangalore,Indiranagar,Indiranagar 12th Main,2100.0,5,Apartment,Semi-Furnished,38500000.0,18333.333333333332
+Bangalore,Indiranagar,Indiranagar 12th Main,2200.0,4,Builder Floor,Semi-Furnished,41500000.0,18863.636363636364
+Bangalore,Indiranagar,Indiranagar 12th Main,750.0,1,Apartment,Semi-Furnished,9500000.0,12666.666666666666
+Bangalore,JP Nagar,JP Nagar 1st Phase,800.0,1,Apartment,Semi-Furnished,6500000.0,8125.0
+Bangalore,JP Nagar,JP Nagar 1st Phase,1600.0,3,Apartment,Semi-Furnished,15500000.0,9687.5
+Bangalore,JP Nagar,JP Nagar 1st Phase,2400.0,4,Builder Floor,Semi-Furnished,32500000.0,13541.666666666666
+Bangalore,JP Nagar,JP Nagar 1st Phase,1200.0,2,Apartment,Semi-Furnished,9500000.0,7916.666666666667
+Bangalore,JP Nagar,JP Nagar 1st Phase,2300.0,5,Apartment,Semi-Furnished,26500000.0,11521.739130434782
+Bangalore,JP Nagar,JP Nagar 2nd Phase,2350.0,4,Builder Floor,Unfurnished,28500000.0,12127.659574468085
+Bangalore,JP Nagar,JP Nagar 2nd Phase,2280.0,5,Apartment,Unfurnished,24200000.0,10614.035087719298
+Bangalore,JP Nagar,JP Nagar 2nd Phase,1180.0,2,Apartment,Unfurnished,8800000.0,7457.627118644068
+Bangalore,JP Nagar,JP Nagar 2nd Phase,1580.0,3,Apartment,Unfurnished,14200000.0,8987.341772151898
+Bangalore,JP Nagar,JP Nagar 2nd Phase,780.0,1,Apartment,Unfurnished,5800000.0,7435.897435897436
+Bangalore,JP Nagar,JP Nagar 3rd Phase,2300.0,4,Builder Floor,Semi-Furnished,26500000.0,11521.739130434782
+Bangalore,JP Nagar,JP Nagar 3rd Phase,1150.0,2,Apartment,Semi-Furnished,8500000.0,7391.304347826087
+Bangalore,JP Nagar,JP Nagar 3rd Phase,2250.0,5,Apartment,Semi-Furnished,23500000.0,10444.444444444445
+Bangalore,JP Nagar,JP Nagar 3rd Phase,750.0,1,Apartment,Semi-Furnished,5500000.0,7333.333333333333
+Bangalore,JP Nagar,JP Nagar 3rd Phase,1550.0,3,Apartment,Semi-Furnished,13800000.0,8903.225806451614
+Bangalore,JP Nagar,JP Nagar 4th Phase,820.0,1,Apartment,Semi-Furnished,6200000.0,7560.975609756098
+Bangalore,JP Nagar,JP Nagar 4th Phase,2450.0,4,Builder Floor,Semi-Furnished,30500000.0,12448.979591836734
+Bangalore,JP Nagar,JP Nagar 4th Phase,1220.0,2,Apartment,Semi-Furnished,9200000.0,7540.983606557377
+Bangalore,JP Nagar,JP Nagar 4th Phase,2320.0,5,Apartment,Semi-Furnished,26800000.0,11551.724137931034
+Bangalore,JP Nagar,JP Nagar 4th Phase,1620.0,3,Apartment,Semi-Furnished,15200000.0,9382.716049382716
+Bangalore,JP Nagar,JP Nagar 5th Phase,1200.0,2,Apartment,Unfurnished,8800000.0,7333.333333333333
+Bangalore,JP Nagar,JP Nagar 5th Phase,1600.0,3,Apartment,Unfurnished,14500000.0,9062.5
+Bangalore,JP Nagar,JP Nagar 5th Phase,2400.0,4,Builder Floor,Unfurnished,28500000.0,11875.0
+Bangalore,JP Nagar,JP Nagar 5th Phase,800.0,1,Apartment,Unfurnished,5800000.0,7250.0
+Bangalore,JP Nagar,JP Nagar 5th Phase,2300.0,5,Apartment,Unfurnished,25200000.0,10956.521739130434
+Bangalore,JP Nagar,JP Nagar 6th Phase,850.0,1,Apartment,Semi-Furnished,6800000.0,8000.0
+Bangalore,JP Nagar,JP Nagar 6th Phase,2350.0,5,Apartment,Semi-Furnished,28500000.0,12127.659574468085
+Bangalore,JP Nagar,JP Nagar 6th Phase,1250.0,3,Apartment,Semi-Furnished,10200000.0,8160.0
+Bangalore,JP Nagar,JP Nagar 6th Phase,1650.0,4,Apartment,Semi-Furnished,17200000.0,10424.242424242424
+Bangalore,JP Nagar,JP Nagar 6th Phase,2500.0,5,Independent House,Semi-Furnished,34500000.0,13800.0
+Bangalore,JP Nagar,JP Nagar 7th Phase,880.0,1,Apartment,Semi-Furnished,7200000.0,8181.818181818182
+Bangalore,JP Nagar,JP Nagar 7th Phase,2380.0,5,Apartment,Semi-Furnished,30200000.0,12689.0756302521
+Bangalore,JP Nagar,JP Nagar 7th Phase,1280.0,3,Apartment,Semi-Furnished,10800000.0,8437.5
+Bangalore,JP Nagar,JP Nagar 7th Phase,2550.0,5,Independent House,Semi-Furnished,36500000.0,14313.725490196079
+Bangalore,JP Nagar,JP Nagar 7th Phase,1680.0,4,Apartment,Semi-Furnished,18200000.0,10833.333333333334
+Bangalore,JP Nagar,JP Nagar 8th Phase,900.0,1,Apartment,Fully Furnished,7800000.0,8666.666666666666
+Bangalore,JP Nagar,JP Nagar 8th Phase,2600.0,5,Independent House,Fully Furnished,39500000.0,15192.307692307691
+Bangalore,JP Nagar,JP Nagar 8th Phase,1700.0,4,Apartment,Fully Furnished,19500000.0,11470.588235294117
+Bangalore,JP Nagar,JP Nagar 8th Phase,1300.0,3,Apartment,Fully Furnished,11500000.0,8846.153846153846
+Bangalore,JP Nagar,JP Nagar 8th Phase,2400.0,5,Apartment,Fully Furnished,32500000.0,13541.666666666666
+Bangalore,Jayanagar,Jayanagar 1st Block,1200.0,2,Apartment,Semi-Furnished,11500000.0,9583.333333333334
+Bangalore,Jayanagar,Jayanagar 1st Block,2400.0,4,Builder Floor,Semi-Furnished,38500000.0,16041.666666666666
+Bangalore,Jayanagar,Jayanagar 1st Block,800.0,1,Apartment,Semi-Furnished,7800000.0,9750.0
+Bangalore,Jayanagar,Jayanagar 1st Block,1600.0,3,Apartment,Semi-Furnished,18500000.0,11562.5
+Bangalore,Jayanagar,Jayanagar 1st Block,2300.0,5,Apartment,Semi-Furnished,32500000.0,14130.434782608696
+Bangalore,Jayanagar,Jayanagar 2nd Block,2280.0,5,Apartment,Unfurnished,29500000.0,12938.59649122807
+Bangalore,Jayanagar,Jayanagar 2nd Block,1180.0,2,Apartment,Unfurnished,10800000.0,9152.542372881357
+Bangalore,Jayanagar,Jayanagar 2nd Block,1580.0,3,Apartment,Unfurnished,17200000.0,10886.075949367088
+Bangalore,Jayanagar,Jayanagar 2nd Block,2350.0,4,Builder Floor,Unfurnished,34500000.0,14680.851063829787
+Bangalore,Jayanagar,Jayanagar 2nd Block,780.0,1,Apartment,Unfurnished,7200000.0,9230.76923076923
+Bangalore,Jayanagar,Jayanagar 3rd Block,2250.0,5,Apartment,Semi-Furnished,28500000.0,12666.666666666666
+Bangalore,Jayanagar,Jayanagar 3rd Block,750.0,1,Apartment,Semi-Furnished,6800000.0,9066.666666666666
+Bangalore,Jayanagar,Jayanagar 3rd Block,1550.0,3,Apartment,Semi-Furnished,16500000.0,10645.161290322581
+Bangalore,Jayanagar,Jayanagar 3rd Block,1150.0,2,Apartment,Semi-Furnished,10200000.0,8869.565217391304
+Bangalore,Jayanagar,Jayanagar 3rd Block,2300.0,4,Builder Floor,Semi-Furnished,32500000.0,14130.434782608696
+Bangalore,Jayanagar,Jayanagar 4th Block,2450.0,4,Builder Floor,Fully Furnished,41500000.0,16938.775510204083
+Bangalore,Jayanagar,Jayanagar 4th Block,2320.0,5,Apartment,Fully Furnished,34500000.0,14870.689655172413
+Bangalore,Jayanagar,Jayanagar 4th Block,1220.0,2,Apartment,Fully Furnished,12200000.0,10000.0
+Bangalore,Jayanagar,Jayanagar 4th Block,820.0,1,Apartment,Fully Furnished,8500000.0,10365.853658536585
+Bangalore,Jayanagar,Jayanagar 4th Block,1620.0,3,Apartment,Fully Furnished,19500000.0,12037.037037037036
+Bangalore,Jayanagar,Jayanagar 5th Block,2400.0,4,Builder Floor,Semi-Furnished,38500000.0,16041.666666666666
+Bangalore,Jayanagar,Jayanagar 5th Block,1200.0,2,Apartment,Semi-Furnished,11800000.0,9833.333333333334
+Bangalore,Jayanagar,Jayanagar 5th Block,800.0,1,Apartment,Semi-Furnished,8200000.0,10250.0
+Bangalore,Jayanagar,Jayanagar 5th Block,2300.0,5,Apartment,Semi-Furnished,32800000.0,14260.869565217392
+Bangalore,Jayanagar,Jayanagar 5th Block,1600.0,3,Apartment,Semi-Furnished,18800000.0,11750.0
+Bangalore,Jayanagar,Jayanagar 9th Block,1650.0,4,Apartment,Semi-Furnished,20500000.0,12424.242424242424
+Bangalore,Jayanagar,Jayanagar 9th Block,2350.0,6,Apartment,Semi-Furnished,36500000.0,15531.91489361702
+Bangalore,Jayanagar,Jayanagar 9th Block,850.0,1,Apartment,Semi-Furnished,8800000.0,10352.941176470587
+Bangalore,Jayanagar,Jayanagar 9th Block,1250.0,3,Apartment,Semi-Furnished,12800000.0,10240.0
+Bangalore,Jayanagar,Jayanagar 9th Block,2500.0,5,Independent House,Semi-Furnished,42500000.0,17000.0
+Bangalore,Koramangala,Koramangala 1st Block,1200.0,2,Apartment,Semi-Furnished,12500000.0,10416.666666666666
+Bangalore,Koramangala,Koramangala 1st Block,800.0,1,Apartment,Semi-Furnished,8500000.0,10625.0
+Bangalore,Koramangala,Koramangala 1st Block,2400.0,4,Independent House,Semi-Furnished,38500000.0,16041.666666666666
+Bangalore,Koramangala,Koramangala 1st Block,1600.0,3,Apartment,Semi-Furnished,19500000.0,12187.5
+Bangalore,Koramangala,Koramangala 1st Block,2200.0,5,Apartment,Semi-Furnished,32500000.0,14772.727272727272
+Bangalore,Koramangala,Koramangala 2nd Block,2150.0,5,Apartment,Fully Furnished,29500000.0,13720.93023255814
+Bangalore,Koramangala,Koramangala 2nd Block,1550.0,3,Apartment,Fully Furnished,18200000.0,11741.935483870968
+Bangalore,Koramangala,Koramangala 2nd Block,2300.0,4,Independent House,Fully Furnished,35500000.0,15434.782608695652
+Bangalore,Koramangala,Koramangala 2nd Block,1150.0,2,Apartment,Fully Furnished,11800000.0,10260.869565217392
+Bangalore,Koramangala,Koramangala 2nd Block,750.0,1,Apartment,Fully Furnished,7800000.0,10400.0
+Bangalore,Koramangala,Koramangala 3rd Block,750.0,1,Apartment,Unfurnished,7200000.0,9600.0
+Bangalore,Koramangala,Koramangala 3rd Block,1500.0,3,Apartment,Unfurnished,16500000.0,11000.0
+Bangalore,Koramangala,Koramangala 3rd Block,2200.0,4,Independent House,Unfurnished,32500000.0,14772.727272727272
+Bangalore,Koramangala,Koramangala 3rd Block,2100.0,5,Apartment,Unfurnished,26500000.0,12619.047619047618
+Bangalore,Koramangala,Koramangala 3rd Block,1100.0,2,Apartment,Unfurnished,10500000.0,9545.454545454546
+Bangalore,Koramangala,Koramangala 4th Block,2250.0,5,Apartment,Semi-Furnished,34500000.0,15333.333333333334
+Bangalore,Koramangala,Koramangala 4th Block,1250.0,2,Apartment,Semi-Furnished,13200000.0,10560.0
+Bangalore,Koramangala,Koramangala 4th Block,1650.0,3,Apartment,Semi-Furnished,20500000.0,12424.242424242424
+Bangalore,Koramangala,Koramangala 4th Block,850.0,1,Apartment,Semi-Furnished,9200000.0,10823.529411764706
+Bangalore,Koramangala,Koramangala 4th Block,2500.0,5,Independent House,Semi-Furnished,42500000.0,17000.0
+Bangalore,Koramangala,Koramangala 5th Block,800.0,1,Apartment,Semi-Furnished,8800000.0,11000.0
+Bangalore,Koramangala,Koramangala 5th Block,2400.0,4,Independent House,Semi-Furnished,38500000.0,16041.666666666666
+Bangalore,Koramangala,Koramangala 5th Block,1200.0,2,Apartment,Semi-Furnished,12800000.0,10666.666666666666
+Bangalore,Koramangala,Koramangala 5th Block,2200.0,5,Apartment,Semi-Furnished,32800000.0,14909.09090909091
+Bangalore,Koramangala,Koramangala 5th Block,1600.0,3,Apartment,Semi-Furnished,19800000.0,12375.0
+Bangalore,Koramangala,Koramangala 6th Block,2350.0,4,Independent House,Unfurnished,35200000.0,14978.72340425532
+Bangalore,Koramangala,Koramangala 6th Block,2180.0,5,Apartment,Unfurnished,29800000.0,13669.724770642202
+Bangalore,Koramangala,Koramangala 6th Block,780.0,1,Apartment,Unfurnished,7800000.0,10000.0
+Bangalore,Koramangala,Koramangala 6th Block,1180.0,2,Apartment,Unfurnished,11500000.0,9745.762711864407
+Bangalore,Koramangala,Koramangala 6th Block,1580.0,3,Apartment,Unfurnished,17800000.0,11265.822784810127
+Bangalore,Koramangala,Koramangala 7th Block,1220.0,2,Apartment,Fully Furnished,13500000.0,11065.573770491803
+Bangalore,Koramangala,Koramangala 7th Block,2220.0,5,Apartment,Fully Furnished,35500000.0,15990.990990990991
+Bangalore,Koramangala,Koramangala 7th Block,2450.0,4,Independent House,Fully Furnished,41500000.0,16938.775510204083
+Bangalore,Koramangala,Koramangala 7th Block,820.0,1,Apartment,Fully Furnished,9500000.0,11585.365853658537
+Bangalore,Koramangala,Koramangala 7th Block,1620.0,3,Apartment,Fully Furnished,21200000.0,13086.41975308642
+Bangalore,Koramangala,Koramangala 8th Block,2300.0,4,Independent House,Semi-Furnished,36800000.0,16000.0
+Bangalore,Koramangala,Koramangala 8th Block,1550.0,3,Apartment,Semi-Furnished,18800000.0,12129.032258064517
+Bangalore,Koramangala,Koramangala 8th Block,1150.0,2,Apartment,Semi-Furnished,12200000.0,10608.695652173914
+Bangalore,Koramangala,Koramangala 8th Block,780.0,1,Apartment,Semi-Furnished,8500000.0,10897.435897435897
+Bangalore,Koramangala,Koramangala 8th Block,2150.0,5,Apartment,Semi-Furnished,31500000.0,14651.162790697674
+Bangalore,Malleshwaram,15th Cross,2150.0,4,Builder Floor,Unfurnished,32500000.0,15116.279069767443
+Bangalore,Malleshwaram,15th Cross,720.0,1,Apartment,Unfurnished,6500000.0,9027.777777777777
+Bangalore,Malleshwaram,15th Cross,1480.0,3,Apartment,Unfurnished,15800000.0,10675.675675675675
+Bangalore,Malleshwaram,15th Cross,1080.0,2,Apartment,Unfurnished,9800000.0,9074.074074074075
+Bangalore,Malleshwaram,15th Cross,2180.0,5,Apartment,Unfurnished,27500000.0,12614.678899082568
+Bangalore,Malleshwaram,18th Cross,2250.0,4,Builder Floor,Semi-Furnished,38500000.0,17111.11111111111
+Bangalore,Malleshwaram,18th Cross,2220.0,5,Apartment,Semi-Furnished,32500000.0,14639.63963963964
+Bangalore,Malleshwaram,18th Cross,780.0,1,Apartment,Semi-Furnished,7800000.0,10000.0
+Bangalore,Malleshwaram,18th Cross,1120.0,2,Apartment,Semi-Furnished,11200000.0,10000.0
+Bangalore,Malleshwaram,18th Cross,1520.0,3,Apartment,Semi-Furnished,18200000.0,11973.684210526315
+Bangalore,Malleshwaram,Malleshwaram Circle,2200.0,5,Apartment,Semi-Furnished,30500000.0,13863.636363636364
+Bangalore,Malleshwaram,Malleshwaram Circle,1100.0,2,Apartment,Semi-Furnished,10500000.0,9545.454545454546
+Bangalore,Malleshwaram,Malleshwaram Circle,1500.0,3,Apartment,Semi-Furnished,17200000.0,11466.666666666666
+Bangalore,Malleshwaram,Malleshwaram Circle,750.0,1,Apartment,Semi-Furnished,7200000.0,9600.0
+Bangalore,Malleshwaram,Malleshwaram Circle,2200.0,4,Builder Floor,Semi-Furnished,35500000.0,16136.363636363636
+Bangalore,Rajajinagar,Rajajinagar 1st Block,2250.0,5,Apartment,Semi-Furnished,26500000.0,11777.777777777777
+Bangalore,Rajajinagar,Rajajinagar 1st Block,750.0,1,Apartment,Semi-Furnished,6200000.0,8266.666666666666
+Bangalore,Rajajinagar,Rajajinagar 1st Block,1150.0,2,Apartment,Semi-Furnished,9200000.0,8000.0
+Bangalore,Rajajinagar,Rajajinagar 1st Block,1550.0,3,Apartment,Semi-Furnished,15200000.0,9806.451612903225
+Bangalore,Rajajinagar,Rajajinagar 1st Block,2300.0,4,Builder Floor,Semi-Furnished,30500000.0,13260.869565217392
+Bangalore,Rajajinagar,Rajajinagar 2nd Block,1500.0,3,Apartment,Unfurnished,13800000.0,9200.0
+Bangalore,Rajajinagar,Rajajinagar 2nd Block,2200.0,4,Builder Floor,Unfurnished,26500000.0,12045.454545454546
+Bangalore,Rajajinagar,Rajajinagar 2nd Block,2200.0,5,Apartment,Unfurnished,23500000.0,10681.818181818182
+Bangalore,Rajajinagar,Rajajinagar 2nd Block,700.0,1,Apartment,Unfurnished,5500000.0,7857.142857142857
+Bangalore,Rajajinagar,Rajajinagar 2nd Block,1100.0,2,Apartment,Unfurnished,8500000.0,7727.272727272727
+Bangalore,Rajajinagar,Rajajinagar 3rd Block,1600.0,3,Apartment,Semi-Furnished,16200000.0,10125.0
+Bangalore,Rajajinagar,Rajajinagar 3rd Block,800.0,1,Apartment,Semi-Furnished,6800000.0,8500.0
+Bangalore,Rajajinagar,Rajajinagar 3rd Block,2400.0,4,Builder Floor,Semi-Furnished,32500000.0,13541.666666666666
+Bangalore,Rajajinagar,Rajajinagar 3rd Block,1200.0,2,Apartment,Semi-Furnished,9800000.0,8166.666666666667
+Bangalore,Rajajinagar,Rajajinagar 3rd Block,2300.0,5,Apartment,Semi-Furnished,28500000.0,12391.304347826086
+Bangalore,Sarjapur Road,Carmelaram,1250.0,3,Apartment,Semi-Furnished,9500000.0,7600.0
+Bangalore,Sarjapur Road,Carmelaram,2500.0,4,Builder Floor,Semi-Furnished,32500000.0,13000.0
+Bangalore,Sarjapur Road,Carmelaram,2350.0,5,Apartment,Semi-Furnished,28500000.0,12127.659574468085
+Bangalore,Sarjapur Road,Carmelaram,1650.0,4,Apartment,Semi-Furnished,16200000.0,9818.181818181818
+Bangalore,Sarjapur Road,Carmelaram,850.0,1,Apartment,Semi-Furnished,6200000.0,7294.117647058823
+Bangalore,Sarjapur Road,Dommasandra,1200.0,3,Apartment,Unfurnished,8800000.0,7333.333333333333
+Bangalore,Sarjapur Road,Dommasandra,1600.0,4,Apartment,Unfurnished,14800000.0,9250.0
+Bangalore,Sarjapur Road,Dommasandra,2400.0,4,Builder Floor,Unfurnished,28500000.0,11875.0
+Bangalore,Sarjapur Road,Dommasandra,800.0,1,Apartment,Unfurnished,5800000.0,7250.0
+Bangalore,Sarjapur Road,Dommasandra,2300.0,5,Apartment,Unfurnished,25500000.0,11086.95652173913
+Bangalore,Sarjapur Road,Harlur,1300.0,3,Apartment,Semi-Furnished,10200000.0,7846.153846153846
+Bangalore,Sarjapur Road,Harlur,900.0,1,Apartment,Semi-Furnished,6800000.0,7555.555555555556
+Bangalore,Sarjapur Road,Harlur,2400.0,6,Apartment,Semi-Furnished,30500000.0,12708.333333333334
+Bangalore,Sarjapur Road,Harlur,1700.0,4,Apartment,Semi-Furnished,17200000.0,10117.64705882353
+Bangalore,Sarjapur Road,Harlur,2600.0,5,Independent House,Semi-Furnished,34500000.0,13269.23076923077
+Bangalore,Sarjapur Road,Wipro Circle,1750.0,4,Apartment,Fully Furnished,18800000.0,10742.857142857143
+Bangalore,Sarjapur Road,Wipro Circle,950.0,1,Apartment,Fully Furnished,7500000.0,7894.736842105263
+Bangalore,Sarjapur Road,Wipro Circle,2450.0,6,Apartment,Fully Furnished,33500000.0,13673.469387755102
+Bangalore,Sarjapur Road,Wipro Circle,2700.0,5,Independent House,Fully Furnished,38500000.0,14259.25925925926
+Bangalore,Sarjapur Road,Wipro Circle,1350.0,3,Apartment,Fully Furnished,11200000.0,8296.296296296296
+Bangalore,Whitefield,Brookefield,900.0,1,Apartment,Fully Furnished,6800000.0,7555.555555555556
+Bangalore,Whitefield,Brookefield,1300.0,3,Apartment,Fully Furnished,9800000.0,7538.461538461538
+Bangalore,Whitefield,Brookefield,2400.0,5,Apartment,Fully Furnished,28500000.0,11875.0
+Bangalore,Whitefield,Brookefield,2600.0,5,Independent House,Fully Furnished,32500000.0,12500.0
+Bangalore,Whitefield,Brookefield,1700.0,4,Apartment,Fully Furnished,16500000.0,9705.882352941177
+Bangalore,Whitefield,ITPL Main Road,2500.0,5,Independent House,Semi-Furnished,28500000.0,11400.0
+Bangalore,Whitefield,ITPL Main Road,2350.0,5,Apartment,Semi-Furnished,26200000.0,11148.936170212766
+Bangalore,Whitefield,ITPL Main Road,850.0,1,Apartment,Semi-Furnished,6200000.0,7294.117647058823
+Bangalore,Whitefield,ITPL Main Road,1250.0,3,Apartment,Semi-Furnished,9200000.0,7360.0
+Bangalore,Whitefield,ITPL Main Road,1650.0,4,Apartment,Semi-Furnished,15200000.0,9212.121212121212
+Bangalore,Whitefield,Kadugodi,1680.0,4,Apartment,Semi-Furnished,16200000.0,9642.857142857143
+Bangalore,Whitefield,Kadugodi,2380.0,5,Apartment,Semi-Furnished,27800000.0,11680.672268907563
+Bangalore,Whitefield,Kadugodi,880.0,1,Apartment,Semi-Furnished,6500000.0,7386.363636363636
+Bangalore,Whitefield,Kadugodi,2550.0,5,Independent House,Semi-Furnished,30500000.0,11960.78431372549
+Bangalore,Whitefield,Kadugodi,1280.0,3,Apartment,Semi-Furnished,9500000.0,7421.875
+Bangalore,Whitefield,Marathahalli,1320.0,3,Apartment,Fully Furnished,10500000.0,7954.545454545455
+Bangalore,Whitefield,Marathahalli,2650.0,5,Independent House,Fully Furnished,34500000.0,13018.867924528302
+Bangalore,Whitefield,Marathahalli,920.0,1,Apartment,Fully Furnished,7200000.0,7826.086956521739
+Bangalore,Whitefield,Marathahalli,1720.0,4,Apartment,Fully Furnished,17800000.0,10348.837209302326
+Bangalore,Whitefield,Marathahalli,2420.0,5,Apartment,Fully Furnished,30500000.0,12603.305785123966
+Bangalore,Whitefield,Varthur Road,1600.0,4,Apartment,Unfurnished,14200000.0,8875.0
+Bangalore,Whitefield,Varthur Road,1200.0,3,Apartment,Unfurnished,8500000.0,7083.333333333333
+Bangalore,Whitefield,Varthur Road,2400.0,4,Independent House,Unfurnished,25500000.0,10625.0
+Bangalore,Whitefield,Varthur Road,2300.0,5,Apartment,Unfurnished,24500000.0,10652.173913043478
+Bangalore,Whitefield,Varthur Road,800.0,1,Apartment,Unfurnished,5800000.0,7250.0
+Bangalore,Whitefield,Whitefield Main Road,1350.0,3,Apartment,Semi-Furnished,10200000.0,7555.555555555556
+Bangalore,Whitefield,Whitefield Main Road,2450.0,5,Apartment,Semi-Furnished,29500000.0,12040.816326530612
+Bangalore,Whitefield,Whitefield Main Road,900.0,1,Apartment,Semi-Furnished,6800000.0,7555.555555555556
+Bangalore,Whitefield,Whitefield Main Road,1750.0,4,Apartment,Semi-Furnished,17200000.0,9828.57142857143
+Bangalore,Whitefield,Whitefield Main Road,2700.0,5,Independent House,Semi-Furnished,33500000.0,12407.407407407407
+Bangalore,Yelahanka,Attur,800.0,1,Apartment,Semi-Furnished,4800000.0,6000.0
+Bangalore,Yelahanka,Attur,1200.0,3,Apartment,Semi-Furnished,7500000.0,6250.0
+Bangalore,Yelahanka,Attur,1600.0,4,Apartment,Semi-Furnished,12200000.0,7625.0
+Bangalore,Yelahanka,Attur,2400.0,4,Independent House,Semi-Furnished,23500000.0,9791.666666666666
+Bangalore,Yelahanka,Attur,2300.0,5,Apartment,Semi-Furnished,21200000.0,9217.391304347826
+Bangalore,Yelahanka,Kogilu,850.0,1,Apartment,Unfurnished,5200000.0,6117.64705882353
+Bangalore,Yelahanka,Kogilu,1650.0,4,Apartment,Unfurnished,12800000.0,7757.575757575758
+Bangalore,Yelahanka,Kogilu,2500.0,4,Independent House,Unfurnished,24500000.0,9800.0
+Bangalore,Yelahanka,Kogilu,1250.0,3,Apartment,Unfurnished,7800000.0,6240.0
+Bangalore,Yelahanka,Kogilu,2350.0,5,Apartment,Unfurnished,22200000.0,9446.808510638299
+Bangalore,Yelahanka,Yelahanka New Town,1700.0,4,Apartment,Semi-Furnished,14200000.0,8352.941176470587
+Bangalore,Yelahanka,Yelahanka New Town,2600.0,5,Independent House,Semi-Furnished,28500000.0,10961.538461538461
+Bangalore,Yelahanka,Yelahanka New Town,2400.0,5,Apartment,Semi-Furnished,24500000.0,10208.333333333334
+Bangalore,Yelahanka,Yelahanka New Town,900.0,1,Apartment,Semi-Furnished,5500000.0,6111.111111111111
+Bangalore,Yelahanka,Yelahanka New Town,1300.0,3,Apartment,Semi-Furnished,8500000.0,6538.461538461538
