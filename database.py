@@ -238,19 +238,35 @@ class DatabaseManager:
             data = []
             for prop in properties:
                 data.append({
-                    'City': prop.city,
-                    'District': prop.district,
-                    'Sub_District': prop.sub_district,
-                    'Area_SqFt': prop.area_sqft,
-                    'BHK': prop.bhk,
-                    'Property_Type': prop.property_type,
-                    'Furnishing': prop.furnishing,
-                    'Price_INR': prop.price_inr,
-                    'Price_per_SqFt': prop.price_per_sqft,
-                    'Source': prop.source
+                    'City': str(prop.city),
+                    'District': str(prop.district),
+                    'Sub_District': str(prop.sub_district),
+                    'Area_SqFt': float(prop.area_sqft),
+                    'BHK': int(prop.bhk),
+                    'Property_Type': str(prop.property_type),
+                    'Furnishing': str(prop.furnishing),
+                    'Price_INR': float(prop.price_inr),
+                    'Price_per_SqFt': float(prop.price_per_sqft),
+                    'Source': str(prop.source)
                 })
             
-            return pd.DataFrame(data)
+            df = pd.DataFrame(data)
+            
+            # Ensure proper data types after database retrieval
+            if not df.empty:
+                # Ensure numeric columns are properly typed
+                numeric_columns = ['Area_SqFt', 'BHK', 'Price_INR', 'Price_per_SqFt']
+                for col in numeric_columns:
+                    if col in df.columns:
+                        df[col] = pd.to_numeric(df[col], errors='coerce')
+                
+                # Ensure categorical columns are strings
+                categorical_columns = ['City', 'District', 'Sub_District', 'Property_Type', 'Furnishing', 'Source']
+                for col in categorical_columns:
+                    if col in df.columns:
+                        df[col] = df[col].astype(str)
+            
+            return df
         finally:
             self.close_session(db)
     

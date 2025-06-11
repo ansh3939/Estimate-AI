@@ -11,6 +11,7 @@ from advanced_ml_models import AdvancedRealEstatePredictor
 from live_data_scraper import LivePropertyDataScraper
 from market_analysis import ComparativeMarketAnalyzer
 from database import db_manager
+from data_validator import data_validator
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
@@ -199,14 +200,17 @@ def main():
     except Exception as e:
         st.error(f"Error loading application components: {str(e)}")
         
-        # Try to load data from database only
+        # Try to load data from database with validation
         try:
-            st.info("Attempting to load data from database...")
+            st.info("Loading data from database...")
             db_data = db_manager.get_properties_from_db()
             if not db_data.empty:
+                # Validate and clean database data
+                validated_data = data_validator.validate_and_clean(db_data)
+                
                 # Create minimal components for database-only mode
                 data_processor = DataProcessor()
-                data_processor.combined_data = db_data
+                data_processor.combined_data = validated_data
                 predictor = RealEstatePredictor()
                 advanced_predictor = AdvancedRealEstatePredictor()
                 investment_analyzer = InvestmentAnalyzer()
@@ -214,17 +218,17 @@ def main():
                 market_analyzer = ComparativeMarketAnalyzer()
                 live_scraper = LivePropertyDataScraper()
                 
-                # Train models with database data
-                predictor.train_model(db_data)
-                advanced_predictor.train_models(db_data)
+                # Train models with validated data
+                predictor.train_model(validated_data)
+                advanced_predictor.train_models(validated_data)
                 
-                st.success("Successfully loaded from database!")
+                st.success(f"Successfully loaded {len(validated_data)} properties from database!")
             else:
-                st.error("No data available in database. Please contact support.")
+                st.error("No data available in database.")
                 st.stop()
         except Exception as db_error:
-            st.error(f"Database connection failed: {str(db_error)}")
-            st.error("Unable to load application. Please refresh the page or contact support.")
+            st.error(f"Database loading failed: {str(db_error)}")
+            st.error("Unable to load application. Please contact support.")
             st.stop()
     
     # Enhanced Sidebar with Professional Styling
