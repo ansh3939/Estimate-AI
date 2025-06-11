@@ -324,7 +324,11 @@ def main():
                 
                 # Best model indicator
                 best_model = advanced_predictor.best_model_name
-                st.info(f"🏆 Best performing model: **{best_model.replace('_', ' ').title()}** (Selected for final prediction)")
+                if best_model:
+                    model_display_name = best_model.replace('_', ' ').title()
+                    st.info(f"🏆 Best performing model: **{model_display_name}** (Selected for final prediction)")
+                else:
+                    st.info("🏆 Using ensemble prediction from multiple AI models")
                 
             else:
                 # Use basic predictor
@@ -646,6 +650,196 @@ def main():
                         )
                         st.plotly_chart(fig, use_container_width=True)
                         st.markdown('</div>', unsafe_allow_html=True)
+            
+            # Advanced Market Analysis Section
+            st.markdown("---")
+            st.markdown("### 📈 Advanced Market Intelligence")
+            
+            # Create tabs for different analysis
+            tab1, tab2, tab3, tab4 = st.tabs([
+                "🏙️ Comparative Analysis", 
+                "📊 Historical Trends", 
+                "🎯 Investment Heatmap", 
+                "🔮 Price Forecasting"
+            ])
+            
+            with tab1:
+                st.markdown("#### Multi-City Market Comparison")
+                combined_data = data_processor.get_combined_data()
+                if combined_data is not None and not combined_data.empty:
+                    comparison_charts = market_analyzer.create_comparative_analysis(combined_data)
+                    
+                    comp_col1, comp_col2 = st.columns(2)
+                    
+                    with comp_col1:
+                        if 'price_comparison' in comparison_charts:
+                            st.plotly_chart(comparison_charts['price_comparison'], use_container_width=True)
+                        
+                        if 'property_type_analysis' in comparison_charts:
+                            st.plotly_chart(comparison_charts['property_type_analysis'], use_container_width=True)
+                    
+                    with comp_col2:
+                        if 'price_sqft_distribution' in comparison_charts:
+                            st.plotly_chart(comparison_charts['price_sqft_distribution'], use_container_width=True)
+                        
+                        if 'bhk_analysis' in comparison_charts:
+                            st.plotly_chart(comparison_charts['bhk_analysis'], use_container_width=True)
+                    
+                    if 'area_price_scatter' in comparison_charts:
+                        st.plotly_chart(comparison_charts['area_price_scatter'], use_container_width=True)
+            
+            with tab2:
+                st.markdown("#### Historical Price Trends & Patterns")
+                if combined_data is not None and not combined_data.empty:
+                    with st.spinner("Generating historical trends..."):
+                        historical_data = market_analyzer.generate_historical_trends(combined_data, years_back=5)
+                        
+                        if not historical_data.empty:
+                            trend_chart = market_analyzer.create_trend_analysis(historical_data)
+                            st.plotly_chart(trend_chart, use_container_width=True)
+                            
+                            # Historical insights
+                            st.markdown("##### Key Historical Insights")
+                            trend_insights = market_analyzer.calculate_appreciation_trends(combined_data)
+                            
+                            insight_cols = st.columns(len(trend_insights))
+                            for i, (city, trends) in enumerate(trend_insights.items()):
+                                with insight_cols[i]:
+                                    st.markdown(f"""
+                                    <div class="metric-card">
+                                        <h5 style="margin: 0; color: #1976D2;">{city}</h5>
+                                        <div style="font-size: 1.1rem; color: #2E7D32;">
+                                            Growth: {trends['annual_growth_rate']*100:.1f}%
+                                        </div>
+                                        <div style="font-size: 0.9rem; color: #666;">
+                                            {trends['market_cycle'].title()} Market
+                                        </div>
+                                    </div>
+                                    """, unsafe_allow_html=True)
+            
+            with tab3:
+                st.markdown("#### Investment Attractiveness Analysis")
+                if combined_data is not None and not combined_data.empty:
+                    heatmap_chart = market_analyzer.create_investment_heatmap(combined_data)
+                    st.plotly_chart(heatmap_chart, use_container_width=True)
+                    
+                    # Investment recommendations
+                    market_insights = market_analyzer.generate_market_insights(combined_data)
+                    
+                    st.markdown("##### Investment Recommendations")
+                    rec_col1, rec_col2 = st.columns(2)
+                    
+                    with rec_col1:
+                        st.markdown(f"""
+                        <div class="success-card">
+                            <h5 style="margin-top: 0; color: #2E7D32;">Best Investment City</h5>
+                            <p><strong>{market_insights.get('best_investment_city', 'N/A')}</strong></p>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Highest growth potential and market stability
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        st.markdown(f"""
+                        <div class="info-section">
+                            <h5 style="margin-top: 0; color: #1976D2;">Most Affordable</h5>
+                            <p><strong>{market_insights.get('most_affordable_city', 'N/A')}</strong></p>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Entry-level investment opportunity
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                    
+                    with rec_col2:
+                        st.markdown(f"""
+                        <div class="warning-card">
+                            <h5 style="margin-top: 0; color: #F57C00;">Premium Market</h5>
+                            <p><strong>{market_insights.get('most_expensive_city', 'N/A')}</strong></p>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Highest property values
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+                        
+                        st.markdown(f"""
+                        <div class="info-section">
+                            <h5 style="margin-top: 0; color: #1976D2;">Best Value BHK</h5>
+                            <p><strong>{market_insights.get('most_value_bhk', 'N/A')} BHK</strong></p>
+                            <p style="font-size: 0.9rem; color: #666;">
+                                Optimal price per square foot
+                            </p>
+                        </div>
+                        """, unsafe_allow_html=True)
+            
+            with tab4:
+                st.markdown("#### 5-Year Price Appreciation Forecast")
+                if combined_data is not None and not combined_data.empty:
+                    forecast_chart = market_analyzer.create_appreciation_forecast(combined_data)
+                    st.plotly_chart(forecast_chart, use_container_width=True)
+                    
+                    # Forecast summary
+                    appreciation_trends = market_analyzer.calculate_appreciation_trends(combined_data)
+                    
+                    st.markdown("##### Projected Returns (5 Years)")
+                    forecast_cols = st.columns(len(appreciation_trends))
+                    
+                    for i, (city, trends) in enumerate(appreciation_trends.items()):
+                        with forecast_cols[i]:
+                            current_price = trends['current_avg_price']
+                            projected_5yr = trends['projected_5_year']
+                            total_return = ((projected_5yr - current_price) / current_price) * 100
+                            
+                            st.markdown(f"""
+                            <div class="metric-card">
+                                <h5 style="margin: 0; color: #1976D2;">{city}</h5>
+                                <div style="font-size: 1.2rem; font-weight: bold; color: #2E7D32;">
+                                    +{total_return:.1f}%
+                                </div>
+                                <div style="font-size: 0.9rem; color: #666;">
+                                    ₹{current_price:,.0f} → ₹{projected_5yr:,.0f}
+                                </div>
+                            </div>
+                            """, unsafe_allow_html=True)
+            
+            # Model Performance Section
+            if model_choice == "Advanced Ensemble (Recommended)":
+                st.markdown("---")
+                st.markdown("### 🎯 AI Model Performance Analysis")
+                
+                model_performance = advanced_predictor.get_model_comparison()
+                if not model_performance.empty:
+                    perf_col1, perf_col2 = st.columns([2, 1])
+                    
+                    with perf_col1:
+                        st.dataframe(
+                            model_performance,
+                            use_container_width=True,
+                            hide_index=True
+                        )
+                    
+                    with perf_col2:
+                        feature_importance = advanced_predictor.get_feature_importance()
+                        if feature_importance:
+                            st.markdown("#### Feature Importance")
+                            
+                            # Create feature importance chart
+                            features = list(feature_importance.keys())[:6]  # Top 6 features
+                            importance_values = [feature_importance[f] for f in features]
+                            
+                            fig_importance = go.Figure(data=[
+                                go.Bar(
+                                    y=features,
+                                    x=importance_values,
+                                    orientation='h',
+                                    marker_color='#2E7D32'
+                                )
+                            ])
+                            fig_importance.update_layout(
+                                title="Top Features Impact",
+                                height=300,
+                                showlegend=False
+                            )
+                            st.plotly_chart(fig_importance, use_container_width=True)
         
         except Exception as e:
             st.error(f"Error in prediction: {str(e)}")
