@@ -571,17 +571,17 @@ def show_prediction_interface():
                 # Enhanced EMI Calculator
                 st.markdown("""
                 <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); margin-bottom: 1rem;">
-                    <h4 style="color: #667eea; margin-top: 0; font-weight: 600;">💰 EMI Calculator</h4>
+                    <h4 style="color: #667eea; margin-top: 0; font-weight: 600;">EMI Calculator</h4>
                 </div>
                 """, unsafe_allow_html=True)
                 
-                loan_percentage = st.slider("💳 Loan Amount (%)", 20, 90, 80, 
+                loan_percentage = st.slider("Loan Amount (%)", 20, 90, 80, 
                                            help="Percentage of property value as loan")
                 loan_amount = predicted_price * (loan_percentage / 100)
                 
-                interest_rate = st.slider("📈 Interest Rate (%)", 6.0, 15.0, 8.5, 0.1,
+                interest_rate = st.slider("Interest Rate (%)", 6.0, 15.0, 8.5, 0.1,
                                          help="Annual interest rate")
-                tenure_years = st.slider("📅 Tenure (Years)", 5, 30, 20,
+                tenure_years = st.slider("Tenure (Years)", 5, 30, 20,
                                         help="Loan repayment period")
                 
                 emi_details = emi_calculator.calculate_emi(loan_amount, interest_rate, tenure_years)
