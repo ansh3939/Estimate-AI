@@ -102,7 +102,6 @@ class FastRealEstatePredictor:
         """Train the fast model"""
         # Try to load cached model first
         if self.load_cached_model():
-            print("Loaded cached model for instant predictions!")
             return {"mae": 0, "r2_score": 0.9, "cached": True}
         
         print("Training fast model...")
