@@ -7,7 +7,7 @@ from database import db_manager
 from fast_ml_model import FastRealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
-from market_analysis import ComparativeMarketAnalyzer
+
 from real_estate_chatbot import RealEstateChatbot
 from portfolio_analyzer import PropertyPortfolioAnalyzer
 import uuid
@@ -218,15 +218,11 @@ def show_prediction_interface():
         fast_predictor = FastRealEstatePredictor()
         investment_analyzer = InvestmentAnalyzer()
         emi_calculator = EMICalculator()
-        market_analyzer = ComparativeMarketAnalyzer()
         
         # Train fast model with database data
         performance = fast_predictor.train_model(data)
         
-        if performance.get('cached', False):
-            st.info("Using cached model for instant predictions!")
-        else:
-            st.success(f"Fast model trained - R²: {performance['r2_score']:.3f}")
+        # Model loaded silently for fast predictions
         
     except Exception as e:
         st.error(f"Model training error: {str(e)}")
