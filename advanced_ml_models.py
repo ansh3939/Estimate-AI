@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.model_selection import train_test_split, GridSearchCV, cross_val_score, RandomizedSearchCV
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.metrics import mean_absolute_error, r2_score, mean_squared_error
 import xgboost as xgb
@@ -13,41 +13,52 @@ warnings.filterwarnings('ignore')
 
 class AdvancedRealEstatePredictor:
     def __init__(self):
-        # Optimized models with enhanced hyperparameters for better accuracy
+        # Advanced ensemble with four optimized models for superior accuracy
         self.models = {
             'random_forest': RandomForestRegressor(
                 random_state=42, 
-                n_estimators=200,  # Increased for better performance
-                max_depth=25,      # Deeper trees for complex patterns
+                n_estimators=250,  # Increased for better performance
+                max_depth=28,      # Deeper trees for complex patterns
                 min_samples_split=3,
                 min_samples_leaf=2,
-                max_features='sqrt',
+                max_features=0.8,  # Use more features
                 bootstrap=True,
                 oob_score=True,
                 n_jobs=-1          # Use all cores
             ),
             'xgboost': xgb.XGBRegressor(
                 random_state=42, 
-                n_estimators=300,  # More estimators for better accuracy
-                max_depth=10,      # Deeper for complex relationships
-                learning_rate=0.08, # Slightly lower for better convergence
-                subsample=0.85,
-                colsample_bytree=0.8,
-                reg_alpha=0.1,     # L1 regularization
-                reg_lambda=1.0,    # L2 regularization
-                min_child_weight=3,
-                gamma=0.1,
+                n_estimators=400,  # More estimators for better accuracy
+                max_depth=12,      # Deeper for complex relationships
+                learning_rate=0.06, # Lower for better convergence
+                subsample=0.87,
+                colsample_bytree=0.85,
+                reg_alpha=0.05,    # Fine-tuned regularization
+                reg_lambda=0.8,    
+                min_child_weight=2,
+                gamma=0.05,
                 objective='reg:squarederror',
                 eval_metric='rmse',
-                early_stopping_rounds=50,
+                early_stopping_rounds=75,
                 n_jobs=-1
+            ),
+            'gradient_boosting': GradientBoostingRegressor(
+                random_state=42,
+                n_estimators=200,
+                max_depth=8,
+                learning_rate=0.1,
+                subsample=0.8,
+                min_samples_split=4,
+                min_samples_leaf=2,
+                max_features='sqrt',
+                loss='squared_error'
             ),
             'decision_tree': DecisionTreeRegressor(
                 random_state=42, 
-                max_depth=20,      # Increased depth
-                min_samples_split=5,
-                min_samples_leaf=3,
-                max_features='sqrt',
+                max_depth=22,      # Increased depth
+                min_samples_split=4,
+                min_samples_leaf=2,
+                max_features=0.9,  # Use most features
                 splitter='best'
             )
         }
