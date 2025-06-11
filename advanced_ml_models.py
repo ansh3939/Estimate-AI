@@ -229,15 +229,49 @@ class AdvancedRealEstatePredictor:
         
         best_score = float('-inf')
         
-        print("Training and evaluating models...")
+        print("Training and evaluating models with hyperparameter optimization...")
+        
+        # Hyperparameter tuning for Random Forest
+        if 'random_forest' in self.models:
+            rf_params = {
+                'n_estimators': [200, 250, 300],
+                'max_depth': [25, 28, 30],
+                'min_samples_split': [2, 3, 4],
+                'max_features': [0.7, 0.8, 0.9]
+            }
+            rf_search = RandomizedSearchCV(
+                RandomForestRegressor(random_state=42, n_jobs=-1),
+                rf_params, cv=3, n_iter=10, random_state=42, scoring='r2'
+            )
+            rf_search.fit(X_train, y_train)
+            self.models['random_forest'] = rf_search.best_estimator_
+            print(f"Random Forest optimized parameters: {rf_search.best_params_}")
+        
+        # Hyperparameter tuning for Gradient Boosting
+        if 'gradient_boosting' in self.models:
+            gb_params = {
+                'n_estimators': [150, 200, 250],
+                'max_depth': [6, 8, 10],
+                'learning_rate': [0.08, 0.1, 0.12],
+                'subsample': [0.75, 0.8, 0.85]
+            }
+            gb_search = RandomizedSearchCV(
+                GradientBoostingRegressor(random_state=42),
+                gb_params, cv=3, n_iter=10, random_state=42, scoring='r2'
+            )
+            gb_search.fit(X_train_scaled, y_train)
+            self.models['gradient_boosting'] = gb_search.best_estimator_
+            print(f"Gradient Boosting optimized parameters: {gb_search.best_params_}")
         
         for model_name, model in self.models.items():
             print(f"Training {model_name}...")
             
             try:
                 if model_name == 'xgboost':
-                    # Use scaled features for XGBoost
-                    model.fit(X_train_scaled, y_train)
+                    # XGBoost with proper validation set for early stopping
+                    model.fit(X_train_scaled, y_train, 
+                             eval_set=[(X_test_scaled, y_test)], 
+                             verbose=False)
                     y_pred = model.predict(X_test_scaled)
                 elif model_name == 'gradient_boosting':
                     # Use scaled features for Gradient Boosting as well
