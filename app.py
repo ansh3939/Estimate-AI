@@ -7,6 +7,9 @@ from data_processor import DataProcessor
 from ml_model import RealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
+from advanced_ml_models import AdvancedRealEstatePredictor
+from live_data_scraper import LivePropertyDataScraper
+from market_analysis import ComparativeMarketAnalyzer
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -136,14 +139,24 @@ st.markdown("""
 def load_components():
     data_processor = DataProcessor()
     predictor = RealEstatePredictor()
+    advanced_predictor = AdvancedRealEstatePredictor()
     investment_analyzer = InvestmentAnalyzer()
     emi_calculator = EMICalculator()
+    market_analyzer = ComparativeMarketAnalyzer()
+    live_scraper = LivePropertyDataScraper()
     
     # Load and process data
     data_processor.load_all_data()
-    predictor.train_model(data_processor.get_combined_data())
+    combined_data = data_processor.get_combined_data()
     
-    return data_processor, predictor, investment_analyzer, emi_calculator
+    # Train basic model
+    predictor.train_model(combined_data)
+    
+    # Train advanced models
+    if combined_data is not None and not combined_data.empty:
+        advanced_predictor.train_models(combined_data)
+    
+    return data_processor, predictor, advanced_predictor, investment_analyzer, emi_calculator, market_analyzer, live_scraper
 
 def main():
     # Professional Header
@@ -158,7 +171,7 @@ def main():
     
     # Load components
     try:
-        data_processor, predictor, investment_analyzer, emi_calculator = load_components()
+        data_processor, predictor, advanced_predictor, investment_analyzer, emi_calculator, market_analyzer, live_scraper = load_components()
     except Exception as e:
         st.error(f"Error loading application components: {str(e)}")
         st.stop()
@@ -224,6 +237,23 @@ def main():
             )
         
         st.markdown("---")
+        
+        # Advanced ML Model Selection
+        st.markdown("#### 🤖 AI Model Selection")
+        model_choice = st.selectbox(
+            "Choose Prediction Model",
+            ["Advanced Ensemble (Recommended)", "Decision Tree", "Random Forest", "XGBoost"],
+            help="Select the AI model for price prediction"
+        )
+        
+        # Live Data Integration Toggle
+        use_live_data = st.checkbox(
+            "Include Live Market Data",
+            value=False,
+            help="Integrate real-time property data from online sources"
+        )
+        
+        st.markdown("---")
     
         # Prediction Button with Enhanced Styling
         predict_button = st.button(
@@ -247,8 +277,58 @@ def main():
         }
         
         try:
-            # Make prediction
-            predicted_price = predictor.predict(input_data)
+            # Handle live data integration
+            if use_live_data:
+                with st.spinner("Fetching live market data..."):
+                    live_data = live_scraper.get_live_market_data([city])
+                    if not live_data.empty:
+                        st.success(f"Integrated {len(live_data)} live properties from market sources")
+            
+            # Make prediction based on model choice
+            if model_choice == "Advanced Ensemble (Recommended)":
+                predicted_price, all_predictions = advanced_predictor.predict(input_data)
+                
+                # Show model comparison
+                st.markdown("#### 🎯 AI Model Predictions Comparison")
+                model_col1, model_col2, model_col3 = st.columns(3)
+                
+                with model_col1:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h5 style="margin: 0; color: #1976D2;">Decision Tree</h5>
+                        <div style="font-size: 1.3rem; font-weight: bold; color: #2E7D32;">
+                            ₹{all_predictions.get('decision_tree', 0):,.0f}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with model_col2:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h5 style="margin: 0; color: #1976D2;">Random Forest</h5>
+                        <div style="font-size: 1.3rem; font-weight: bold; color: #2E7D32;">
+                            ₹{all_predictions.get('random_forest', 0):,.0f}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                with model_col3:
+                    st.markdown(f"""
+                    <div class="metric-card">
+                        <h5 style="margin: 0; color: #1976D2;">XGBoost</h5>
+                        <div style="font-size: 1.3rem; font-weight: bold; color: #2E7D32;">
+                            ₹{all_predictions.get('xgboost', 0):,.0f}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
+                
+                # Best model indicator
+                best_model = advanced_predictor.best_model_name
+                st.info(f"🏆 Best performing model: **{best_model.replace('_', ' ').title()}** (Selected for final prediction)")
+                
+            else:
+                # Use basic predictor
+                predicted_price = predictor.predict(input_data)
             
             # Analyze investment
             investment_score, recommendation = investment_analyzer.analyze(
