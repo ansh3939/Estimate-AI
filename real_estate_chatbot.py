@@ -11,6 +11,7 @@ class RealEstateChatbot:
         # do not change this unless explicitly requested by the user
         self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         self.model = "gpt-4o"
+        self.fallback_knowledge = self._build_knowledge_base()
         
         # System prompt for real estate expertise
         self.system_prompt = """You are an expert real estate advisor and consultant with deep knowledge of the Indian property market. You specialize in:
@@ -55,7 +56,92 @@ Keep responses concise but informative, and ask clarifying questions when needed
             return response_content if response_content is not None else "I apologize, but I couldn't generate a response. Please try again."
             
         except Exception as e:
-            return f"I apologize, but I'm experiencing technical difficulties. Please try again. Error: {str(e)}"
+            error_msg = str(e)
+            if "insufficient_quota" in error_msg or "quota" in error_msg.lower():
+                # Use fallback knowledge base when quota exceeded
+                fallback_response = self.get_fallback_response(user_message)
+                return f"📋 **Real Estate Knowledge Base Response:**\n\n{fallback_response}\n\n💡 *Note: Advanced AI assistant temporarily unavailable due to quota limits. The above information is from our curated real estate knowledge base.*"
+            else:
+                return f"I'm experiencing technical difficulties connecting to the AI service. Please try again later. Error details: {error_msg}"
+
+    def _build_knowledge_base(self) -> Dict[str, str]:
+        """Build a comprehensive real estate knowledge base for fallback responses"""
+        return {
+            "buying": """**Home Buying Process in India:**
+1. Determine budget and get pre-approved for loan
+2. Research locations and property types
+3. Visit properties and shortlist options
+4. Verify legal documents (title deed, approvals, NOC)
+5. Negotiate price and terms
+6. Sign agreement and pay token amount
+7. Complete due diligence and property verification
+8. Finalize loan and complete registration
+9. Take possession and register utilities
+
+**Key Documents:** Sale deed, title certificate, occupancy certificate, RERA registration, property tax receipts, society NOC""",
+
+            "investment": """**Property Investment Analysis:**
+- **Location factors:** Connectivity, infrastructure development, employment hubs
+- **Financial metrics:** Rental yield (6-8% good), capital appreciation potential
+- **Market timing:** Buy during market corrections, avoid peak pricing
+- **Property type:** Residential vs commercial based on goals
+- **Legal compliance:** RERA registered projects, clear titles
+- **Exit strategy:** Plan for liquidity needs and market cycles
+
+**ROI Calculation:** (Annual rental income + appreciation) / Total investment cost""",
+
+            "legal": """**Legal Aspects of Property Transactions:**
+- **Title verification:** Chain of ownership, encumbrance certificate
+- **Approvals:** Building plan approval, occupancy certificate, RERA registration
+- **Compliance:** Property tax clearance, society NOC, utility connections
+- **Registration:** Stamp duty, registration fees vary by state
+- **Documentation:** Sale deed, agreement to sell, power of attorney verification
+
+**Red flags:** Disputed properties, incomplete approvals, unclear titles, non-RERA projects""",
+
+            "financing": """**Home Loan and Financing:**
+- **Eligibility:** 60-80% of property value, income-based EMI capacity
+- **Interest rates:** Currently 8.5-11% for home loans
+- **Documentation:** Income proof, property papers, bank statements
+- **Processing:** 15-30 days for approval, additional time for disbursement
+- **Tax benefits:** Section 80C (principal), Section 24 (interest)
+
+**EMI calculation:** Use property price predictor's built-in EMI calculator for accurate estimates""",
+
+            "market": """**Current Indian Real Estate Market Trends:**
+- **Metropolitan growth:** Mumbai, Delhi, Bangalore leading appreciation
+- **Emerging markets:** Pune, Hyderabad, Chennai showing strong potential
+- **Segment performance:** Mid-segment (₹50L-₹1Cr) most active
+- **Supply trends:** Focus on ready-to-move properties increasing
+- **Policy impact:** RERA, GST implementation stabilizing market
+- **Future outlook:** Steady growth expected with infrastructure development"""
+        }
+
+    def get_fallback_response(self, user_message: str) -> str:
+        """Provide fallback response using knowledge base"""
+        message_lower = user_message.lower()
+        
+        # Match keywords to knowledge base topics
+        if any(word in message_lower for word in ["buy", "buying", "purchase", "first home"]):
+            return self.fallback_knowledge["buying"]
+        elif any(word in message_lower for word in ["invest", "investment", "roi", "return"]):
+            return self.fallback_knowledge["investment"]
+        elif any(word in message_lower for word in ["legal", "document", "registration", "title"]):
+            return self.fallback_knowledge["legal"]
+        elif any(word in message_lower for word in ["loan", "finance", "emi", "bank", "mortgage"]):
+            return self.fallback_knowledge["financing"]
+        elif any(word in message_lower for word in ["market", "trend", "price", "growth"]):
+            return self.fallback_knowledge["market"]
+        else:
+            return """I can help with these real estate topics:
+
+**🏠 Buying Process** - Steps to purchase property in India
+**💰 Investment Analysis** - ROI calculation and market factors  
+**📋 Legal Aspects** - Documentation and compliance requirements
+**🏦 Financing** - Home loans and EMI calculations
+**📈 Market Trends** - Current real estate market insights
+
+Please ask about any of these topics for detailed guidance. For personalized advice, consult local real estate professionals."""
 
     def initialize_chat_history(self):
         """Initialize chat history in Streamlit session state"""
