@@ -750,7 +750,7 @@ def show_floating_chat_icon():
     # Static floating chat icon HTML
     st.markdown("""
     <div class="floating-chat-icon" title="AI Assistant - Click for help">
-        ?
+        💬
     </div>
     """, unsafe_allow_html=True)
 
