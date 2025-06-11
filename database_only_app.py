@@ -22,70 +22,290 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS
+# Enhanced Professional CSS
 st.markdown("""
 <style>
-    .main-header {
-        background: linear-gradient(90deg, #2E7D32 0%, #4CAF50 100%);
-        padding: 2rem;
-        border-radius: 10px;
-        color: white;
-        text-align: center;
-        margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    /* Global App Background */
+    .stApp {
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
     }
+    
+    /* Main Header with Advanced Effects */
+    .main-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 3rem 2rem;
+        border-radius: 20px;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: white;
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        backdrop-filter: blur(10px);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .main-header::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+        animation: shine 3s infinite;
+    }
+    
+    @keyframes shine {
+        0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+        100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+    
+    /* Enhanced Price Display */
     .price-display {
-        background: linear-gradient(135deg, #1976D2, #42A5F5);
+        font-size: 3.5rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        text-align: center;
+        padding: 3rem 2rem;
+        background-color: white;
+        border-radius: 20px;
+        margin: 2rem 0;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        backdrop-filter: blur(10px);
+    }
+    
+    /* Modern Card Design */
+    .metric-card {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin: 1rem 0;
+    }
+    
+    .metric-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Recommendation Cards */
+    .success-card {
+        background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+        border: none;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 15px 30px rgba(168, 237, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .success-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    
+    .warning-card {
+        background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+        border: none;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 15px 30px rgba(252, 182, 159, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .warning-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    }
+    
+    .error-card {
+        background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+        border: none;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 1.5rem 0;
+        box-shadow: 0 15px 30px rgba(250, 177, 160, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .error-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+    }
+    
+    .info-section {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
         padding: 2rem;
         border-radius: 15px;
-        text-align: center;
-        font-size: 2.5rem;
-        font-weight: bold;
-        margin: 1rem 0;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        margin: 1.5rem 0;
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.3);
     }
-    .metric-card {
-        background: #F8F9FA;
-        border: 1px solid #E9ECEF;
-        border-radius: 10px;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-    .success-card {
-        background: linear-gradient(135deg, #E8F5E8, #C8E6C9);
-        border-left: 4px solid #4CAF50;
-        padding: 1rem;
-        border-radius: 8px;
-        margin: 1rem 0;
-    }
-    .warning-card {
-        background: linear-gradient(135deg, #FFF3E0, #FFCC02);
-        border-left: 4px solid #FF9800;
-        padding: 1rem;
-        border-radius: 8px;
-        margin: 1rem 0;
-    }
-    .error-card {
-        background: linear-gradient(135deg, #FFEBEE, #EF5350);
-        border-left: 4px solid #F44336;
-        padding: 1rem;
-        border-radius: 8px;
-        margin: 1rem 0;
-    }
-    .info-section {
-        background: #E3F2FD;
-        border-left: 4px solid #2196F3;
-        padding: 1rem;
-        border-radius: 8px;
-        margin: 1rem 0;
-    }
+    
     .sidebar-section {
-        background: #F5F5F5;
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Enhanced Tabs */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: white;
+        border-radius: 15px;
+        padding: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 10px;
+        padding: 12px 24px;
+        border: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stTabs [data-baseweb="tab"]:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
+        box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+    }
+    
+    /* Premium Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 32px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Enhanced Form Controls */
+    .stSelectbox > div > div {
+        background: white;
+        border-radius: 10px;
+        border: 2px solid #e1e8ed;
+        transition: all 0.3s ease;
+    }
+    
+    .stSelectbox > div > div:focus-within {
+        border-color: #667eea;
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+    }
+    
+    .stNumberInput > div > div {
+        background: white;
+        border-radius: 10px;
+        border: 2px solid #e1e8ed;
+        transition: all 0.3s ease;
+    }
+    
+    .stNumberInput > div > div:focus-within {
+        border-color: #667eea;
+        box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+    }
+    
+    /* Metric Container Styling */
+    [data-testid="metric-container"] {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        transition: transform 0.3s ease;
+    }
+    
+    [data-testid="metric-container"]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Chart Styling */
+    .stPlotlyChart {
+        background: white;
+        border-radius: 15px;
         padding: 1rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        margin: 1rem 0;
+    }
+    
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+        color: #2c3e50;
+        font-weight: 600;
+    }
+    
+    .stMarkdown p {
+        color: #34495e;
+        line-height: 1.6;
+    }
+    
+    /* Loading Animation */
+    .stSpinner {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 50%;
+    }
+    
+    /* Floating Chat Button */
+    .stButton > button[data-testid="baseButton-primary"] {
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 1000 !important;
+        width: 60px !important;
+        height: 60px !important;
+        border-radius: 50% !important;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+        border: none !important;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4) !important;
+        font-size: 24px !important;
+        padding: 0 !important;
+    }
+    
+    .stButton > button[data-testid="baseButton-primary"]:hover {
+        transform: scale(1.1) !important;
+        box-shadow: 0 12px 30px rgba(102, 126, 234, 0.5) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -151,10 +371,15 @@ def main():
     
     st.markdown(f"""
     <div class="main-header">
-        <h1 style="margin: 0; font-size: 2.5rem;">AI Real Estate Intelligence Platform</h1>
-        <p style="margin: 0.5rem 0 0 0; font-size: 1.2rem; opacity: 0.9;">
+        <h1 style="margin: 0; font-size: 3.2rem; font-weight: 700; position: relative; z-index: 2;">
+            🏢 AI Real Estate Intelligence Platform
+        </h1>
+        <p style="margin: 1rem 0 0 0; font-size: 1.4rem; opacity: 0.95; position: relative; z-index: 2;">
             Professional Investment Analysis & Market Intelligence Platform
         </p>
+        <div style="margin-top: 1.5rem; font-size: 1rem; opacity: 0.8; position: relative; z-index: 2;">
+            Powered by Advanced Machine Learning • Real-time Market Analysis • Investment Insights
+        </div>
     </div>
     """, unsafe_allow_html=True)
     
@@ -214,25 +439,45 @@ def show_prediction_interface():
         st.error(f"Model training error: {str(e)}")
         st.stop()
     
-    # Sidebar for property input
+    # Enhanced sidebar with professional styling
     with st.sidebar:
-        st.markdown("### Property Configuration")
+        st.markdown("""
+        <div class="sidebar-section">
+            <h3 style="color: #667eea; margin-bottom: 1rem; font-weight: 600;">🏠 Property Configuration</h3>
+        </div>
+        """, unsafe_allow_html=True)
         
-        # Location selection
-        st.markdown("#### Location Details")
-        city = st.selectbox("Select City", ["Mumbai", "Delhi", "Gurugram", "Noida", "Bangalore"])
+        # Location selection with enhanced styling
+        st.markdown("""
+        <div class="sidebar-section">
+            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">📍 Location Details</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        city = st.selectbox("🌆 Select City", ["Mumbai", "Delhi", "Gurugram", "Noida", "Bangalore"], 
+                           help="Choose the city for property analysis")
         
         districts = get_districts(data, city)
-        district = st.selectbox("Select District", districts)
+        district = st.selectbox("🏘️ Select District", districts, 
+                               help="District within the selected city")
         
         sub_districts = get_sub_districts(data, city, district)
-        sub_district = st.selectbox("Select Sub-District", sub_districts)
+        sub_district = st.selectbox("📍 Select Sub-District", sub_districts,
+                                   help="Specific area within the district")
         
-        # Property details
-        st.markdown("#### Property Specifications")
-        area_sqft = st.number_input("Area (Square Feet)", min_value=100, max_value=10000, value=1000, step=50)
-        bhk = st.selectbox("BHK", [1, 2, 3, 4, 5, 6])
-        property_type = st.selectbox("Property Type", ["Apartment", "Villa", "House", "Studio"])
+        # Property details with enhanced styling
+        st.markdown("""
+        <div class="sidebar-section">
+            <h4 style="color: #2c3e50; margin-bottom: 0.8rem;">🏗️ Property Specifications</h4>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        area_sqft = st.number_input("📐 Area (Square Feet)", min_value=100, max_value=10000, 
+                                   value=1000, step=50, help="Property area in square feet")
+        bhk = st.selectbox("🛏️ BHK Configuration", [1, 2, 3, 4, 5, 6], index=1,
+                          help="Number of bedrooms, hall, and kitchen")
+        property_type = st.selectbox("🏢 Property Type", ["Apartment", "Villa", "House", "Studio"], 
+                                    help="Type of property")
         furnishing = st.selectbox("Furnishing", ["Unfurnished", "Semi-Furnished", "Fully Furnished"])
         
         # Predict button
@@ -271,14 +516,19 @@ def show_prediction_interface():
             except:
                 pass  # Continue without database save if error
             
-            # Display results
-            st.markdown("### Property Valuation Results")
+            # Enhanced results display
+            st.markdown("""
+            <div style="text-align: center; margin: 2rem 0;">
+                <h3 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">💎 Property Valuation Results</h3>
+            </div>
+            """, unsafe_allow_html=True)
             
-            # Price display
+            # Enhanced price display with professional styling
             st.markdown(f"""
             <div class="price-display">
+                <div style="font-size: 1.2rem; margin-bottom: 0.5rem; opacity: 0.8;">Estimated Property Value</div>
                 ₹{predicted_price:,.0f}
-                <div style="font-size: 1rem; margin-top: 0.5rem; opacity: 0.8;">
+                <div style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9; background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 10px;">
                     ₹{predicted_price/area_sqft:,.0f} per Sq Ft
                 </div>
             </div>
@@ -304,33 +554,57 @@ def show_prediction_interface():
                 
                 st.markdown(f"""
                 <div class="{card_class}">
-                    <h4 style="margin-top: 0; color: {score_color};">Investment Analysis</h4>
-                    <div style="font-size: 1.5rem; font-weight: bold; color: {score_color};">
+                    <h4 style="margin-top: 0; color: #2c3e50; font-weight: 600;">📊 Investment Analysis</h4>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: {score_color}; text-align: center; margin: 1rem 0;">
                         {investment_score}/10
                     </div>
-                    <p style="margin: 0.5rem 0 0 0;">{status_text}</p>
-                    <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #666;">
-                        {recommendation}
-                    </p>
+                    <div style="background: rgba(255,255,255,0.3); padding: 0.8rem; border-radius: 10px; margin: 1rem 0;">
+                        <p style="margin: 0; font-weight: 600; color: #2c3e50;">{status_text}</p>
+                        <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0; color: #34495e; line-height: 1.4;">
+                            {recommendation}
+                        </p>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
             
             with col2:
-                # EMI Calculator
-                st.markdown("#### EMI Calculator")
-                loan_percentage = st.slider("Loan Amount (%)", 20, 90, 80)
+                # Enhanced EMI Calculator
+                st.markdown("""
+                <div style="background: white; padding: 1.5rem; border-radius: 15px; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06); margin-bottom: 1rem;">
+                    <h4 style="color: #667eea; margin-top: 0; font-weight: 600;">💰 EMI Calculator</h4>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                loan_percentage = st.slider("💳 Loan Amount (%)", 20, 90, 80, 
+                                           help="Percentage of property value as loan")
                 loan_amount = predicted_price * (loan_percentage / 100)
-                interest_rate = st.slider("Interest Rate (%)", 6.0, 15.0, 8.5, 0.1)
-                tenure_years = st.slider("Tenure (Years)", 5, 30, 20)
+                
+                interest_rate = st.slider("📈 Interest Rate (%)", 6.0, 15.0, 8.5, 0.1,
+                                         help="Annual interest rate")
+                tenure_years = st.slider("📅 Tenure (Years)", 5, 30, 20,
+                                        help="Loan repayment period")
                 
                 emi_details = emi_calculator.calculate_emi(loan_amount, interest_rate, tenure_years)
                 
                 st.markdown(f"""
                 <div class="info-section">
-                    <h5 style="margin-top: 0;">Monthly EMI: ₹{emi_details['emi']:,.0f}</h5>
-                    <p style="margin: 0.25rem 0;">Loan Amount: ₹{loan_amount:,.0f}</p>
-                    <p style="margin: 0.25rem 0;">Total Interest: ₹{emi_details['total_interest']:,.0f}</p>
-                    <p style="margin: 0.25rem 0;">Total Payment: ₹{emi_details['total_amount']:,.0f}</p>
+                    <div style="text-align: center; margin-bottom: 1rem;">
+                        <div style="font-size: 2rem; font-weight: 700; color: white; margin-bottom: 0.5rem;">
+                            ₹{emi_details['emi']:,.0f}
+                        </div>
+                        <div style="font-size: 1rem; opacity: 0.9;">Monthly EMI</div>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 10px;">
+                        <div style="display: flex; justify-content: space-between; margin: 0.3rem 0;">
+                            <span>Loan Amount:</span> <strong>₹{loan_amount:,.0f}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.3rem 0;">
+                            <span>Total Interest:</span> <strong>₹{emi_details['total_interest']:,.0f}</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin: 0.3rem 0;">
+                            <span>Total Payment:</span> <strong>₹{emi_details['total_amount']:,.0f}</strong>
+                        </div>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
             
