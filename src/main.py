@@ -3,6 +3,13 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
+import sys
+import os
+
+# Add project root to path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
 from src.models.database import db_manager
 from src.models.fast_ml_model import FastRealEstatePredictor
 from src.analyzers.investment_analyzer import InvestmentAnalyzer

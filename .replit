@@ -18,15 +18,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "Database App"
+args = "AI Real Estate Platform"
 
 [[workflows.workflow]]
-name = "Database App"
+name = "AI Real Estate Platform"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "streamlit run database_only_app.py --server.port 5000"
+args = "streamlit run src/main.py --server.port 5000"
 waitForPort = 5000
 
 [[ports]]
