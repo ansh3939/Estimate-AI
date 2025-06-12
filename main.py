@@ -112,36 +112,31 @@ st.markdown("""
         border: 2px solid #e1e5e9;
     }
     
-    /* Navigation Pills */
-    .nav-pills {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 2rem;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-    
-    .nav-pill {
-        background: white;
-        color: #667eea;
-        padding: 10px 20px;
-        border-radius: 25px;
-        text-decoration: none;
-        border: 2px solid #667eea;
-        transition: all 0.3s ease;
-        cursor: pointer;
-        font-weight: 600;
-    }
-    
-    .nav-pill:hover {
-        background: #667eea;
+    /* Enhanced Button Styling for Active States */
+    .stButton > button[kind="primary"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
+        border: none;
+        border-radius: 25px;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
         transform: translateY(-2px);
     }
     
-    .nav-pill.active {
-        background: #667eea;
-        color: white;
+    .stButton > button[kind="secondary"] {
+        background: white;
+        color: #667eea;
+        border: 2px solid #667eea;
+        border-radius: 25px;
+        padding: 0.5rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+    
+    .stButton > button[kind="secondary"]:hover {
+        background: #f8f9fa;
+        transform: translateY(-1px);
     }
     
     /* Prediction Results */
@@ -373,45 +368,26 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Navigation (Visual indicator only)
-    st.markdown("""
-    <div class="nav-pills">
-        <div class="nav-pill {}">Property Property Prediction</div>
-        <div class="nav-pill {}">Analytics Portfolio Tracker</div>
-        <div class="nav-pill {}">Investment Investment Analyzer</div>
-        <div class="nav-pill {}">Market Market Trends</div>
-        <div class="nav-pill {}">🧮 EMI Calculator</div>
-        <div class="nav-pill {}">🤖 AI Assistant</div>
-    </div>
-    """.format(
-        'active' if st.session_state.page == 'prediction' else '',
-        'active' if st.session_state.page == 'portfolio' else '',
-        'active' if st.session_state.page == 'investment' else '',
-        'active' if st.session_state.page == 'trends' else '',
-        'active' if st.session_state.page == 'emi' else '',
-        'active' if st.session_state.page == 'chatbot' else ''
-    ), unsafe_allow_html=True)
-    
-    # Page selection
+    # Interactive Navigation
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
     with col1:
-        if st.button("Property Property Prediction"):
+        if st.button("Property Prediction", key="nav_prediction", type="primary" if st.session_state.page == 'prediction' else "secondary"):
             st.session_state.page = 'prediction'
     with col2:
-        if st.button("Analytics Portfolio Tracker"):
+        if st.button("Portfolio Tracker", key="nav_portfolio", type="primary" if st.session_state.page == 'portfolio' else "secondary"):
             st.session_state.page = 'portfolio'
     with col3:
-        if st.button("Investment Investment Analyzer"):
+        if st.button("Investment Analyzer", key="nav_investment", type="primary" if st.session_state.page == 'investment' else "secondary"):
             st.session_state.page = 'investment'
     with col4:
-        if st.button("Market Market Trends"):
+        if st.button("Market Trends", key="nav_trends", type="primary" if st.session_state.page == 'trends' else "secondary"):
             st.session_state.page = 'trends'
     with col5:
-        if st.button("🧮 EMI Calculator"):
+        if st.button("EMI Calculator", key="nav_emi", type="primary" if st.session_state.page == 'emi' else "secondary"):
             st.session_state.page = 'emi'
     with col6:
-        if st.button("🤖 AI Assistant"):
+        if st.button("AI Assistant", key="nav_chatbot", type="primary" if st.session_state.page == 'chatbot' else "secondary"):
             st.session_state.page = 'chatbot'
     
     # Show selected page
