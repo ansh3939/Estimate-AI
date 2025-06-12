@@ -344,15 +344,15 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Navigation
+    # Navigation (Visual indicator only)
     st.markdown("""
     <div class="nav-pills">
-        <div class="nav-pill {}" onclick="window.location.hash='prediction'">🏠 Property Prediction</div>
-        <div class="nav-pill {}" onclick="window.location.hash='portfolio'">📊 Portfolio Tracker</div>
-        <div class="nav-pill {}" onclick="window.location.hash='investment'">💰 Investment Analyzer</div>
-        <div class="nav-pill {}" onclick="window.location.hash='trends'">📈 Market Trends</div>
-        <div class="nav-pill {}" onclick="window.location.hash='emi'">🧮 EMI Calculator</div>
-        <div class="nav-pill {}" onclick="window.location.hash='chatbot'">🤖 AI Assistant</div>
+        <div class="nav-pill {}">🏠 Property Prediction</div>
+        <div class="nav-pill {}">📊 Portfolio Tracker</div>
+        <div class="nav-pill {}">💰 Investment Analyzer</div>
+        <div class="nav-pill {}">📈 Market Trends</div>
+        <div class="nav-pill {}">🧮 EMI Calculator</div>
+        <div class="nav-pill {}">🤖 AI Assistant</div>
     </div>
     """.format(
         'active' if st.session_state.page == 'prediction' else '',
