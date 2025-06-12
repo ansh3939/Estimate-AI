@@ -305,6 +305,8 @@ class PropertyAppreciationAnalyzer:
         
         recommendations = {
             'overall_rating': self._calculate_investment_rating(metrics, investment_horizon),
+            'expected_annual_return': metrics['average_annual_growth'],
+            'recommendation_text': f"Based on {investment_horizon}-year analysis",
             'key_insights': [],
             'recommendations': [],
             'risk_factors': [],
@@ -328,6 +330,14 @@ class PropertyAppreciationAnalyzer:
                 recommendations['best_strategy'] = 'Consider waiting for better market conditions'
         else:
             recommendations['best_strategy'] = 'Long-term buy and hold strategy recommended'
+        
+        # Generate detailed recommendation text
+        if metrics['average_annual_growth'] > 8 and metrics['volatility'] < 5:
+            recommendations['recommendation_text'] = f"Excellent investment opportunity with {metrics['average_annual_growth']:.1f}% average growth and stable market conditions"
+        elif metrics['average_annual_growth'] > 5:
+            recommendations['recommendation_text'] = f"Good investment potential with {metrics['average_annual_growth']:.1f}% historical growth"
+        else:
+            recommendations['recommendation_text'] = f"Conservative market with {metrics['average_annual_growth']:.1f}% growth - suitable for risk-averse investors"
         
         return recommendations
     

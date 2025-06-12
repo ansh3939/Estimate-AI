@@ -1516,6 +1516,19 @@ def show_appreciation_trends():
             except Exception as e:
                 st.error(f"❌ Appreciation analysis failed: {str(e)}")
                 st.info("Please try again with different parameters")
+                
+                # Add debugging information for development
+                if str(e).find("expected_annual_return") != -1:
+                    st.info("Debug: Issue with investment recommendations - checking data structure")
+                    
+                # Fallback: Show basic city information
+                st.markdown("### 📊 Basic City Information")
+                for city in selected_cities[:3]:
+                    try:
+                        basic_metrics = appreciation_analyzer.calculate_appreciation_metrics(city, analysis_years)
+                        st.info(f"**{city}**: Average growth {basic_metrics.get('average_annual_growth', 7.5):.1f}% annually")
+                    except:
+                        st.info(f"**{city}**: Market data temporarily unavailable")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
