@@ -651,11 +651,23 @@ def show_prediction_results():
         if 'all_predictions' in results and results['all_predictions']:
             st.markdown("### 🔍 Model Comparison")
             
-            predictions_df = pd.DataFrame(list(results['all_predictions'].items()), 
-                                        columns=['Model', 'Prediction'])
-            predictions_df['Prediction'] = predictions_df['Prediction'].apply(lambda x: f"₹{x:,.0f}")
+            # Filter out non-numeric predictions
+            predictions_data = []
+            for model, prediction in results['all_predictions'].items():
+                if model != 'best_model' and isinstance(prediction, (int, float)):
+                    predictions_data.append({
+                        'Model': model.replace('_', ' ').title(),
+                        'Prediction': f"₹{prediction:,.0f}"
+                    })
             
-            st.dataframe(predictions_df, use_container_width=True, hide_index=True)
+            if predictions_data:
+                predictions_df = pd.DataFrame(predictions_data)
+                st.dataframe(predictions_df, use_container_width=True, hide_index=True)
+                
+                # Show best model indicator
+                if 'best_model' in results['all_predictions']:
+                    best_model = results['all_predictions']['best_model']
+                    st.info(f"🏆 Best performing model: {best_model.replace('_', ' ').title()}")
         
         # Feature importance
         if 'feature_importance' in results and results['feature_importance']:
@@ -741,21 +753,27 @@ def show_prediction_interface(data):
                     training_metrics = predictor.train_model(data)
                     
                     # Display model performance if available
-                    if 'all_scores' in training_metrics and not training_metrics.get('cached', False):
+                    if ('all_scores' in training_metrics and 
+                        isinstance(training_metrics['all_scores'], dict) and 
+                        not training_metrics.get('cached', False)):
                         st.success(f"Best performing model: {training_metrics.get('best_model', 'Unknown')}")
                         
                         # Show performance comparison
                         with st.expander("📊 Model Performance Comparison"):
                             scores_data = []
-                            for model_name, scores in training_metrics['all_scores'].items():
-                                scores_data.append({
-                                    'Model': model_name.replace('_', ' ').title(),
-                                    'R² Score': f"{scores['r2_score']:.3f}",
-                                    'MAE (₹)': f"{scores['mae']:,.0f}"
-                                })
+                            all_scores = training_metrics.get('all_scores', {})
+                            if isinstance(all_scores, dict):
+                                for model_name, scores in all_scores.items():
+                                    if isinstance(scores, dict) and 'r2_score' in scores and 'mae' in scores:
+                                        scores_data.append({
+                                            'Model': model_name.replace('_', ' ').title(),
+                                            'R² Score': f"{scores['r2_score']:.3f}",
+                                            'MAE (₹)': f"{scores['mae']:,.0f}"
+                                        })
                             
-                            scores_df = pd.DataFrame(scores_data)
-                            st.dataframe(scores_df, use_container_width=True, hide_index=True)
+                            if scores_data:
+                                scores_df = pd.DataFrame(scores_data)
+                                st.dataframe(scores_df, use_container_width=True, hide_index=True)
                     
                     # Make prediction
                     prediction, all_predictions = predictor.predict(input_data)
