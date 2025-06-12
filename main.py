@@ -276,8 +276,8 @@ def load_database_data():
             st.info("Please contact administrator to import property data")
             return None
         
-        # Validate required columns
-        required_columns = ['city', 'district', 'sub_district', 'area_sqft', 'bhk', 'property_type', 'furnishing', 'price_inr']
+        # Validate required columns (database returns title case column names)
+        required_columns = ['City', 'District', 'Sub_District', 'Area_SqFt', 'BHK', 'Property_Type', 'Furnishing', 'Price_INR']
         missing_columns = [col for col in required_columns if col not in data.columns]
         
         if missing_columns:
@@ -286,16 +286,16 @@ def load_database_data():
         
         # Clean and validate data
         data = data.dropna(subset=required_columns)
-        data['price_inr'] = pd.to_numeric(data['price_inr'], errors='coerce')
-        data['area_sqft'] = pd.to_numeric(data['area_sqft'], errors='coerce')
-        data = data.dropna(subset=['price_inr', 'area_sqft'])
+        data['Price_INR'] = pd.to_numeric(data['Price_INR'], errors='coerce')
+        data['Area_SqFt'] = pd.to_numeric(data['Area_SqFt'], errors='coerce')
+        data = data.dropna(subset=['Price_INR', 'Area_SqFt'])
         
         # Filter realistic values
         data = data[
-            (data['price_inr'] > 100000) & 
-            (data['price_inr'] < 100000000) &
-            (data['area_sqft'] > 100) & 
-            (data['area_sqft'] < 10000)
+            (data['Price_INR'] > 100000) & 
+            (data['Price_INR'] < 100000000) &
+            (data['Area_SqFt'] > 100) & 
+            (data['Area_SqFt'] < 10000)
         ]
         
         if len(data) < 100:
@@ -320,14 +320,14 @@ def get_districts(data, city):
     """Get districts for a city"""
     if data is None:
         return []
-    return sorted(data[data['city'] == city]['district'].unique().tolist())
+    return sorted(data[data['City'] == city]['District'].unique().tolist())
 
 def get_sub_districts(data, city, district):
     """Get sub-districts for a city and district"""
     if data is None:
         return []
-    filtered_data = data[(data['city'] == city) & (data['district'] == district)]
-    return sorted(filtered_data['sub_district'].unique().tolist())
+    filtered_data = data[(data['City'] == city) & (data['District'] == district)]
+    return sorted(filtered_data['Sub_District'].unique().tolist())
 
 def main():
     # Load data
