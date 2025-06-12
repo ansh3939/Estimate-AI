@@ -433,13 +433,13 @@ def show_emi_calculator():
             st.markdown(f"""
             <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 2rem;">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['monthly_emi']:,.0f}</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['emi']:,.0f}</div>
                     <div style="color: #7f8c8d; font-weight: 600;">Monthly EMI</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
                     <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_payment']:,.0f}</div>
+                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_amount']:,.0f}</div>
                         <div style="color: #7f8c8d; font-size: 0.9rem;">Total Payment</div>
                     </div>
                     <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
@@ -720,13 +720,13 @@ def show_emi_calculator():
             st.markdown(f"""
             <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 2rem;">
                 <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['monthly_emi']:,.0f}</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['emi']:,.0f}</div>
                     <div style="color: #7f8c8d; font-weight: 600;">Monthly EMI</div>
                 </div>
                 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
                     <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_payment']:,.0f}</div>
+                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_amount']:,.0f}</div>
                         <div style="color: #7f8c8d; font-size: 0.9rem;">Total Payment</div>
                     </div>
                     <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
