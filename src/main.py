@@ -3,14 +3,14 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-from database import db_manager
-from fast_ml_model import FastRealEstatePredictor
-from investment_analyzer import InvestmentAnalyzer
-from emi_calculator import EMICalculator
+from src.models.database import db_manager
+from src.models.fast_ml_model import FastRealEstatePredictor
+from src.analyzers.investment_analyzer import InvestmentAnalyzer
+from src.utils.emi_calculator import EMICalculator
 
-from real_estate_chatbot import RealEstateChatbot
-from portfolio_analyzer import PropertyPortfolioAnalyzer
-from appreciation_analyzer import PropertyAppreciationAnalyzer
+from src.components.real_estate_chatbot import RealEstateChatbot
+from src.analyzers.portfolio_analyzer import PropertyPortfolioAnalyzer
+from src.analyzers.appreciation_analyzer import PropertyAppreciationAnalyzer
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
