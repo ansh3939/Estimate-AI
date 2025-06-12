@@ -4,16 +4,13 @@ import streamlit as st
 st.set_page_config(
     page_title="Real Estate Price Predictor",
     page_icon="RE",
-    layout="wide",
-    initial_sidebar_state="expanded"
+    layout="wide"
 )
 
 import pandas as pd
 import numpy as np
-import plotly.express as px
 import plotly.graph_objects as go
 import sys
-import os
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
@@ -79,10 +76,7 @@ st.markdown("""
         transform: translateY(-5px);
     }
     
-    /* Sidebar Styling */
-    .css-1d391kg {
-        background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
-    }
+
     
     /* Button Styling */
     .stButton > button {
