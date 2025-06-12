@@ -541,49 +541,46 @@ def main():
     col1, col2, col3 = st.columns(3, gap="large")
     
     with col1:
-        if st.button("📈", key="prediction_btn", help="AI-Powered Price Prediction", use_container_width=True):
-            st.session_state.active_section = 'prediction'
-            st.rerun()
-        
         st.markdown("""
-        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #4285f4; margin-top: -1rem;">
+        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #4285f4;">
             <h3 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 700;">AI-Powered Price Prediction</h3>
             <p style="color: #7f8c8d; margin-bottom: 1.5rem; line-height: 1.6;">
                 Highly accurate property valuation using advanced machine learning algorithms trained on extensive Indian real estate data.
             </p>
-            <div style="color: #4285f4; font-weight: 600; cursor: pointer;">Analyze Property →</div>
         </div>
         """, unsafe_allow_html=True)
+        
+        if st.button("Analyze Property →", key="analyze_btn", use_container_width=True):
+            st.session_state.active_section = 'prediction'
+            st.rerun()
     
     with col2:
-        if st.button("📊", key="investment_btn", help="Comprehensive Investment Analysis", use_container_width=True):
-            st.session_state.active_section = 'investment'
-            st.rerun()
-        
         st.markdown("""
-        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #34a853; margin-top: -1rem;">
+        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #34a853;">
             <h3 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 700;">Comprehensive Investment Analysis</h3>
             <p style="color: #7f8c8d; margin-bottom: 1.5rem; line-height: 1.6;">
                 Detailed rental yield calculations, appreciation forecasts, and investment potential ratings for informed decisions.
             </p>
-            <div style="color: #34a853; font-weight: 600; cursor: pointer;">View Insights →</div>
         </div>
         """, unsafe_allow_html=True)
+        
+        if st.button("View Insights →", key="insights_btn", use_container_width=True):
+            st.session_state.active_section = 'investment'
+            st.rerun()
     
     with col3:
-        if st.button("🧮", key="financial_btn", help="Financial Planning Tools", use_container_width=True):
-            st.session_state.active_section = 'financial'
-            st.rerun()
-        
         st.markdown("""
-        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #9c27b0; margin-top: -1rem;">
+        <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #9c27b0;">
             <h3 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 700;">Financial Planning Tools</h3>
             <p style="color: #7f8c8d; margin-bottom: 1.5rem; line-height: 1.6;">
                 Sophisticated EMI calculator with customizable parameters to help plan your property financing with precision.
             </p>
-            <div style="color: #9c27b0; font-weight: 600; cursor: pointer;">Calculate EMI →</div>
         </div>
         """, unsafe_allow_html=True)
+        
+        if st.button("Calculate EMI →", key="emi_btn", use_container_width=True):
+            st.session_state.active_section = 'financial'
+            st.rerun()
     
     st.markdown("</div></div>", unsafe_allow_html=True)
     
