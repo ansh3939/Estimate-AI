@@ -3,7 +3,7 @@ import streamlit as st
 # Page configuration - MUST be first Streamlit command
 st.set_page_config(
     page_title="Real Estate Price Predictor",
-    page_icon="🏢",
+    page_icon="RE",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -301,7 +301,7 @@ def load_database_data():
         data = db_manager.get_properties_from_db()
         
         if data.empty:
-            st.error("❌ No data found in database")
+            st.error("No data found in database")
             st.info("Please contact administrator to import property data")
             return None
         
@@ -310,7 +310,7 @@ def load_database_data():
         missing_columns = [col for col in required_columns if col not in data.columns]
         
         if missing_columns:
-            st.error(f"❌ Missing required columns in database: {missing_columns}")
+            st.error(f"Missing required columns in database: {missing_columns}")
             return None
         
         # Clean and validate data
@@ -328,14 +328,14 @@ def load_database_data():
         ]
         
         if len(data) < 100:
-            st.warning(f"⚠️ Limited data available: {len(data)} properties")
+            st.warning(f"Limited data available: {len(data)} properties")
         else:
             st.success(f"✅ Successfully loaded {len(data)} properties from database")
         
         return data
         
     except Exception as e:
-        st.error(f"❌ Database connection error: {str(e)}")
+        st.error(f"Database connection error: {str(e)}")
         st.info("Please check database configuration")
         return None
 
@@ -368,7 +368,7 @@ def main():
     # Header
     st.markdown("""
     <div class="main-header">
-        <h1>🏢 Real Estate Price Predictor</h1>
+        <h1>Real Estate Price Predictor</h1>
         <p>Professional Property Analytics Platform with ML-Powered Predictions</p>
     </div>
     """, unsafe_allow_html=True)
