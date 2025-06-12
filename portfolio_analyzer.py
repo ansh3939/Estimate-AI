@@ -306,6 +306,10 @@ class PropertyPortfolioAnalyzer:
             'current_growth_rate': current_growth,
             'market_sentiment': sentiment,
             'cycle_phase': cycle_phase,
+            'market_phase': cycle_phase,  # Alias for UI compatibility
             'timing_advice': timing_advice,
+            'phase_description': timing_advice,  # Alias for UI compatibility  
+            'recommended_action': sentiment.upper(),
+            'action_reason': timing_advice,
             'recommendation_confidence': 75
         }
