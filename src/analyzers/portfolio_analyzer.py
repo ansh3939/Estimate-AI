@@ -54,7 +54,7 @@ class PropertyPortfolioAnalyzer:
         annual_growth = total_growth / years_held if years_held > 0 else 0
         
         # Market benchmark growth
-        city = purchase_data['city']
+        city = purchase_data['City']
         expected_annual_growth = self.city_growth_rates.get(city, 7.5)
         expected_current_value = purchase_price * (1 + expected_annual_growth/100) ** years_held
         expected_total_growth = ((expected_current_value - purchase_price) / purchase_price) * 100
@@ -79,7 +79,7 @@ class PropertyPortfolioAnalyzer:
                                         property_data: Dict[str, Any]) -> Dict[str, Any]:
         """Generate buy/sell/hold recommendation"""
         
-        city = property_data['city']
+        city = property_data['City']
         annual_growth = property_analysis['annual_growth_percent']
         performance_vs_market = property_analysis['performance_vs_market']
         years_held = property_analysis['years_held']
@@ -138,7 +138,7 @@ class PropertyPortfolioAnalyzer:
         # Get market prediction for the property
         predicted_value, confidence = current_predictor.predict(target_property)
         
-        city = target_property['city']
+        city = target_property['City']
         asking_price = budget
         
         # Value analysis
@@ -154,7 +154,7 @@ class PropertyPortfolioAnalyzer:
         # Investment scoring
         value_score = min(10, max(-5, value_gap_percent))
         growth_potential_score = min(10, annual_growth_rate)
-        location_score = min(5, len(target_property.get('district', ''))) # Basic location scoring
+        location_score = min(5, len(target_property.get('District', ''))) # Basic location scoring
         
         # Market timing score
         sentiment = self.market_sentiment.get(city, 'Hold')
