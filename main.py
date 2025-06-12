@@ -1028,7 +1028,7 @@ def show_portfolio_tracker(data):
                 <div class="chart-container">
                     <h3>🎯 Investment Recommendation: <span style="color: {rec_color};">{recommendation['recommendation']}</span></h3>
                     <p><strong>Reasoning:</strong> {recommendation['reasoning']}</p>
-                    <p><strong>Confidence:</strong> {recommendation['confidence']}</p>
+                    <p><strong>Confidence:</strong> {recommendation['confidence_score']:.0f}%</p>
                 </div>
                 """, unsafe_allow_html=True)
                 

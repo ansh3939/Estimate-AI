@@ -137,7 +137,16 @@ class PropertyPortfolioAnalyzer:
         """Analyze if a property at given price is a good investment"""
         
         # Get market prediction for the property
-        predicted_value, confidence = current_predictor.predict(target_property)
+        predicted_value, all_predictions = current_predictor.predict(target_property)
+        
+        # Calculate confidence based on model consistency (difference between predictions)
+        if len(all_predictions) > 1:
+            predictions_list = list(all_predictions.values())
+            std_dev = np.std(predictions_list)
+            mean_pred = np.mean(predictions_list)
+            confidence = max(0, 100 - (std_dev / mean_pred * 100))  # Lower std dev = higher confidence
+        else:
+            confidence = 85.0  # Default confidence for single model
         
         city = target_property['City']
         asking_price = budget
@@ -187,10 +196,16 @@ class PropertyPortfolioAnalyzer:
         return {
             'asking_price': asking_price,
             'predicted_market_value': predicted_value,
+            'fair_market_value': predicted_value,  # Alias for UI compatibility
             'value_gap': value_gap,
             'value_gap_percent': value_gap_percent,
+            'budget_adequacy': min(100, max(0, (predicted_value / asking_price) * 100)),
+            'projected_roi_annual': annual_growth_rate,
+            'investment_attractiveness_score': min(100, max(0, total_investment_score * 5)),
             'investment_recommendation': investment_recommendation,
             'reasoning': investment_reasoning,
+            'detailed_analysis': investment_reasoning,  # Alias for UI compatibility
+            'risk_level': 'Medium' if total_investment_score > 10 else 'High' if total_investment_score > 5 else 'Very High',
             'confidence_score': min(100, max(0, total_investment_score * 4)),
             'growth_projections': {
                 'one_year': one_year_value,
