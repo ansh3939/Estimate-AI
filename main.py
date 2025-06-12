@@ -1208,9 +1208,14 @@ def show_investment_analyzer(data):
                 predictor.train_model(data)
                 
                 # Analyze investment opportunity
-                investment_analysis = portfolio_analyzer.analyze_investment_opportunity(
-                    target_property, investment_budget, predictor
-                )
+                try:
+                    investment_analysis = portfolio_analyzer.analyze_investment_opportunity(
+                        target_property, investment_budget, predictor
+                    )
+                except Exception as analysis_error:
+                    st.error(f"❌ Investment analysis failed: {str(analysis_error)}")
+                    st.info("Please check your inputs and try again")
+                    return
                 
                 # Display results
                 st.markdown("---")

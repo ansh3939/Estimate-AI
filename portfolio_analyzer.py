@@ -141,13 +141,27 @@ class PropertyPortfolioAnalyzer:
         predicted_value, all_predictions = current_predictor.predict(target_property)
         
         # Calculate confidence based on model consistency (difference between predictions)
-        if len(all_predictions) > 1:
-            predictions_list = list(all_predictions.values())
-            std_dev = np.std(predictions_list)
-            mean_pred = np.mean(predictions_list)
-            confidence = max(0, 100 - (std_dev / mean_pred * 100))  # Lower std dev = higher confidence
-        else:
-            confidence = 85.0  # Default confidence for single model
+        confidence = 85.0  # Default confidence
+        try:
+            if len(all_predictions) > 1:
+                # Safely extract numeric predictions
+                predictions_list = []
+                for pred in all_predictions.values():
+                    try:
+                        numeric_pred = float(pred)
+                        if not np.isnan(numeric_pred) and np.isfinite(numeric_pred):
+                            predictions_list.append(numeric_pred)
+                    except (ValueError, TypeError):
+                        continue
+                
+                if len(predictions_list) > 1:
+                    predictions_array = np.array(predictions_list, dtype=np.float64)
+                    std_dev = float(np.std(predictions_array))
+                    mean_pred = float(np.mean(predictions_array))
+                    if mean_pred > 0:
+                        confidence = float(max(0.0, 100.0 - (std_dev / mean_pred * 100)))
+        except Exception:
+            confidence = 85.0
         
         city = target_property['City']
         asking_price = budget
