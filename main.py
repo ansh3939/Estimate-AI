@@ -991,7 +991,13 @@ def show_portfolio_tracker(data):
                 predictor.train_model(data)
                 
                 # Analyze current property value
-                current_analysis = portfolio_analyzer.analyze_current_property_value(purchase_data, predictor)
+                try:
+                    current_analysis = portfolio_analyzer.analyze_current_property_value(purchase_data, predictor)
+                except Exception as e:
+                    st.error(f"Portfolio analysis error: {str(e)}")
+                    st.write("Debug info - Purchase data keys:", list(purchase_data.keys()))
+                    st.write("Debug info - Purchase data:", purchase_data)
+                    return
                 
                 # Generate recommendations
                 property_data = {k: v for k, v in purchase_data.items() if k != 'purchase_price' and k != 'purchase_year'}

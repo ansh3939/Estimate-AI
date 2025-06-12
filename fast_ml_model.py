@@ -88,9 +88,15 @@ class FastRealEstatePredictor:
         """Create basic features for faster processing"""
         enhanced_data = data.copy()
         
-        # Only essential features for speed
-        enhanced_data['Area_Per_Room'] = enhanced_data['Area_SqFt'] / enhanced_data['BHK'].replace(0, 1)
-        enhanced_data['Area_Squared'] = enhanced_data['Area_SqFt'] ** 2
+        # Check if required columns exist, if not skip feature creation
+        if 'Area_SqFt' in enhanced_data.columns and 'BHK' in enhanced_data.columns:
+            # Only essential features for speed
+            enhanced_data['Area_Per_Room'] = enhanced_data['Area_SqFt'] / enhanced_data['BHK'].replace(0, 1)
+            enhanced_data['Area_Squared'] = enhanced_data['Area_SqFt'] ** 2
+        else:
+            # Add default features if columns are missing
+            enhanced_data['Area_Per_Room'] = 0
+            enhanced_data['Area_Squared'] = 0
         
         return enhanced_data
     
@@ -235,9 +241,16 @@ class FastRealEstatePredictor:
         # Create DataFrame from mapped input
         input_df = pd.DataFrame([mapped_data])
         
+        # Debug: Print column names
+        print(f"Debug - Input columns after mapping: {list(input_df.columns)}")
+        
         # Create features
         enhanced_input = self._create_simple_features(input_df)
+        print(f"Debug - Enhanced columns: {list(enhanced_input.columns)}")
+        
         encoded_input = self._encode_categorical_features(enhanced_input, fit=False)
+        print(f"Debug - Encoded columns: {list(encoded_input.columns)}")
+        print(f"Debug - Expected feature columns: {self.feature_columns + ['Area_Per_Room', 'Area_Squared']}")
         
         # Select features
         X = encoded_input[self.feature_columns + ['Area_Per_Room', 'Area_Squared']]
