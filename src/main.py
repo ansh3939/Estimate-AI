@@ -373,149 +373,6 @@ def get_sub_districts(data, city, district):
     filtered_data = data[(data['City'] == city) & (data['District'] == district)]
     return sorted(filtered_data['Sub_District'].unique().tolist())
 
-def show_emi_calculator():
-    """Display EMI calculator interface"""
-    st.header("EMI Calculator & Financial Planning")
-    st.markdown("Calculate your property loan EMI and explore different financing scenarios.")
-    
-    # Initialize EMI calculator
-    emi_calc = EMICalculator()
-    
-    col1, col2 = st.columns([1, 1])
-    
-    with col1:
-        st.subheader("Loan Details")
-        
-        loan_amount = st.number_input(
-            "Loan Amount (₹)", 
-            min_value=100000, 
-            max_value=50000000, 
-            value=5000000, 
-            step=100000,
-            help="Total loan amount you want to borrow"
-        )
-        
-        interest_rate = st.number_input(
-            "Annual Interest Rate (%)", 
-            min_value=1.0, 
-            max_value=20.0, 
-            value=8.5, 
-            step=0.1,
-            help="Annual interest rate offered by the bank"
-        )
-        
-        loan_tenure = st.selectbox(
-            "Loan Tenure (Years)", 
-            [5, 10, 15, 20, 25, 30], 
-            index=4,
-            help="Duration of the loan in years"
-        )
-        
-        if st.button("Calculate EMI", type="primary", use_container_width=True):
-            # Calculate EMI details
-            emi_details = emi_calc.calculate_emi(loan_amount, interest_rate, loan_tenure)
-            
-            # Store results in session state
-            st.session_state.emi_results = emi_details
-            st.session_state.loan_params = {
-                'amount': loan_amount,
-                'rate': interest_rate,
-                'tenure': loan_tenure
-            }
-    
-    with col2:
-        st.subheader("EMI Breakdown")
-        
-        if 'emi_results' in st.session_state:
-            results = st.session_state.emi_results
-            
-            # Display EMI results
-            st.markdown(f"""
-            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['emi']:,.0f}</div>
-                    <div style="color: #7f8c8d; font-weight: 600;">Monthly EMI</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-                    <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_amount']:,.0f}</div>
-                        <div style="color: #7f8c8d; font-size: 0.9rem;">Total Payment</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #e74c3c;">₹{results['total_interest']:,.0f}</div>
-                        <div style="color: #7f8c8d; font-size: 0.9rem;">Total Interest</div>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-        else:
-            st.info("Enter loan details and click 'Calculate EMI' to see the breakdown.")
-    
-    # Amortization schedule
-    if 'emi_results' in st.session_state and 'loan_params' in st.session_state:
-        st.markdown("---")
-        st.subheader("Payment Schedule (First 12 Months)")
-        
-        params = st.session_state.loan_params
-        schedule = emi_calc.generate_amortization_schedule(
-            params['amount'], 
-            params['rate'], 
-            params['tenure']
-        )
-        
-        # Create DataFrame for display
-        schedule_df = pd.DataFrame(schedule)
-        schedule_df = schedule_df.rename(columns={'month': 'Month', 'principal': 'Principal Payment', 'interest': 'Interest Payment', 'outstanding': 'Remaining Balance'})
-        schedule_df = schedule_df[['Month', 'Principal Payment', 'Interest Payment', 'Remaining Balance']]
-        
-        # Format currency columns
-        for col in ['Principal Payment', 'Interest Payment', 'Remaining Balance']:
-            schedule_df[col] = schedule_df[col].apply(lambda x: f"₹{x:,.0f}")
-        
-        st.dataframe(schedule_df, use_container_width=True, hide_index=True)
-        
-        # Prepayment calculator
-        st.markdown("---")
-        st.subheader("Prepayment Analysis")
-        
-        col1, col2 = st.columns([1, 1])
-        
-        with col1:
-            prepay_amount = st.number_input(
-                "Prepayment Amount (₹)", 
-                min_value=10000, 
-                max_value=params['amount']//2, 
-                value=500000, 
-                step=50000
-            )
-            
-            prepay_month = st.selectbox(
-                "Prepayment Month", 
-                list(range(12, 61, 12)), 
-                help="When do you plan to make the prepayment"
-            )
-        
-        with col2:
-            if st.button("Calculate Savings", use_container_width=True):
-                savings = emi_calc.calculate_prepayment_savings(
-                    params['amount'], 
-                    params['rate'], 
-                    params['tenure'], 
-                    prepay_amount, 
-                    prepay_month
-                )
-                
-                st.markdown(f"""
-                <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50;">
-                    <h4 style="color: #2e7d32; margin-bottom: 1rem;">Prepayment Benefits</h4>
-                    <div style="color: #2c3e50;">
-                        <strong>Interest Savings:</strong> ₹{savings['interest_saved']:,.0f}<br>
-                        <strong>Tenure Reduction:</strong> {savings['tenure_reduction']:.1f} months<br>
-                        <strong>New EMI:</strong> ₹{savings['new_emi']:,.0f}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
 
 def main():
     # Initialize session
@@ -716,26 +573,18 @@ def show_emi_calculator():
         if 'emi_results' in st.session_state:
             results = st.session_state.emi_results
             
-            # Display EMI results
-            st.markdown(f"""
-            <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); margin-bottom: 2rem;">
-                <div style="text-align: center; margin-bottom: 1.5rem;">
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #667eea;">₹{results['emi']:,.0f}</div>
-                    <div style="color: #7f8c8d; font-weight: 600;">Monthly EMI</div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem;">
-                    <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #2c3e50;">₹{results['total_amount']:,.0f}</div>
-                        <div style="color: #7f8c8d; font-size: 0.9rem;">Total Payment</div>
-                    </div>
-                    <div style="text-align: center; padding: 1rem; background: #f8f9fa; border-radius: 10px;">
-                        <div style="font-size: 1.5rem; font-weight: 600; color: #e74c3c;">₹{results['total_interest']:,.0f}</div>
-                        <div style="color: #7f8c8d; font-size: 0.9rem;">Total Interest</div>
-                    </div>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            # Display EMI results using Streamlit components
+            st.success("EMI Calculation Complete!")
+            
+            # Main EMI metric
+            st.metric("Monthly EMI", f"₹{results['emi']:,.0f}")
+            
+            # Additional details in columns
+            col_total, col_interest = st.columns(2)
+            with col_total:
+                st.metric("Total Payment", f"₹{results['total_amount']:,.0f}")
+            with col_interest:
+                st.metric("Total Interest", f"₹{results['total_interest']:,.0f}")
         else:
             st.info("Enter loan details and click 'Calculate EMI' to see the breakdown.")
     
@@ -793,16 +642,15 @@ def show_emi_calculator():
                     prepay_month
                 )
                 
-                st.markdown(f"""
-                <div style="background: #e8f5e8; padding: 1.5rem; border-radius: 12px; border-left: 4px solid #4caf50;">
-                    <h4 style="color: #2e7d32; margin-bottom: 1rem;">Prepayment Benefits</h4>
-                    <div style="color: #2c3e50;">
-                        <strong>Interest Savings:</strong> ₹{savings['interest_saved']:,.0f}<br>
-                        <strong>Tenure Reduction:</strong> {savings['tenure_reduction']:.1f} months<br>
-                        <strong>New EMI:</strong> ₹{savings['new_emi']:,.0f}
-                    </div>
-                </div>
-                """, unsafe_allow_html=True)
+                st.success("Prepayment Benefits Calculated!")
+                
+                col1, col2, col3 = st.columns(3)
+                with col1:
+                    st.metric("Interest Savings", f"₹{savings['interest_saved']:,.0f}")
+                with col2:
+                    st.metric("Tenure Reduction", f"{savings['tenure_reduction']:.1f} months")
+                with col3:
+                    st.metric("New EMI", f"₹{savings['new_emi']:,.0f}")
 
 def show_chatbot_interface():
     """Display the AI chatbot interface"""
