@@ -480,7 +480,7 @@ def show_emi_calculator():
         """, unsafe_allow_html=True)
     
     # Calculate EMI
-    if st.button("Analytics Calculate EMI", key="calc_emi"):
+    if st.button("Calculate EMI", key="calc_emi"):
         calculator = EMICalculator()
         
         # Basic EMI calculation
@@ -488,7 +488,7 @@ def show_emi_calculator():
         
         # Display results
         st.markdown("---")
-        st.markdown("## Analytics EMI Calculation Results")
+        st.markdown("## EMI Calculation Results")
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -785,52 +785,20 @@ def show_prediction_interface(data):
                     st.info("Please check your inputs and try again")
     
     with col2:
-        st.markdown("### Analytics Market Overview")
+        # Prediction tips and guidance
+        st.markdown("### Prediction Tips")
         
-        # Quick stats for selected city
-        city_data = data[data['City'] == selected_city]
-        
-        if not city_data.empty:
-            avg_price = city_data['Price_INR'].mean()
-            avg_price_per_sqft = city_data['Price_per_SqFt'].mean()
-            total_properties = len(city_data)
-            
-            st.markdown(f"""
-            <div class="metric-card">
-                <h4>Average Price</h4>
-                <h3>₹{avg_price:,.0f}</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            st.markdown(f"""
-            <div class="metric-card">
-                <h4>Price per Sq.Ft</h4>
-                <h3>₹{avg_price_per_sqft:,.0f}</h3>
-            </div>
-            """, unsafe_allow_html=True)
-            
-            st.markdown(f"""
-            <div class="metric-card">
-                <h4>Available Properties</h4>
-                <h3>{total_properties:,}</h3>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # Recent predictions
-        st.markdown("### 🕒 Recent Predictions")
-        session_id = get_session_id()
-        recent_predictions = db_manager.get_prediction_history(session_id, limit=5)
-        
-        if recent_predictions:
-            for i, pred in enumerate(recent_predictions[:3]):
-                st.markdown(f"""
-                <div class="info-box">
-                    <small>{pred['city']} - {pred['bhk']} BHK</small><br>
-                    <strong>₹{pred['predicted_price']:,.0f}</strong>
-                </div>
-                """, unsafe_allow_html=True)
-        else:
-            st.info("No recent predictions found")
+        st.markdown("""
+        <div class="info-box">
+        <h4>Prediction Tips:</h4>
+        <ul>
+        <li>Select specific location for accurate predictions</li>
+        <li>Enter realistic property specifications</li>
+        <li>Consider current market conditions</li>
+        <li>Use results as guidance, not absolute values</li>
+        </ul>
+        </div>
+        """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -847,7 +815,7 @@ def show_portfolio_tracker(data):
     """Display portfolio tracking interface for existing properties"""
     st.markdown('<div class="slide-in">', unsafe_allow_html=True)
     
-    st.markdown("## Analytics Portfolio Tracker")
+    st.markdown("## Portfolio Tracker")
     st.markdown("Track your existing property investments and get market insights")
     
     col1, col2 = st.columns([2, 1])
@@ -917,7 +885,7 @@ def show_portfolio_tracker(data):
         </div>
         """, unsafe_allow_html=True)
     
-    if st.button("Market Analyze Portfolio Performance", key="analyze_portfolio"):
+    if st.button("Analyze Portfolio Performance", key="analyze_portfolio"):
         with st.spinner("Analyzing your property portfolio..."):
             try:
                 # Prepare property data
@@ -955,7 +923,7 @@ def show_portfolio_tracker(data):
                 
                 # Display results
                 st.markdown("---")
-                st.markdown("## Analytics Portfolio Analysis Results")
+                st.markdown("## Portfolio Analysis Results")
                 
                 col1, col2, col3, col4 = st.columns(4)
                 
@@ -1359,10 +1327,10 @@ def show_appreciation_trends():
                                               key="appreciation_investment")
     
     with col2:
-        st.markdown("### Analytics Market Insights")
+        st.markdown("### Historical Trends")
         st.markdown("""
         <div class="info-box">
-        <h4>Historical Trends:</h4>
+        <h4>Market Performance:</h4>
         <ul>
         <li>Mumbai: Premium market leader</li>
         <li>Bangalore: Tech hub growth</li>
