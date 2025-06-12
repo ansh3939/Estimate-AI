@@ -5,6 +5,9 @@ import plotly.express as px
 import plotly.graph_objects as go
 import sys
 import os
+import uuid
+import warnings
+warnings.filterwarnings('ignore')
 
 # Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -14,13 +17,9 @@ from src.models.database import db_manager
 from src.models.fast_ml_model import FastRealEstatePredictor
 from src.analyzers.investment_analyzer import InvestmentAnalyzer
 from src.utils.emi_calculator import EMICalculator
-
 from src.components.real_estate_chatbot import RealEstateChatbot
 from src.analyzers.portfolio_analyzer import PropertyPortfolioAnalyzer
 from src.analyzers.appreciation_analyzer import PropertyAppreciationAnalyzer
-import uuid
-import warnings
-warnings.filterwarnings('ignore')
 
 # Page configuration
 st.set_page_config(
