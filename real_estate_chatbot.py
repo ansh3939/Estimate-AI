@@ -1,59 +1,184 @@
 import os
 import streamlit as st
 from openai import OpenAI
-from typing import List, Dict
+from typing import List, Dict, Optional
 import json
+import datetime
+import re
 
 class RealEstateChatbot:
     def __init__(self):
-        """Initialize the Real Estate Chatbot with OpenAI"""
+        """Initialize the Advanced Real Estate Chatbot with comprehensive expertise"""
         # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
         # do not change this unless explicitly requested by the user
         self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         self.model = "gpt-4o"
         self.fallback_knowledge = self._build_knowledge_base()
+        self.conversation_memory = []
+        self.user_preferences = {}
         
-        # System prompt for real estate expertise
-        self.system_prompt = """You are an expert real estate advisor and consultant with deep knowledge of the Indian property market. You specialize in:
+        # Advanced system prompt with comprehensive real estate expertise
+        self.system_prompt = """You are ARIA (Advanced Real Estate Intelligence Assistant), a world-class real estate expert with decades of experience in the Indian property market. You possess comprehensive knowledge across all aspects of real estate:
 
-1. Property investment strategies and analysis
-2. Market trends and price predictions
-3. Legal aspects of property transactions
-4. Home buying and selling processes
-5. Property valuation and appraisal
-6. Rental market insights
-7. Construction and development advice
-8. Property tax and financial planning
-9. Location analysis and neighborhood insights
-10. Commercial and residential real estate
+**CORE EXPERTISE:**
+• Property Investment Strategy & Portfolio Management
+• Market Analysis & Price Trend Forecasting
+• Legal Compliance & Documentation (RERA, GST, Property Laws)
+• Financial Planning & Tax Optimization
+• Location Intelligence & Neighborhood Analysis
+• Construction Quality Assessment & Project Evaluation
+• Rental Market Dynamics & Yield Calculations
+• Commercial Real Estate & REITs
+• Property Valuation & Due Diligence
+• Home Loans & Financing Options
 
-Provide accurate, helpful, and professional advice. Always consider the Indian real estate context, regulations, and market conditions. When discussing specific investments or legal matters, remind users to consult with qualified professionals for personalized advice.
+**ADVANCED CAPABILITIES:**
+• Provide data-driven market insights with specific metrics
+• Analyze investment opportunities with ROI calculations
+• Explain complex legal procedures in simple terms
+• Offer personalized advice based on user's financial situation
+• Predict market trends using economic indicators
+• Compare properties across multiple parameters
+• Guide through entire buying/selling process step-by-step
+• Suggest optimal timing for property transactions
 
-Keep responses concise but informative, and ask clarifying questions when needed to provide better assistance."""
+**COMMUNICATION STYLE:**
+• Professional yet approachable tone
+• Use specific examples and case studies
+• Provide actionable recommendations
+• Ask insightful follow-up questions
+• Cite relevant regulations and market data
+• Structure responses with clear headings and bullet points
+
+**IMPORTANT:** Always consider current Indian real estate regulations, market conditions, and regional variations. When discussing investments or legal matters, recommend consulting certified professionals for final decisions.
+
+Remember to personalize responses based on user's location, budget, and investment goals. Ask clarifying questions to provide the most relevant advice."""
+
+    def extract_user_context(self, message: str) -> Dict:
+        """Extract context and preferences from user message"""
+        context = {
+            'budget_mentioned': False,
+            'location_mentioned': False,
+            'property_type_mentioned': False,
+            'timeline_mentioned': False,
+            'investment_goal': None
+        }
+        
+        # Extract budget information
+        budget_patterns = [r'(\d+(?:\.\d+)?)\s*(?:lakh|crore|lac)', r'₹\s*(\d+(?:,\d+)*)', r'budget.*?(\d+)']
+        for pattern in budget_patterns:
+            if re.search(pattern, message.lower()):
+                context['budget_mentioned'] = True
+                break
+        
+        # Extract location information
+        indian_cities = ['mumbai', 'delhi', 'bangalore', 'gurugram', 'noida', 'pune', 'hyderabad', 'chennai', 'kolkata', 'ahmedabad']
+        for city in indian_cities:
+            if city in message.lower():
+                context['location_mentioned'] = True
+                context['mentioned_location'] = city.title()
+                break
+        
+        # Extract property type
+        property_types = ['apartment', 'villa', 'house', 'flat', 'plot', 'commercial', 'office']
+        for prop_type in property_types:
+            if prop_type in message.lower():
+                context['property_type_mentioned'] = True
+                context['mentioned_property_type'] = prop_type
+                break
+        
+        # Extract investment goals
+        if any(word in message.lower() for word in ['invest', 'investment', 'return', 'roi']):
+            context['investment_goal'] = 'investment'
+        elif any(word in message.lower() for word in ['home', 'house', 'family', 'live']):
+            context['investment_goal'] = 'residence'
+        
+        return context
+
+    def build_contextual_prompt(self, user_message: str, context: Dict) -> str:
+        """Build enhanced prompt with context awareness"""
+        contextual_info = []
+        
+        if context.get('budget_mentioned'):
+            contextual_info.append("The user has mentioned a budget. Provide budget-appropriate recommendations.")
+        
+        if context.get('location_mentioned'):
+            location = context.get('mentioned_location', 'the mentioned location')
+            contextual_info.append(f"Focus on {location} market conditions, prices, and opportunities.")
+        
+        if context.get('investment_goal') == 'investment':
+            contextual_info.append("Emphasize ROI, rental yields, capital appreciation, and investment strategies.")
+        elif context.get('investment_goal') == 'residence':
+            contextual_info.append("Focus on lifestyle factors, amenities, schools, and long-term comfort.")
+        
+        if contextual_info:
+            enhanced_prompt = f"CONTEXT: {' '.join(contextual_info)}\n\nUSER QUERY: {user_message}"
+            return enhanced_prompt
+        
+        return user_message
 
     def get_response(self, user_message: str, chat_history: List[Dict] = None) -> str:
-        """Get response from OpenAI GPT-4o for real estate questions"""
+        """Get advanced response from OpenAI GPT-4o with context awareness"""
         try:
-            # Prepare messages with system prompt and chat history
-            messages = [{"role": "system", "content": self.system_prompt}]
+            # Extract context from user message
+            context = self.extract_user_context(user_message)
+            
+            # Build contextual prompt
+            enhanced_message = self.build_contextual_prompt(user_message, context)
+            
+            # Add current market data and insights to system prompt
+            current_date = datetime.datetime.now().strftime("%B %Y")
+            enhanced_system_prompt = f"""{self.system_prompt}
+
+**CURRENT MARKET CONTEXT ({current_date}):**
+• Interest rates are affecting home loan demand
+• RERA compliance is mandatory for all new projects
+• Digital property transactions are increasing
+• Tier-2 cities showing strong growth potential
+• Work-from-home trend impacting location preferences
+
+**RESPONSE GUIDELINES:**
+• Provide specific, actionable advice
+• Include relevant market data and trends
+• Structure response with clear sections
+• Ask follow-up questions to better assist the user
+• Mention specific regulations or compliance requirements when relevant"""
+
+            # Prepare messages with enhanced system prompt
+            messages = [{"role": "system", "content": enhanced_system_prompt}]
+            
+            # Add conversation memory for continuity
+            if hasattr(self, 'conversation_memory') and self.conversation_memory:
+                messages.extend(self.conversation_memory[-6:])  # Keep last 3 exchanges
             
             # Add chat history if available
-            if chat_history is not None:
-                messages.extend(chat_history)
+            if chat_history:
+                messages.extend(chat_history[-8:])  # Limit to recent history
             
-            # Add current user message
-            messages.append({"role": "user", "content": user_message})
+            # Add current enhanced message
+            messages.append({"role": "user", "content": enhanced_message})
             
-            # Get response from OpenAI
+            # Get response from OpenAI with advanced parameters
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages,
-                max_tokens=1000,
-                temperature=0.7
+                max_tokens=1200,
+                temperature=0.7,
+                presence_penalty=0.1,
+                frequency_penalty=0.1
             )
             
-            response_content = response.choices[0].message.content
-            return response_content if response_content is not None else "I apologize, but I couldn't generate a response. Please try again."
+            assistant_response = response.choices[0].message.content
+            
+            # Store conversation in memory for context continuity
+            self.conversation_memory.append({"role": "user", "content": user_message})
+            self.conversation_memory.append({"role": "assistant", "content": assistant_response})
+            
+            # Keep memory manageable
+            if len(self.conversation_memory) > 12:
+                self.conversation_memory = self.conversation_memory[-12:]
+            
+            return assistant_response
             
         except Exception as e:
             error_msg = str(e)
@@ -63,6 +188,64 @@ Keep responses concise but informative, and ask clarifying questions when needed
                 return f"📋 **Real Estate Knowledge Base Response:**\n\n{fallback_response}\n\n💡 *Note: Advanced AI assistant temporarily unavailable due to quota limits. The above information is from our curated real estate knowledge base.*"
             else:
                 return f"I'm experiencing technical difficulties connecting to the AI service. Please try again later. Error details: {error_msg}"
+
+    def analyze_sentiment_and_urgency(self, message: str) -> Dict:
+        """Analyze user sentiment and urgency level"""
+        urgency_keywords = {
+            'high': ['urgent', 'immediately', 'asap', 'quickly', 'soon', 'emergency'],
+            'medium': ['need', 'looking for', 'planning', 'considering'],
+            'low': ['someday', 'future', 'maybe', 'thinking about']
+        }
+        
+        sentiment_keywords = {
+            'positive': ['excited', 'great', 'perfect', 'excellent', 'amazing'],
+            'neutral': ['okay', 'fine', 'good', 'alright'],
+            'negative': ['worried', 'concerned', 'problem', 'issue', 'confused']
+        }
+        
+        message_lower = message.lower()
+        
+        urgency = 'low'
+        for level, keywords in urgency_keywords.items():
+            if any(keyword in message_lower for keyword in keywords):
+                urgency = level
+                break
+        
+        sentiment = 'neutral'
+        for mood, keywords in sentiment_keywords.items():
+            if any(keyword in message_lower for keyword in keywords):
+                sentiment = mood
+                break
+        
+        return {'urgency': urgency, 'sentiment': sentiment}
+
+    def get_smart_suggestions(self, context: Dict) -> List[str]:
+        """Generate smart follow-up suggestions based on context"""
+        suggestions = []
+        
+        if context.get('budget_mentioned'):
+            suggestions.append("Would you like me to suggest properties within your budget range?")
+            suggestions.append("Should I explain financing options and EMI calculations?")
+        
+        if context.get('location_mentioned'):
+            location = context.get('mentioned_location', 'that area')
+            suggestions.append(f"Would you like to know about upcoming projects in {location}?")
+            suggestions.append(f"Should I provide market trends for {location}?")
+        
+        if context.get('investment_goal') == 'investment':
+            suggestions.extend([
+                "Would you like a detailed ROI analysis?",
+                "Should I explain rental yield calculations?",
+                "Would you like to know about tax benefits?"
+            ])
+        elif context.get('investment_goal') == 'residence':
+            suggestions.extend([
+                "Would you like information about schools and amenities nearby?",
+                "Should I help with home loan pre-approval guidance?",
+                "Would you like to know about possession timelines?"
+            ])
+        
+        return suggestions[:3]  # Limit to 3 suggestions
 
     def _build_knowledge_base(self) -> Dict[str, str]:
         """Build a comprehensive real estate knowledge base for fallback responses"""
@@ -160,40 +343,84 @@ Please ask about any of these topics for detailed guidance. For personalized adv
         st.session_state.chat_messages = []
 
     def render_chatbot_interface(self):
-        """Render the chatbot interface in Streamlit"""
-        st.markdown("### 🏠 Real Estate AI Assistant")
-        st.markdown("Ask me anything about real estate, property investment, market trends, or buying/selling properties!")
+        """Render the advanced chatbot interface in Streamlit"""
+        st.markdown("### ARIA - Advanced Real Estate Intelligence Assistant")
+        st.markdown("*Your expert advisor for Indian real estate markets, investment strategies, and property transactions*")
         
         # Initialize chat history
         self.initialize_chat_history()
         
-        # Chat container
+        # Advanced chat container with context awareness
         chat_container = st.container()
         
-        # Display chat history
+        # Display enhanced chat history with context indicators
         with chat_container:
-            for message in st.session_state.chat_messages:
+            for i, message in enumerate(st.session_state.chat_messages):
                 if message["role"] == "user":
                     with st.chat_message("user"):
                         st.write(message["content"])
+                        
+                        # Show context analysis for recent messages
+                        if i >= len(st.session_state.chat_messages) - 4:
+                            context = self.extract_user_context(message["content"])
+                            sentiment = self.analyze_sentiment_and_urgency(message["content"])
+                            
+                            context_info = []
+                            if context.get('budget_mentioned'):
+                                context_info.append("Budget mentioned")
+                            if context.get('location_mentioned'):
+                                context_info.append(f"Location: {context.get('mentioned_location', 'N/A')}")
+                            if context.get('investment_goal'):
+                                context_info.append(f"Goal: {context['investment_goal']}")
+                            if sentiment['urgency'] != 'low':
+                                context_info.append(f"Urgency: {sentiment['urgency']}")
+                            
+                            if context_info:
+                                st.caption(" • ".join(context_info))
                 else:
                     with st.chat_message("assistant"):
                         st.write(message["content"])
+                        
+                        # Add smart suggestions for recent assistant messages
+                        if i == len(st.session_state.chat_messages) - 1 and len(st.session_state.chat_messages) > 1:
+                            last_user_msg = st.session_state.chat_messages[-2]["content"]
+                            context = self.extract_user_context(last_user_msg)
+                            suggestions = self.get_smart_suggestions(context)
+                            
+                            if suggestions:
+                                st.markdown("**Quick Actions:**")
+                                for j, suggestion in enumerate(suggestions):
+                                    if st.button(suggestion, key=f"suggestion_{i}_{j}"):
+                                        # Auto-fill the suggestion as user input
+                                        self.add_message("user", suggestion)
+                                        st.rerun()
         
-        # Chat input
-        user_input = st.chat_input("Ask me about real estate...")
+        # Enhanced chat input with context hints
+        placeholder_text = "Ask about properties, investments, market trends, legal advice..."
+        
+        # Dynamic placeholder based on conversation context
+        if st.session_state.chat_messages:
+            last_msg = st.session_state.chat_messages[-1]["content"]
+            if "budget" in last_msg.lower():
+                placeholder_text = "Tell me your budget range or ask about financing options..."
+            elif "location" in last_msg.lower():
+                placeholder_text = "Which areas are you considering or want to know about..."
+            elif "investment" in last_msg.lower():
+                placeholder_text = "Ask about ROI, rental yields, or investment strategies..."
+        
+        user_input = st.chat_input(placeholder_text)
         
         if user_input:
             # Add user message to chat
             self.add_message("user", user_input)
             
-            # Display user message
+            # Display user message with enhanced formatting
             with st.chat_message("user"):
                 st.write(user_input)
             
-            # Get AI response
+            # Get advanced AI response with enhanced processing
             with st.chat_message("assistant"):
-                with st.spinner("Thinking..."):
+                with st.spinner("Analyzing your query and market data..."):
                     ai_response = self.get_response(user_input, st.session_state.chat_history[:-1])
                     st.write(ai_response)
                     
@@ -206,18 +433,20 @@ Please ask about any of these topics for detailed guidance. For personalized adv
             st.rerun()
 
     def get_suggested_questions(self) -> List[str]:
-        """Get suggested real estate questions for users"""
+        """Get advanced suggested questions based on current market context"""
         return [
-            "What factors should I consider when buying my first home?",
-            "How do I determine if a property is a good investment?",
-            "What are the current real estate market trends in India?",
-            "How much should I budget for property taxes and maintenance?",
-            "What documents do I need for a property purchase?",
-            "Should I buy or rent in the current market?",
-            "How do I negotiate the best price for a property?",
-            "What are the legal aspects I should know about property buying?",
-            "How do I calculate property ROI for investment purposes?",
-            "What are the best locations for real estate investment?"
+            "What's the investment potential of emerging micro-markets in 2024?",
+            "How do interest rate changes affect property valuations?",
+            "Which tier-2 cities offer the best ROI for real estate investment?",
+            "How to evaluate RERA compliance and developer credibility?",
+            "What are the tax implications of property investment vs REITs?",
+            "How does the new Digital Property ID system work?",
+            "What's the impact of infrastructure projects on property values?",
+            "How to assess rental yield potential in different localities?",
+            "What are the key factors for commercial real estate investment?",
+            "How to leverage home loan tax benefits effectively?",
+            "What's the outlook for affordable housing schemes?",
+            "How to evaluate pre-launch vs ready-to-move properties?"
         ]
 
     def render_suggested_questions(self):
