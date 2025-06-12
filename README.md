@@ -26,15 +26,11 @@ A cutting-edge Streamlit-powered AI real estate analytics platform delivering in
 ```
 ├── src/
 │   ├── components/           # Streamlit UI components
-│   ├── models/              # ML models and predictors
+│   ├── models/              # ML models and database
 │   ├── analyzers/           # Investment and market analyzers
 │   └── utils/               # Utility functions and helpers
-├── public/
-│   ├── assets/              # Static assets and images
-│   └── data/                # Data files and datasets
-├── config/                  # Configuration files
-├── docs/                    # Documentation
-└── tests/                   # Test suite
+├── .streamlit/              # Streamlit configuration
+└── fast_model_cache.pkl     # Cached ML model
 ```
 
 ## 🛠️ Technology Stack
@@ -74,9 +70,6 @@ PGDATABASE=your_pg_database
 
 ### Quick Start
 ```bash
-# Install dependencies
-pip install -r requirements.txt
-
 # Run the application
 streamlit run src/main.py --server.port 5000
 ```
@@ -143,7 +136,7 @@ The platform is optimized for Replit Deployments with:
 
 ## 📞 Support
 
-For technical support or feature requests, please refer to the documentation in the `docs/` folder.
+For technical support or feature requests, please contact the development team.
 
 ## 📄 License
 
