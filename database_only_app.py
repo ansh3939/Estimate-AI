@@ -1319,10 +1319,13 @@ def show_portfolio_tracker():
                     "SELL": "🔴"
                 }.get(recommendation['recommendation'], "🟡")
                 
+                # Clean the reasoning text to remove any HTML tags
+                clean_reasoning = recommendation['reasoning'].replace('<', '&lt;').replace('>', '&gt;')
+                
                 st.markdown(f"""
                 <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
                     <h4>{rec_color} {recommendation['recommendation']}</h4>
-                    <p>{recommendation['reasoning']}</p>
+                    <p>{clean_reasoning}</p>
                     <p><strong>Confidence Score:</strong> {recommendation['confidence_score']:.0f}%</p>
                 </div>
                 """, unsafe_allow_html=True)

@@ -121,23 +121,23 @@ class InvestmentAnalyzer:
         # Ensure score is within bounds
         score = max(1, min(10, score))
         
-        # Generate recommendation text
+        # Generate recommendation text (plain text format)
         if score >= 8:
-            recommendation = "**Strong Buy Recommendation**\n\n"
+            recommendation = "Strong Buy Recommendation\n\n"
         elif score >= 6:
-            recommendation = "**Good Investment Opportunity**\n\n"
+            recommendation = "Good Investment Opportunity\n\n"
         elif score >= 4:
-            recommendation = "**Consider with Caution**\n\n"
+            recommendation = "Consider with Caution\n\n"
         else:
-            recommendation = "**High Risk Investment**\n\n"
+            recommendation = "High Risk Investment\n\n"
         
         # Add detailed points
-        recommendation += "**Key Factors:**\n"
+        recommendation += "Key Factors:\n"
         for point in recommendation_points:
             recommendation += f"• {point}\n"
         
         # Add financial metrics
-        recommendation += f"\n**Financial Metrics:**\n"
+        recommendation += f"\nFinancial Metrics:\n"
         recommendation += f"• Price per sq ft: ₹{price_per_sqft:,.0f}\n"
         recommendation += f"• Estimated monthly rent: ₹{estimated_monthly_rent:,.0f}\n"
         recommendation += f"• Projected 5-year value: ₹{self._calculate_future_value(predicted_price, city, 5):,.0f}\n"
