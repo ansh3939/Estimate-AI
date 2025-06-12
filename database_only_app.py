@@ -667,27 +667,7 @@ def show_prediction_interface():
             </div>
             """, unsafe_allow_html=True)
         
-        # Enhanced city-wise analysis
-        st.markdown("""
-        <div style="margin: 3rem 0 1rem 0;">
-            <h4 style="color: #667eea; font-weight: 600; text-align: center;">Market Distribution by City</h4>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        city_counts = data['City'].value_counts()
-        fig = px.bar(x=city_counts.index, y=city_counts.values, 
-                     title="", color=city_counts.values,
-                     color_continuous_scale=['#667eea', '#764ba2'])
-        fig.update_layout(
-            showlegend=False,
-            plot_bgcolor='rgba(0,0,0,0)',
-            paper_bgcolor='rgba(0,0,0,0)',
-            font=dict(color='#2c3e50'),
-            xaxis=dict(title="Cities", showgrid=False),
-            yaxis=dict(title="Number of Properties", showgrid=True, gridcolor='#ecf0f1')
-        )
-        fig.update_traces(hovertemplate='<b>%{x}</b><br>Properties: %{y}<extra></extra>')
-        st.plotly_chart(fig, use_container_width=True)
+
 
 def show_floating_chat_icon():
     """Display static floating chat icon in bottom right corner"""
