@@ -531,6 +531,20 @@ def main():
     if 'active_section' not in st.session_state:
         st.session_state.active_section = 'prediction'
     
+    # Check if there's a prediction result to prioritize
+    show_cards_first = True
+    if (st.session_state.active_section == 'prediction' and 
+        'prediction_results' in st.session_state and 
+        st.session_state.prediction_results is not None):
+        show_cards_first = False
+    
+    # Show prediction results first if available
+    if not show_cards_first:
+        show_prediction_interface()
+        
+        # Add separator
+        st.markdown("<div style='margin: 4rem 0 2rem 0;'></div>", unsafe_allow_html=True)
+    
     # Feature cards section
     st.markdown("""
     <div style="margin: 3rem 0 2rem 0;">
@@ -552,6 +566,9 @@ def main():
         
         if st.button("Analyze Property →", key="analyze_btn", use_container_width=True):
             st.session_state.active_section = 'prediction'
+            # Clear previous results to show cards first
+            if 'prediction_results' in st.session_state:
+                del st.session_state.prediction_results
             st.rerun()
     
     with col2:
@@ -584,15 +601,16 @@ def main():
     
     st.markdown("</div></div>", unsafe_allow_html=True)
     
-    # Display the active section
-    st.markdown("<div style='margin: 3rem 0;'></div>", unsafe_allow_html=True)
-    
-    if st.session_state.active_section == 'prediction':
-        show_prediction_interface()
-    elif st.session_state.active_section == 'investment':
-        show_investment_analyzer()
-    elif st.session_state.active_section == 'financial':
-        show_emi_calculator()
+    # Display other sections or prediction interface if no results
+    if show_cards_first:
+        st.markdown("<div style='margin: 3rem 0;'></div>", unsafe_allow_html=True)
+        
+        if st.session_state.active_section == 'prediction':
+            show_prediction_interface()
+        elif st.session_state.active_section == 'investment':
+            show_investment_analyzer()
+        elif st.session_state.active_section == 'financial':
+            show_emi_calculator()
     
     # Floating AI assistant icon
     show_floating_chat_icon()
@@ -757,8 +775,91 @@ def show_chatbot_interface():
         st.error(f"Chatbot initialization error: {str(e)}")
         st.info("Please ensure the OpenAI API key is properly configured.")
 
+def show_prediction_results():
+    """Display stored prediction results"""
+    results = st.session_state.prediction_results
+    
+    # Enhanced results display
+    st.markdown("""
+    <div style="text-align: center; margin: 2rem 0;">
+        <h3 style="color: #667eea; font-weight: 600; margin-bottom: 1rem;">Property Valuation Results</h3>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Enhanced price display with professional styling
+    st.markdown(f"""
+    <div class="price-display">
+        <div style="font-size: 1.2rem; margin-bottom: 0.5rem; opacity: 0.8;">Estimated Property Value</div>
+        ₹{results['predicted_price']:,.0f}
+        <div style="font-size: 1.2rem; margin-top: 1rem; opacity: 0.9; background: rgba(255,255,255,0.1); padding: 0.5rem; border-radius: 10px;">
+            ₹{results['predicted_price']/results['area_sqft']:,.0f} per Sq Ft
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Results columns
+    col1, col2 = st.columns([1, 1])
+    
+    with col1:
+        # Investment analysis
+        investment_score = results['investment_score']
+        if investment_score >= 7:
+            card_class = "success-card"
+            score_color = "#2E7D32"
+            status_text = "Excellent Investment"
+        elif investment_score >= 5:
+            card_class = "warning-card"
+            score_color = "#F57C00"
+            status_text = "Good Investment"
+        else:
+            card_class = "error-card"
+            score_color = "#C62828"
+            status_text = "High Risk"
+        
+        st.markdown(f"""
+        <div class="{card_class}">
+            <h4 style="margin-top: 0; color: #2c3e50; font-weight: 600;">Investment Analysis</h4>
+            <div style="font-size: 2.5rem; font-weight: 700; color: {score_color}; text-align: center; margin: 1rem 0;">
+                {investment_score}/10
+            </div>
+            <div style="text-align: center; color: {score_color}; font-weight: 600; font-size: 1.1rem;">
+                {status_text}
+            </div>
+            <div style="margin-top: 1rem; color: #2c3e50; font-size: 0.95rem; line-height: 1.4;">
+                {results['recommendation']}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    with col2:
+        # Property details summary
+        input_data = results['input_data']
+        st.markdown(f"""
+        <div class="info-card">
+            <h4 style="margin-top: 0; color: #2c3e50; font-weight: 600;">Property Details</h4>
+            <div style="color: #2c3e50; line-height: 1.6;">
+                <strong>Location:</strong> {input_data['Sub_District']}, {input_data['District']}, {input_data['City']}<br>
+                <strong>Area:</strong> {input_data['Area_SqFt']:,} sq ft<br>
+                <strong>Type:</strong> {input_data['BHK']} BHK {input_data['Property_Type']}<br>
+                <strong>Furnishing:</strong> {input_data['Furnishing']}<br>
+                <strong>Model:</strong> Fast Random Forest
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    # Add button to make new prediction
+    if st.button("Make New Prediction", type="secondary", use_container_width=True):
+        if 'prediction_results' in st.session_state:
+            del st.session_state.prediction_results
+        st.rerun()
+
 def show_prediction_interface():
     """Display the main property prediction interface"""
+    
+    # Check if we should display stored results first
+    if 'prediction_results' in st.session_state and st.session_state.prediction_results:
+        show_prediction_results()
+        return
     
     # Load data from database
     data = load_database_data()
@@ -845,6 +946,16 @@ def show_prediction_interface():
             
             # Investment analysis
             investment_score, recommendation = investment_analyzer.analyze(input_data, predicted_price)
+            
+            # Store prediction results in session state for layout control
+            st.session_state.prediction_results = {
+                'predicted_price': predicted_price,
+                'investment_score': investment_score,
+                'recommendation': recommendation,
+                'confidence_scores': confidence_scores,
+                'input_data': input_data,
+                'area_sqft': area_sqft
+            }
             
             # Save prediction to database
             try:
