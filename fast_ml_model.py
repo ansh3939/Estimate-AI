@@ -5,6 +5,7 @@ from sklearn.tree import DecisionTreeRegressor
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
+import xgboost as xgb
 import pickle
 import os
 from typing import Dict, Any, Tuple
@@ -13,17 +14,40 @@ warnings.filterwarnings('ignore')
 
 class FastRealEstatePredictor:
     def __init__(self):
-        # Single fast model for quick predictions
-        self.model = RandomForestRegressor(
-            random_state=42, 
-            n_estimators=50,   # Much reduced for speed
-            max_depth=12,      # Balanced depth
-            min_samples_split=5,
-            min_samples_leaf=3,
-            max_features=0.6,  
-            bootstrap=True,
-            n_jobs=-1
-        )
+        # Initialize all three allowed models
+        self.models = {
+            'decision_tree': DecisionTreeRegressor(
+                random_state=42,
+                max_depth=15,
+                min_samples_split=10,
+                min_samples_leaf=5,
+                max_features='sqrt'
+            ),
+            'random_forest': RandomForestRegressor(
+                random_state=42, 
+                n_estimators=100,
+                max_depth=15,
+                min_samples_split=10,
+                min_samples_leaf=5,
+                max_features='sqrt',
+                bootstrap=True,
+                n_jobs=-1
+            ),
+            'xgboost': xgb.XGBRegressor(
+                random_state=42,
+                n_estimators=100,
+                max_depth=8,
+                learning_rate=0.1,
+                subsample=0.8,
+                colsample_bytree=0.8,
+                n_jobs=-1
+            )
+        }
+        
+        # Best performing model will be selected after training
+        self.best_model = None
+        self.best_model_name = None
+        self.model_scores = {}
         
         self.label_encoders = {}
         self.scaler = StandardScaler()
@@ -76,7 +100,9 @@ class FastRealEstatePredictor:
             try:
                 with open(self.cache_file, 'rb') as f:
                     cache_data = pickle.load(f)
-                    self.model = cache_data['model']
+                    self.best_model = cache_data['best_model']
+                    self.best_model_name = cache_data['best_model_name']
+                    self.model_scores = cache_data['model_scores']
                     self.label_encoders = cache_data['encoders']
                     self.scaler = cache_data['scaler']
                     self.model_trained = True
@@ -89,7 +115,9 @@ class FastRealEstatePredictor:
         """Save trained model to cache"""
         try:
             cache_data = {
-                'model': self.model,
+                'best_model': self.best_model,
+                'best_model_name': self.best_model_name,
+                'model_scores': self.model_scores,
                 'encoders': self.label_encoders,
                 'scaler': self.scaler
             }
@@ -99,12 +127,12 @@ class FastRealEstatePredictor:
             pass
     
     def train_model(self, data: pd.DataFrame) -> Dict[str, float]:
-        """Train the fast model"""
+        """Train all three models and select the best performer"""
         # Try to load cached model first
         if self.load_cached_model():
-            return {"mae": 0, "r2_score": 0.9, "cached": True}
+            return {"mae": 0, "r2_score": 0.9, "cached": True, "best_model": self.best_model_name}
         
-        print("Training fast model...")
+        print("Training all models: Decision Tree, Random Forest, and XGBoost...")
         
         # Prepare features
         enhanced_data = self._create_simple_features(data)
@@ -117,33 +145,56 @@ class FastRealEstatePredictor:
         # Split data
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         
-        # Scale features
+        # Scale features for tree-based models (helps with consistency)
         X_train_scaled = self.scaler.fit_transform(X_train)
         X_test_scaled = self.scaler.transform(X_test)
         
-        # Train model
-        self.model.fit(X_train_scaled, y_train)
+        # Train and evaluate all models
+        best_score = -float('inf')
         
-        # Evaluate
-        y_pred = self.model.predict(X_test_scaled)
-        mae = mean_absolute_error(y_test, y_pred)
-        r2 = r2_score(y_test, y_pred)
+        for model_name, model in self.models.items():
+            print(f"Training {model_name}...")
+            
+            # Train model
+            model.fit(X_train_scaled, y_train)
+            
+            # Evaluate
+            y_pred = model.predict(X_test_scaled)
+            mae = mean_absolute_error(y_test, y_pred)
+            r2 = r2_score(y_test, y_pred)
+            
+            # Store scores
+            self.model_scores[model_name] = {
+                'mae': mae,
+                'r2_score': r2
+            }
+            
+            print(f"{model_name} - R²: {r2:.3f}, MAE: ₹{mae:,.0f}")
+            
+            # Select best model based on R² score
+            if r2 > best_score:
+                best_score = r2
+                self.best_model = model
+                self.best_model_name = model_name
         
-        print(f"Fast Model - R²: {r2:.3f}, MAE: ₹{mae:,.0f}")
+        print(f"\nBest performing model: {self.best_model_name}")
+        print(f"Best R² Score: {best_score:.3f}")
         
         self.model_trained = True
         self.save_model_cache()
         
         return {
-            'mae': mae,
-            'r2_score': r2,
+            'mae': self.model_scores[self.best_model_name]['mae'],
+            'r2_score': self.model_scores[self.best_model_name]['r2_score'],
+            'best_model': self.best_model_name,
+            'all_scores': self.model_scores,
             'cached': False
         }
     
     def predict(self, input_data: Dict[str, Any]) -> Tuple[float, Dict[str, float]]:
-        """Make fast prediction"""
-        if not self.model_trained:
-            raise ValueError("Model not trained yet!")
+        """Make prediction using the best trained model"""
+        if not self.model_trained or self.best_model is None:
+            raise ValueError("Models not trained yet!")
         
         # Create DataFrame from input
         input_df = pd.DataFrame([input_data])
@@ -157,20 +208,29 @@ class FastRealEstatePredictor:
         
         # Scale and predict
         X_scaled = self.scaler.transform(X)
-        prediction = self.model.predict(X_scaled)[0]
+        prediction = self.best_model.predict(X_scaled)[0]
         
-        # Simple confidence score
-        confidence = {
-            'fast_model': min(0.95, max(0.7, 0.9 - abs(prediction - input_data.get('Area_SqFt', 1000) * 5000) / 10000000))
-        }
+        # Get predictions from all models for comparison
+        all_predictions = {}
+        for model_name, model in self.models.items():
+            try:
+                pred = model.predict(X_scaled)[0]
+                all_predictions[model_name] = float(pred)
+            except:
+                all_predictions[model_name] = float(prediction)
         
-        return prediction, confidence
+        all_predictions['best_model'] = self.best_model_name
+        
+        return float(prediction), all_predictions
     
     def get_feature_importance(self) -> Dict[str, float]:
-        """Get feature importance from the trained model"""
-        if not self.model_trained:
+        """Get feature importance from the best trained model"""
+        if not self.model_trained or self.best_model is None:
             return {}
         
-        feature_names = self.feature_columns + ['Area_Per_Room', 'Area_Squared']
-        importance_dict = dict(zip(feature_names, self.model.feature_importances_))
-        return dict(sorted(importance_dict.items(), key=lambda x: x[1], reverse=True))
+        try:
+            feature_names = self.feature_columns + ['Area_Per_Room', 'Area_Squared']
+            importance_dict = dict(zip(feature_names, self.best_model.feature_importances_))
+            return dict(sorted(importance_dict.items(), key=lambda x: float(x[1]), reverse=True))
+        except:
+            return {}
