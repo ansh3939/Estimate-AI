@@ -1271,15 +1271,15 @@ def show_portfolio_tracker():
     with col2:
         if analyze_button:
             with st.spinner("Analyzing your property portfolio..."):
-                # Prepare property data for prediction
+                # Prepare property data for prediction (using correct column names)
                 property_data = {
-                    'city': city,
-                    'district': district,
-                    'sub_district': sub_district,
-                    'area_sqft': area_sqft,
-                    'bhk': bhk,
-                    'property_type': property_type,
-                    'furnishing': furnishing,
+                    'City': city,
+                    'District': district,
+                    'Sub_District': sub_district,
+                    'Area_SqFt': area_sqft,
+                    'BHK': bhk,
+                    'Property_Type': property_type,
+                    'Furnishing': furnishing,
                     'purchase_price': purchase_price,
                     'purchase_date': purchase_date.strftime('%Y-%m-%d')
                 }
@@ -1383,15 +1383,15 @@ def show_investment_analyzer():
     with col2:
         if analyze_investment_button:
             with st.spinner("Analyzing investment opportunity..."):
-                # Prepare target property data
+                # Prepare target property data (using correct column names)
                 target_property = {
-                    'city': city,
-                    'district': district,
-                    'sub_district': sub_district,
-                    'area_sqft': area_sqft,
-                    'bhk': bhk,
-                    'property_type': property_type,
-                    'furnishing': furnishing
+                    'City': city,
+                    'District': district,
+                    'Sub_District': sub_district,
+                    'Area_SqFt': area_sqft,
+                    'BHK': bhk,
+                    'Property_Type': property_type,
+                    'Furnishing': furnishing
                 }
                 
                 # Analyze investment opportunity
