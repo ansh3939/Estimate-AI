@@ -1,4 +1,13 @@
 import streamlit as st
+
+# Page configuration - MUST be first Streamlit command
+st.set_page_config(
+    page_title="Real Estate Price Predictor",
+    page_icon="🏢",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
 import pandas as pd
 import numpy as np
 import plotly.express as px
@@ -12,10 +21,12 @@ warnings.filterwarnings('ignore')
 # Check Python version compatibility
 def check_python_version():
     version = sys.version_info
-    if version.major < 3 or (version.major == 3 and version.minor < 13) or (version.major == 3 and version.minor == 13 and version.micro < 5):
-        st.error(f"Python 3.13.5+ required. Current version: {version.major}.{version.minor}.{version.micro}")
-        st.info("Please upgrade Python or run: python setup.py")
+    if version.major < 3 or (version.major == 3 and version.minor < 11):
+        st.error(f"Python 3.11+ required. Current version: {version.major}.{version.minor}.{version.micro}")
+        st.info("Please upgrade Python to 3.11 or higher")
         st.stop()
+    elif version.minor < 13:
+        st.info(f"Running Python {version.major}.{version.minor}.{version.micro}. For optimal performance, consider upgrading to Python 3.13+")
 
 check_python_version()
 
@@ -30,14 +41,6 @@ from src.utils.emi_calculator import EMICalculator
 from src.components.real_estate_chatbot import RealEstateChatbot
 from src.analyzers.portfolio_analyzer import PropertyPortfolioAnalyzer
 from src.analyzers.appreciation_analyzer import PropertyAppreciationAnalyzer
-
-# Page configuration
-st.set_page_config(
-    page_title="Real Estate Price Predictor",
-    page_icon="🏢",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
 # Enhanced Professional CSS
 st.markdown("""

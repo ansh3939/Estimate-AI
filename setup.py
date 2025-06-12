@@ -9,10 +9,10 @@ import sys
 import os
 
 def check_python_version():
-    """Check if Python version is 3.13.5 or higher"""
+    """Check if Python version is 3.11 or higher"""
     version = sys.version_info
-    if version.major != 3 or version.minor < 13 or (version.minor == 13 and version.micro < 5):
-        print(f"Error: Python 3.13.5+ required. Current version: {version.major}.{version.minor}.{version.micro}")
+    if version.major != 3 or version.minor < 11:
+        print(f"Error: Python 3.11+ required. Current version: {version.major}.{version.minor}.{version.micro}")
         sys.exit(1)
     print(f"Python version {version.major}.{version.minor}.{version.micro} is compatible")
 

@@ -35,7 +35,7 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Python 3.13.5+
+- **Backend**: Python 3.11+
 - **Web Framework**: Streamlit
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **ML Framework**: scikit-learn, XGBoost
@@ -53,11 +53,11 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 ## 🔧 Installation & Setup
 
 ### Prerequisites
-- Python 3.13.5+
+- Python 3.11+
 - PostgreSQL database
 - OpenAI API key
 
-### Installation for Python 3.13.5
+### Installation
 
 #### Option 1: Automated Setup
 ```bash
@@ -89,10 +89,10 @@ PGDATABASE=your_pg_database
 streamlit run src/main.py --server.port 5000
 ```
 
-### macOS Installation (Python 3.13.5)
+### macOS Installation (Python 3.11+)
 ```bash
-# Install Python 3.13.5 via Homebrew
-brew install python@3.13
+# Install Python 3.11+ via Homebrew
+brew install python@3.11
 
 # Install PostgreSQL
 brew install postgresql
