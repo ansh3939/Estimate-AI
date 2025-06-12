@@ -1436,8 +1436,8 @@ def show_investment_analyzer():
                 clean_reasoning = investment_analysis['reasoning'].replace('<', '&lt;').replace('>', '&gt;')
                 
                 st.markdown(f"""
-                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
-                    <h4>{rec_color} {investment_analysis['investment_recommendation']}</h4>
+                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid {rec_color};">
+                    <h4 style="color: {rec_color};">{investment_analysis['investment_recommendation']}</h4>
                     <p>{clean_reasoning}</p>
                     <p><strong>Confidence Score:</strong> {investment_analysis['confidence_score']:.0f}%</p>
                 </div>
