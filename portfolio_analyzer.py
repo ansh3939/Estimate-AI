@@ -69,6 +69,7 @@ class PropertyPortfolioAnalyzer:
             'total_appreciation': current_prediction - purchase_price,
             'total_growth_percent': total_growth,
             'annual_growth_percent': annual_growth,
+            'annualized_return': annual_growth,  # Alias for UI compatibility
             'years_held': years_held,
             'expected_current_value': expected_current_value,
             'expected_growth_percent': expected_total_growth,
