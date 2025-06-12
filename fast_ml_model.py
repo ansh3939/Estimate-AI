@@ -65,23 +65,30 @@ class FastRealEstatePredictor:
         
         for column in categorical_columns:
             if column in encoded_data.columns:
-                if fit:
-                    if column not in self.label_encoders:
-                        self.label_encoders[column] = LabelEncoder()
-                    encoded_data[column] = self.label_encoders[column].fit_transform(encoded_data[column].astype(str))
-                else:
-                    if column in self.label_encoders:
-                        # Handle unseen categories
-                        known_categories = set(self.label_encoders[column].classes_)
-                        encoded_data[column] = encoded_data[column].astype(str).apply(
-                            lambda x: x if x in known_categories else 'Unknown'
-                        )
-                        # Add 'Unknown' to encoder if not present
-                        if 'Unknown' not in known_categories:
-                            self.label_encoders[column].classes_ = np.append(self.label_encoders[column].classes_, 'Unknown')
-                        encoded_data[column] = self.label_encoders[column].transform(encoded_data[column])
+                try:
+                    if fit:
+                        if column not in self.label_encoders:
+                            self.label_encoders[column] = LabelEncoder()
+                        encoded_data[column] = self.label_encoders[column].fit_transform(encoded_data[column].astype(str))
                     else:
-                        encoded_data[column] = 0
+                        if column in self.label_encoders:
+                            # Handle unseen categories
+                            known_categories = set(self.label_encoders[column].classes_)
+                            encoded_data[column] = encoded_data[column].astype(str).apply(
+                                lambda x: x if x in known_categories else 'Unknown'
+                            )
+                            # Add 'Unknown' to encoder if not present
+                            if 'Unknown' not in known_categories:
+                                self.label_encoders[column].classes_ = np.append(self.label_encoders[column].classes_, 'Unknown')
+                            encoded_data[column] = self.label_encoders[column].transform(encoded_data[column])
+                        else:
+                            # If no encoder exists, use default value
+                            print(f"Warning: No encoder found for {column}, using default value 0")
+                            encoded_data[column] = 0
+                except Exception as e:
+                    print(f"Error encoding {column}: {e}")
+                    # Set default value on error
+                    encoded_data[column] = 0
         return encoded_data
     
     def _create_simple_features(self, data: pd.DataFrame) -> pd.DataFrame:
@@ -102,19 +109,7 @@ class FastRealEstatePredictor:
     
     def load_cached_model(self) -> bool:
         """Load cached model if available"""
-        if os.path.exists(self.cache_file):
-            try:
-                with open(self.cache_file, 'rb') as f:
-                    cache_data = pickle.load(f)
-                    self.best_model = cache_data['best_model']
-                    self.best_model_name = cache_data['best_model_name']
-                    self.model_scores = cache_data['model_scores']
-                    self.label_encoders = cache_data['encoders']
-                    self.scaler = cache_data['scaler']
-                    self.model_trained = True
-                    return True
-            except:
-                pass
+        # Disable caching for now to ensure fresh training
         return False
     
     def save_model_cache(self):
