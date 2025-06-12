@@ -141,7 +141,8 @@ class EMICalculator:
         
         return {
             'interest_saved': round(max(0, interest_saved), 2),
-            'tenure_saved_months': max(0, tenure_saved_months),
+            'tenure_reduction': max(0, tenure_saved_months),
+            'new_emi': original_emi,
             'new_tenure_months': new_tenure_months,
             'outstanding_after_prepayment': round(max(0, outstanding_after_prepayment), 2)
         }
