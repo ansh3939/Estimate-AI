@@ -1318,20 +1318,20 @@ def show_portfolio_tracker():
                     )
                 
                 # Recommendation
-                st.subheader("🎯 Investment Recommendation")
+                st.subheader("Investment Recommendation")
                 
                 rec_color = {
-                    "STRONG HOLD": "🟢", "HOLD": "🟢", 
-                    "CONDITIONAL HOLD": "🟡", "CONSIDER SELLING": "🟠", 
-                    "SELL": "🔴"
-                }.get(recommendation['recommendation'], "🟡")
+                    "STRONG HOLD": "#2E7D32", "HOLD": "#2E7D32", 
+                    "CONDITIONAL HOLD": "#F57C00", "CONSIDER SELLING": "#FF9800", 
+                    "SELL": "#D32F2F"
+                }.get(recommendation['recommendation'], "#F57C00")
                 
                 # Clean the reasoning text to remove any HTML tags
                 clean_reasoning = recommendation['reasoning'].replace('<', '&lt;').replace('>', '&gt;')
                 
                 st.markdown(f"""
-                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
-                    <h4>{rec_color} {recommendation['recommendation']}</h4>
+                <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid {rec_color};">
+                    <h4 style="color: {rec_color};">{recommendation['recommendation']}</h4>
                     <p>{clean_reasoning}</p>
                     <p><strong>Confidence Score:</strong> {recommendation['confidence_score']:.0f}%</p>
                 </div>
@@ -1424,13 +1424,13 @@ def show_investment_analyzer():
                 st.markdown(f"**Value Assessment:** {gap_color} {gap_text}")
                 
                 # Investment recommendation
-                st.subheader("🎯 Investment Recommendation")
+                st.subheader("Investment Recommendation")
                 
                 rec_color = {
-                    "STRONG BUY": "🟢", "BUY": "🟢", 
-                    "CONDITIONAL BUY": "🟡", "AVOID": "🟠", 
-                    "STRONG AVOID": "🔴"
-                }.get(investment_analysis['investment_recommendation'], "🟡")
+                    "STRONG BUY": "#2E7D32", "BUY": "#2E7D32", 
+                    "CONDITIONAL BUY": "#F57C00", "AVOID": "#FF9800", 
+                    "STRONG AVOID": "#D32F2F"
+                }.get(investment_analysis['investment_recommendation'], "#F57C00")
                 
                 # Clean the reasoning text to remove any HTML tags
                 clean_reasoning = investment_analysis['reasoning'].replace('<', '&lt;').replace('>', '&gt;')

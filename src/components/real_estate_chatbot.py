@@ -185,7 +185,7 @@ Remember to personalize responses based on user's location, budget, and investme
             if "insufficient_quota" in error_msg or "quota" in error_msg.lower():
                 # Use fallback knowledge base when quota exceeded
                 fallback_response = self.get_fallback_response(user_message)
-                return f"📋 **Real Estate Knowledge Base Response:**\n\n{fallback_response}\n\n💡 *Note: Advanced AI assistant temporarily unavailable due to quota limits. The above information is from our curated real estate knowledge base.*"
+                return f"**Real Estate Knowledge Base Response:**\n\n{fallback_response}\n\n*Note: Advanced AI assistant temporarily unavailable due to quota limits. The above information is from our curated real estate knowledge base.*"
             else:
                 return f"I'm experiencing technical difficulties connecting to the AI service. Please try again later. Error details: {error_msg}"
 
@@ -318,11 +318,11 @@ Remember to personalize responses based on user's location, budget, and investme
         else:
             return """I can help with these real estate topics:
 
-**🏠 Buying Process** - Steps to purchase property in India
-**💰 Investment Analysis** - ROI calculation and market factors  
-**📋 Legal Aspects** - Documentation and compliance requirements
-**🏦 Financing** - Home loans and EMI calculations
-**📈 Market Trends** - Current real estate market insights
+**Buying Process** - Steps to purchase property in India
+**Investment Analysis** - ROI calculation and market factors  
+**Legal Aspects** - Documentation and compliance requirements
+**Financing** - Home loans and EMI calculations
+**Market Trends** - Current real estate market insights
 
 Please ask about any of these topics for detailed guidance. For personalized advice, consult local real estate professionals."""
 
