@@ -80,7 +80,7 @@ class PropertyPortfolioAnalyzer:
                                         property_data: Dict[str, Any]) -> Dict[str, Any]:
         """Generate buy/sell/hold recommendation"""
         
-        city = property_data['City']
+        city = property_data.get('city', property_data.get('City', 'Mumbai'))
         annual_growth = property_analysis['annual_growth_percent']
         performance_vs_market = property_analysis['performance_vs_market']
         years_held = property_analysis['years_held']

@@ -1013,12 +1013,12 @@ def show_portfolio_tracker(data):
                     st.markdown(f"""
                     <div class="metric-card">
                         <h3>Current Value</h3>
-                        <h2 style="color: #667eea;">₹{current_analysis['current_market_value']:,.0f}</h2>
+                        <h2 style="color: #667eea;">₹{current_analysis['current_value']:,.0f}</h2>
                     </div>
                     """, unsafe_allow_html=True)
                 
                 with col2:
-                    gain_loss = current_analysis['total_gain_loss']
+                    gain_loss = current_analysis['total_appreciation']
                     color = "#43e97b" if gain_loss >= 0 else "#ff6b6b"
                     st.markdown(f"""
                     <div class="metric-card">
@@ -1029,7 +1029,7 @@ def show_portfolio_tracker(data):
                     """, unsafe_allow_html=True)
                 
                 with col3:
-                    appreciation = current_analysis['total_appreciation_percent']
+                    appreciation = current_analysis['total_growth_percent']
                     color = "#43e97b" if appreciation >= 0 else "#ff6b6b"
                     st.markdown(f"""
                     <div class="metric-card">
@@ -1039,7 +1039,7 @@ def show_portfolio_tracker(data):
                     """, unsafe_allow_html=True)
                 
                 with col4:
-                    annual_return = current_analysis['annualized_return']
+                    annual_return = current_analysis['annual_growth_percent']
                     color = "#43e97b" if annual_return >= 5 else "#f093fb" if annual_return >= 0 else "#ff6b6b"
                     st.markdown(f"""
                     <div class="metric-card">
