@@ -466,7 +466,7 @@ def show_emi_calculator():
         
         # Create DataFrame for display
         schedule_df = pd.DataFrame(schedule)
-        schedule_df['Month'] = range(1, len(schedule_df) + 1)
+        schedule_df = schedule_df.rename(columns={'month': 'Month', 'principal': 'Principal Payment', 'interest': 'Interest Payment', 'outstanding': 'Remaining Balance'})
         schedule_df = schedule_df[['Month', 'Principal Payment', 'Interest Payment', 'Remaining Balance']]
         
         # Format currency columns
@@ -753,7 +753,7 @@ def show_emi_calculator():
         
         # Create DataFrame for display
         schedule_df = pd.DataFrame(schedule)
-        schedule_df['Month'] = range(1, len(schedule_df) + 1)
+        schedule_df = schedule_df.rename(columns={'month': 'Month', 'principal': 'Principal Payment', 'interest': 'Interest Payment', 'outstanding': 'Remaining Balance'})
         schedule_df = schedule_df[['Month', 'Principal Payment', 'Interest Payment', 'Remaining Balance']]
         
         # Format currency columns
