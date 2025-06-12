@@ -10,6 +10,7 @@ from emi_calculator import EMICalculator
 
 from real_estate_chatbot import RealEstateChatbot
 from portfolio_analyzer import PropertyPortfolioAnalyzer
+from appreciation_analyzer import PropertyAppreciationAnalyzer
 import uuid
 import warnings
 warnings.filterwarnings('ignore')
@@ -599,6 +600,39 @@ def main():
             st.session_state.active_section = 'financial'
             st.rerun()
     
+    # Add fourth column for appreciation trends
+    with st.container():
+        st.markdown("<div style='margin: 2rem 0;'></div>", unsafe_allow_html=True)
+        col4, col5 = st.columns(2)
+        
+        with col4:
+            st.markdown("""
+            <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #ff6b6b;">
+                <h3 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 700;">Market Trends & History</h3>
+                <p style="color: #7f8c8d; margin-bottom: 1.5rem; line-height: 1.6;">
+                    Comprehensive property appreciation analysis with historical trends, growth projections, and market timing insights.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if st.button("View Trends →", key="trends_btn", use_container_width=True):
+                st.session_state.active_section = 'trends'
+                st.rerun()
+        
+        with col5:
+            st.markdown("""
+            <div style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.1); border-top: 4px solid #4ecdc4;">
+                <h3 style="color: #2c3e50; margin-bottom: 1rem; font-weight: 700;">Portfolio Tracking</h3>
+                <p style="color: #7f8c8d; margin-bottom: 1.5rem; line-height: 1.6;">
+                    Track your existing property investments with performance analytics and strategic recommendations.
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            if st.button("Track Portfolio →", key="portfolio_btn", use_container_width=True):
+                st.session_state.active_section = 'portfolio'
+                st.rerun()
+    
     st.markdown("</div></div>", unsafe_allow_html=True)
     
     # Display other sections or prediction interface if no results
@@ -611,6 +645,10 @@ def main():
             show_investment_analyzer()
         elif st.session_state.active_section == 'financial':
             show_emi_calculator()
+        elif st.session_state.active_section == 'trends':
+            show_appreciation_trends()
+        elif st.session_state.active_section == 'portfolio':
+            show_portfolio_tracker()
     
     # Floating AI assistant icon
     show_floating_chat_icon()
@@ -1429,6 +1467,185 @@ def show_investment_analyzer():
                 )
                 
                 st.plotly_chart(fig, use_container_width=True)
+
+def show_appreciation_trends():
+    """Display property appreciation trends and historical analysis"""
+    st.markdown("## 📈 Property Appreciation Trends & Historical Analysis")
+    st.markdown("---")
+    
+    appreciation_analyzer = PropertyAppreciationAnalyzer()
+    
+    # Main controls section
+    st.markdown("### 🎯 Market Analysis Controls")
+    
+    analysis_col1, analysis_col2 = st.columns(2)
+    
+    with analysis_col1:
+        selected_cities = st.multiselect(
+            "Select Cities for Analysis",
+            ["Mumbai", "Delhi", "Bangalore", "Gurugram", "Noida"],
+            default=["Mumbai", "Delhi", "Bangalore"],
+            key="appreciation_cities"
+        )
+        
+        analysis_period = st.selectbox(
+            "Analysis Period",
+            ["Last 3 Years", "Last 5 Years", "Last 6 Years (Full History)"],
+            index=1,
+            key="analysis_period"
+        )
+    
+    with analysis_col2:
+        focus_city = st.selectbox(
+            "Focus City (Detailed Analysis)",
+            selected_cities if selected_cities else ["Mumbai"],
+            key="focus_city"
+        )
+        
+        property_value_projection = st.number_input(
+            "Property Value for Projection (₹)",
+            min_value=1000000,
+            value=5000000,
+            step=100000,
+            key="projection_value"
+        )
+    
+    # Generate analysis
+    if selected_cities:
+        # Historical trends dashboard
+        st.markdown("### 📊 Historical Performance Dashboard")
+        trends_chart = appreciation_analyzer.create_appreciation_trends_chart(selected_cities)
+        st.plotly_chart(trends_chart, use_container_width=True)
+        
+        # City performance comparison
+        st.markdown("### 🏆 City Performance Comparison")
+        
+        years_for_analysis = 3 if "3 Years" in analysis_period else (5 if "5 Years" in analysis_period else 6)
+        comparison_df = appreciation_analyzer.compare_cities_performance(selected_cities, years_for_analysis)
+        
+        # Display comparison table with styling
+        st.dataframe(
+            comparison_df.style.format({
+                'Avg Annual Growth (%)': '{:.1f}%',
+                'CAGR (%)': '{:.1f}%',
+                'Volatility': '{:.1f}',
+                'Cumulative Return (%)': '{:.1f}%'
+            }).background_gradient(subset=['Avg Annual Growth (%)', 'CAGR (%)', 'Cumulative Return (%)']),
+            use_container_width=True
+        )
+        
+        # Focus city detailed analysis
+        if focus_city:
+            st.markdown(f"### 🔍 Detailed Analysis: {focus_city}")
+            
+            city_metrics = appreciation_analyzer.calculate_appreciation_metrics(focus_city, years_for_analysis)
+            
+            # Key metrics display
+            metrics_col1, metrics_col2, metrics_col3, metrics_col4 = st.columns(4)
+            
+            with metrics_col1:
+                st.metric(
+                    "Average Annual Growth",
+                    f"{city_metrics['average_annual_growth']}%",
+                    delta=f"{city_metrics['average_annual_growth'] - 7.5:.1f}%" if city_metrics['average_annual_growth'] != 7.5 else None
+                )
+            
+            with metrics_col2:
+                st.metric(
+                    "6-Year CAGR",
+                    f"{city_metrics['cagr_6_year']}%",
+                    delta=f"{city_metrics['cagr_6_year'] - 8.0:.1f}%" if city_metrics['cagr_6_year'] != 8.2 else None
+                )
+            
+            with metrics_col3:
+                volatility_color = "normal" if city_metrics['volatility'] < 5 else "inverse"
+                st.metric(
+                    "Market Volatility",
+                    f"{city_metrics['volatility']:.1f}",
+                    delta=f"{city_metrics['risk_level']} Risk"
+                )
+            
+            with metrics_col4:
+                st.metric(
+                    "Cumulative Return",
+                    f"{city_metrics['cumulative_return_6_year']}%",
+                    delta=city_metrics['market_phase']
+                )
+            
+            # Investment insights
+            st.markdown("### 💡 Investment Insights & Recommendations")
+            
+            horizon_years = st.slider("Investment Horizon (Years)", 1, 15, 5, key="investment_horizon_slider")
+            recommendations = appreciation_analyzer.get_investment_recommendations(focus_city, horizon_years)
+            
+            insight_col1, insight_col2 = st.columns(2)
+            
+            with insight_col1:
+                st.markdown("#### 🎯 Overall Rating")
+                rating_color = {
+                    'Excellent': '🟢',
+                    'Good': '🟡', 
+                    'Average': '🟠',
+                    'Below Average': '🔴'
+                }
+                st.markdown(f"**{rating_color.get(recommendations['overall_rating'], '⚪')} {recommendations['overall_rating']}**")
+                
+                st.markdown("#### 📈 Key Insights")
+                for insight in recommendations['key_insights']:
+                    st.write(f"• {insight}")
+            
+            with insight_col2:
+                st.markdown("#### 🎯 Best Strategy")
+                st.info(recommendations['best_strategy'])
+                
+                if recommendations['risk_factors']:
+                    st.markdown("#### ⚠️ Risk Factors")
+                    for risk in recommendations['risk_factors']:
+                        st.write(f"• {risk}")
+            
+            # Future value projection
+            st.markdown("### 🔮 Future Value Projections")
+            projection_years = st.slider("Projection Period (Years)", 1, 15, 10, key="projection_years")
+            
+            projection_chart = appreciation_analyzer.create_future_projection_chart(
+                focus_city, property_value_projection, projection_years
+            )
+            st.plotly_chart(projection_chart, use_container_width=True)
+            
+            # Projection summary
+            city_growth_rate = city_metrics['average_annual_growth'] / 100
+            
+            projection_col1, projection_col2, projection_col3 = st.columns(3)
+            
+            with projection_col1:
+                conservative_value = property_value_projection * ((1 + city_growth_rate * 0.5) ** projection_years)
+                st.metric(
+                    "Conservative Scenario",
+                    f"₹{conservative_value/10000000:.1f} Cr" if conservative_value >= 10000000 else f"₹{conservative_value/100000:.0f} L",
+                    delta=f"+{((conservative_value/property_value_projection - 1) * 100):.0f}%"
+                )
+                st.caption("50% of historical growth rate")
+            
+            with projection_col2:
+                realistic_value = property_value_projection * ((1 + city_growth_rate) ** projection_years)
+                st.metric(
+                    "Realistic Scenario", 
+                    f"₹{realistic_value/10000000:.1f} Cr" if realistic_value >= 10000000 else f"₹{realistic_value/100000:.0f} L",
+                    delta=f"+{((realistic_value/property_value_projection - 1) * 100):.0f}%"
+                )
+                st.caption("Historical average growth rate")
+            
+            with projection_col3:
+                optimistic_value = property_value_projection * ((1 + city_growth_rate * 1.2) ** projection_years)
+                st.metric(
+                    "Optimistic Scenario",
+                    f"₹{optimistic_value/10000000:.1f} Cr" if optimistic_value >= 10000000 else f"₹{optimistic_value/100000:.0f} L", 
+                    delta=f"+{((optimistic_value/property_value_projection - 1) * 100):.0f}%"
+                )
+                st.caption("120% of historical growth rate")
+    
+    else:
+        st.warning("Please select at least one city for analysis.")
 
 if __name__ == "__main__":
     main()
