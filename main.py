@@ -607,33 +607,7 @@ def show_emi_calculator():
         st.dataframe(schedule_df, use_container_width=True)
         
         # Payment breakdown chart
-        st.markdown("### 📊 Payment Breakdown Over Time")
-        
-        # Create payment breakdown chart
-        months = list(range(1, min(61, tenure_years*12 + 1)))  # First 5 years
-        principals = []
-        interests = []
-        
-        for month in months:
-            month_data = calculator.generate_amortization_schedule(loan_amount, interest_rate, tenure_years, month)
-            if month_data:
-                last_payment = month_data[-1]
-                principals.append(last_payment['Principal'])
-                interests.append(last_payment['Interest'])
-        
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(x=months, y=principals, name='Principal', fill='tonexty'))
-        fig.add_trace(go.Scatter(x=months, y=interests, name='Interest', fill='tozeroy'))
-        
-        fig.update_layout(
-            title='Monthly Payment Breakdown (First 5 Years)',
-            xaxis_title='Month',
-            yaxis_title='Amount (₹)',
-            hovermode='x unified',
-            height=400
-        )
-        
-        st.plotly_chart(fig, use_container_width=True)
+
     
     st.markdown('</div>', unsafe_allow_html=True)
 
