@@ -244,6 +244,35 @@ st.markdown("""
         box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
     
+    /* Price Range Card */
+    .price-range-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 15px;
+        text-align: center;
+        margin: 1rem 0;
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .price-range-card h4 {
+        margin-bottom: 0.5rem;
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+    
+    .price-range-card h2 {
+        margin: 0.5rem 0;
+        font-weight: bold;
+        font-size: 1.4rem;
+    }
+    
+    .price-range-card p {
+        margin-top: 0.5rem;
+        opacity: 0.8;
+        font-size: 0.9rem;
+    }
+    
     /* Animation */
     @keyframes slideIn {
         from { opacity: 0; transform: translateY(20px); }
@@ -626,12 +655,16 @@ def show_prediction_results():
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        # Main prediction
+        # Main prediction with range
+        base_prediction = results['prediction']
+        lower_bound = base_prediction * 0.90
+        upper_bound = base_prediction * 1.10
+        
         st.markdown(f"""
         <div class="prediction-result">
-            <h2>Predicted Property Value</h2>
-            <h1>₹{results['prediction']:,.0f}</h1>
-            <p>Confidence: {results.get('confidence', 'High')}</p>
+            <h2>Predicted Property Value Range</h2>
+            <h1>₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}</h1>
+            <p>Best Estimate: ₹{base_prediction:,.0f}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -647,27 +680,26 @@ def show_prediction_results():
             """, unsafe_allow_html=True)
     
     with col2:
-        # All model predictions
-        if 'all_predictions' in results and results['all_predictions']:
-            st.markdown("### 🔍 Model Comparison")
+        # Price range estimate
+        if 'prediction' in results:
+            st.markdown("### 🎯 Price Range Estimate")
             
-            # Filter out non-numeric predictions
-            predictions_data = []
-            for model, prediction in results['all_predictions'].items():
-                if model != 'best_model' and isinstance(prediction, (int, float)):
-                    predictions_data.append({
-                        'Model': model.replace('_', ' ').title(),
-                        'Prediction': f"₹{prediction:,.0f}"
-                    })
+            base_prediction = results['prediction']
+            # Calculate a realistic range based on ±10-15% variation
+            lower_bound = base_prediction * 0.90
+            upper_bound = base_prediction * 1.10
             
-            if predictions_data:
-                predictions_df = pd.DataFrame(predictions_data)
-                st.dataframe(predictions_df, use_container_width=True, hide_index=True)
-                
-                # Show best model indicator
-                if 'best_model' in results['all_predictions']:
-                    best_model = results['all_predictions']['best_model']
-                    st.info(f"🏆 Best performing model: {best_model.replace('_', ' ').title()}")
+            st.markdown(f"""
+            <div class="price-range-card">
+                <h4>Estimated Property Value Range</h4>
+                <h2>₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}</h2>
+                <p>Best Estimate: ₹{base_prediction:,.0f}</p>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Show confidence level
+            confidence_level = "High" if results.get('training_metrics', {}).get('r2_score', 0) > 0.85 else "Medium"
+            st.info(f"Confidence Level: {confidence_level}")
         
         # Feature importance
         if 'feature_importance' in results and results['feature_importance']:
@@ -752,28 +784,13 @@ def show_prediction_interface(data):
                     st.info("Training three ML models: Decision Tree, Random Forest, and XGBoost...")
                     training_metrics = predictor.train_model(data)
                     
-                    # Display model performance if available
-                    if ('all_scores' in training_metrics and 
-                        isinstance(training_metrics['all_scores'], dict) and 
-                        not training_metrics.get('cached', False)):
-                        st.success(f"Best performing model: {training_metrics.get('best_model', 'Unknown')}")
+                    # Display only the best model result
+                    if not training_metrics.get('cached', False):
+                        best_model = training_metrics.get('best_model', 'Unknown')
+                        r2_score = training_metrics.get('r2_score', 0)
+                        mae = training_metrics.get('mae', 0)
                         
-                        # Show performance comparison
-                        with st.expander("📊 Model Performance Comparison"):
-                            scores_data = []
-                            all_scores = training_metrics.get('all_scores', {})
-                            if isinstance(all_scores, dict):
-                                for model_name, scores in all_scores.items():
-                                    if isinstance(scores, dict) and 'r2_score' in scores and 'mae' in scores:
-                                        scores_data.append({
-                                            'Model': model_name.replace('_', ' ').title(),
-                                            'R² Score': f"{scores['r2_score']:.3f}",
-                                            'MAE (₹)': f"{scores['mae']:,.0f}"
-                                        })
-                            
-                            if scores_data:
-                                scores_df = pd.DataFrame(scores_data)
-                                st.dataframe(scores_df, use_container_width=True, hide_index=True)
+                        st.success(f"Model trained successfully! Accuracy: {r2_score:.1%}")
                     
                     # Make prediction
                     prediction, all_predictions = predictor.predict(input_data)
