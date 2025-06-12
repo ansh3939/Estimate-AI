@@ -35,7 +35,7 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 
 ## 🛠️ Technology Stack
 
-- **Backend**: Python 3.11+
+- **Backend**: Python 3.13.5+
 - **Web Framework**: Streamlit
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **ML Framework**: scikit-learn, XGBoost
@@ -53,11 +53,26 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 ## 🔧 Installation & Setup
 
 ### Prerequisites
-- Python 3.11+
+- Python 3.13.5+
 - PostgreSQL database
 - OpenAI API key
 
+### Installation for Python 3.13.5
+
+#### Option 1: Automated Setup
+```bash
+# Run the setup script
+python setup.py
+```
+
+#### Option 2: Manual Installation
+```bash
+# Install dependencies
+pip install streamlit>=1.45.1 pandas>=2.3.0 numpy>=2.3.0 plotly>=6.1.2 scikit-learn>=1.7.0 sqlalchemy>=2.0.41 psycopg2-binary>=2.9.10 openai>=1.86.0 xgboost>=3.0.2 joblib>=1.5.1 requests>=2.32.4 beautifulsoup4>=4.13.4 trafilatura>=2.0.0
+```
+
 ### Environment Variables
+Create a `.env` file or export these variables:
 ```bash
 DATABASE_URL=postgresql://user:password@host:port/database
 OPENAI_API_KEY=your_openai_api_key
@@ -71,6 +86,25 @@ PGDATABASE=your_pg_database
 ### Quick Start
 ```bash
 # Run the application
+streamlit run src/main.py --server.port 5000
+```
+
+### macOS Installation (Python 3.13.5)
+```bash
+# Install Python 3.13.5 via Homebrew
+brew install python@3.13
+
+# Install PostgreSQL
+brew install postgresql
+brew services start postgresql
+
+# Create database
+createdb real_estate_db
+
+# Run setup
+python setup.py
+
+# Start application
 streamlit run src/main.py --server.port 5000
 ```
 

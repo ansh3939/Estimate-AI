@@ -9,6 +9,16 @@ import uuid
 import warnings
 warnings.filterwarnings('ignore')
 
+# Check Python version compatibility
+def check_python_version():
+    version = sys.version_info
+    if version.major < 3 or (version.major == 3 and version.minor < 13) or (version.major == 3 and version.minor == 13 and version.micro < 5):
+        st.error(f"Python 3.13.5+ required. Current version: {version.major}.{version.minor}.{version.micro}")
+        st.info("Please upgrade Python or run: python setup.py")
+        st.stop()
+
+check_python_version()
+
 # Add project root to path
 project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, project_root)
