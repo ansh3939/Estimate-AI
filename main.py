@@ -687,7 +687,7 @@ def show_prediction_interface(data):
         col_a, col_b = st.columns(2)
         
         with col_a:
-            cities = sorted(data['city'].unique().tolist())
+            cities = sorted(data['City'].unique().tolist())
             selected_city = st.selectbox("Select City", cities, key="pred_city")
             
             districts = get_districts(data, selected_city)
@@ -697,7 +697,7 @@ def show_prediction_interface(data):
             sub_districts = get_sub_districts(data, selected_city, selected_district)
             selected_sub_district = st.selectbox("Select Sub-District", sub_districts, key="pred_sub_district")
             
-            property_types = sorted(data['property_type'].unique().tolist())
+            property_types = sorted(data['Property_Type'].unique().tolist())
             selected_property_type = st.selectbox("Property Type", property_types, key="pred_property_type")
         
         # Property specifications
@@ -711,11 +711,11 @@ def show_prediction_interface(data):
                                       step=50,
                                       key="pred_area")
             
-            bhk_options = sorted(data['bhk'].unique().tolist())
+            bhk_options = sorted(data['BHK'].unique().tolist())
             selected_bhk = st.selectbox("BHK", bhk_options, key="pred_bhk")
         
         with col_d:
-            furnishing_options = sorted(data['furnishing'].unique().tolist())
+            furnishing_options = sorted(data['Furnishing'].unique().tolist())
             selected_furnishing = st.selectbox("Furnishing", furnishing_options, key="pred_furnishing")
         
         # Predict button
@@ -724,13 +724,13 @@ def show_prediction_interface(data):
                 try:
                     # Prepare input data
                     input_data = {
-                        'city': selected_city,
-                        'district': selected_district,
-                        'sub_district': selected_sub_district,
-                        'area_sqft': area_sqft,
-                        'bhk': selected_bhk,
-                        'property_type': selected_property_type,
-                        'furnishing': selected_furnishing
+                        'City': selected_city,
+                        'District': selected_district,
+                        'Sub_District': selected_sub_district,
+                        'Area_SqFt': area_sqft,
+                        'BHK': selected_bhk,
+                        'Property_Type': selected_property_type,
+                        'Furnishing': selected_furnishing
                     }
                     
                     # Initialize and train predictor
@@ -775,11 +775,11 @@ def show_prediction_interface(data):
         st.markdown("### 📊 Market Overview")
         
         # Quick stats for selected city
-        city_data = data[data['city'] == selected_city]
+        city_data = data[data['City'] == selected_city]
         
         if not city_data.empty:
-            avg_price = city_data['price_inr'].mean()
-            avg_price_per_sqft = city_data['price_per_sqft'].mean()
+            avg_price = city_data['Price_INR'].mean()
+            avg_price_per_sqft = city_data['Price_per_SqFt'].mean()
             total_properties = len(city_data)
             
             st.markdown(f"""
@@ -846,7 +846,7 @@ def show_portfolio_tracker(data):
         col_a, col_b = st.columns(2)
         
         with col_a:
-            cities = sorted(data['city'].unique().tolist())
+            cities = sorted(data['City'].unique().tolist())
             property_city = st.selectbox("Property City", cities, key="portfolio_city")
             
             districts = get_districts(data, property_city)
@@ -856,10 +856,10 @@ def show_portfolio_tracker(data):
             property_sub_district = st.selectbox("Property Sub-District", sub_districts, key="portfolio_sub_district")
         
         with col_b:
-            property_types = sorted(data['property_type'].unique().tolist())
+            property_types = sorted(data['Property_Type'].unique().tolist())
             property_type = st.selectbox("Property Type", property_types, key="portfolio_property_type")
             
-            furnishing_options = sorted(data['furnishing'].unique().tolist())
+            furnishing_options = sorted(data['Furnishing'].unique().tolist())
             property_furnishing = st.selectbox("Furnishing", furnishing_options, key="portfolio_furnishing")
         
         col_c, col_d = st.columns(2)
@@ -872,7 +872,7 @@ def show_portfolio_tracker(data):
                                           step=50,
                                           key="portfolio_area")
             
-            bhk_options = sorted(data['bhk'].unique().tolist())
+            bhk_options = sorted(data['BHK'].unique().tolist())
             property_bhk = st.selectbox("BHK", bhk_options, key="portfolio_bhk")
         
         with col_d:
@@ -1072,7 +1072,7 @@ def show_investment_analyzer(data):
                                               step=100000,
                                               key="investment_budget")
             
-            cities = sorted(data['city'].unique().tolist())
+            cities = sorted(data['City'].unique().tolist())
             target_city = st.selectbox("Target City", cities, key="investment_city")
             
             districts = get_districts(data, target_city)
@@ -1100,7 +1100,7 @@ def show_investment_analyzer(data):
             sub_districts = get_sub_districts(data, target_city, target_district)
             target_sub_district = st.selectbox("Target Sub-District", sub_districts, key="investment_sub_district")
             
-            property_types = sorted(data['property_type'].unique().tolist())
+            property_types = sorted(data['Property_Type'].unique().tolist())
             target_property_type = st.selectbox("Property Type", property_types, key="investment_property_type")
         
         with col_d:
@@ -1111,10 +1111,10 @@ def show_investment_analyzer(data):
                                         step=50,
                                         key="investment_area")
             
-            bhk_options = sorted(data['bhk'].unique().tolist())
+            bhk_options = sorted(data['BHK'].unique().tolist())
             target_bhk = st.selectbox("BHK", bhk_options, key="investment_bhk")
             
-            furnishing_options = sorted(data['furnishing'].unique().tolist())
+            furnishing_options = sorted(data['Furnishing'].unique().tolist())
             target_furnishing = st.selectbox("Furnishing", furnishing_options, key="investment_furnishing")
     
     with col2:
@@ -1133,9 +1133,9 @@ def show_investment_analyzer(data):
         """, unsafe_allow_html=True)
         
         # Market insights for selected city
-        city_data = data[data['city'] == target_city]
+        city_data = data[data['City'] == target_city]
         if not city_data.empty:
-            avg_price_per_sqft = city_data['price_per_sqft'].mean()
+            avg_price_per_sqft = city_data['Price_per_SqFt'].mean()
             st.markdown(f"""
             <div class="metric-card">
                 <h4>{target_city} Avg Price</h4>
@@ -1148,13 +1148,13 @@ def show_investment_analyzer(data):
             try:
                 # Prepare target property data
                 target_property = {
-                    'city': target_city,
-                    'district': target_district,
-                    'sub_district': target_sub_district,
-                    'area_sqft': target_area,
-                    'bhk': target_bhk,
-                    'property_type': target_property_type,
-                    'furnishing': target_furnishing
+                    'City': target_city,
+                    'District': target_district,
+                    'Sub_District': target_sub_district,
+                    'Area_SqFt': target_area,
+                    'BHK': target_bhk,
+                    'Property_Type': target_property_type,
+                    'Furnishing': target_furnishing
                 }
                 
                 # Initialize analyzers
