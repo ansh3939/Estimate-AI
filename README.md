@@ -1,18 +1,18 @@
-# AI Real Estate Intelligence Platform
+# Real Estate Intelligence Platform
 
 ## Overview
 
-A cutting-edge Streamlit-powered AI real estate analytics platform delivering intelligent property insights for the Indian market through advanced machine learning techniques.
+A professional Streamlit-powered real estate analytics platform delivering intelligent property insights for the Indian market through advanced machine learning techniques.
 
 ## 🚀 Features
 
 ### Core Functionality
-- **AI-Powered Property Valuation**: Advanced Random Forest ML models for accurate price predictions
+- **Property Valuation**: Advanced Random Forest ML models for accurate price predictions
 - **Investment Analysis**: Comprehensive ROI calculations and market timing insights
 - **Property Appreciation Trends**: Historical market analysis with future projections
 - **Portfolio Management**: Track existing properties with performance analytics
 - **EMI Calculator**: Sophisticated loan planning with amortization schedules
-- **ARIA AI Assistant**: ChatGPT-powered real estate advisor with context awareness
+- **Real Estate Assistant**: Intelligent real estate advisor with context awareness
 
 ### Advanced Analytics
 - **Market Intelligence**: Real-time market trends and sentiment analysis
@@ -40,8 +40,8 @@ A cutting-edge Streamlit-powered AI real estate analytics platform delivering in
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **ML Framework**: scikit-learn, XGBoost
 - **Data Visualization**: Plotly, Pandas
-- **AI Integration**: OpenAI GPT-4o
-- **Deployment**: Replit Deployments
+- **Natural Language Processing**: OpenAI GPT-4o
+- **Deployment**: Cloud Platform
 
 ## 📊 Data Coverage
 
@@ -79,7 +79,7 @@ streamlit run src/main.py --server.port 5000
 ### Property Valuation
 1. Select city, district, and sub-district
 2. Input property specifications (area, BHK, type, furnishing)
-3. Get instant AI-powered price prediction with confidence intervals
+3. Get instant price prediction with confidence intervals
 
 ### Investment Analysis
 1. Access "View Insights" section
@@ -96,7 +96,7 @@ streamlit run src/main.py --server.port 5000
 2. Input existing property purchase details
 3. Get current valuation and hold/sell recommendations
 
-## 🤖 ARIA AI Assistant
+## 🤖 Real Estate Assistant
 
 Advanced Real Estate Intelligence Assistant provides:
 - Context-aware conversations
@@ -128,7 +128,7 @@ Advanced Real Estate Intelligence Assistant provides:
 
 ## 🚀 Deployment
 
-The platform is optimized for Replit Deployments with:
+The platform is optimized for cloud deployment with:
 - Automatic SSL certificates
 - Global CDN distribution
 - Health monitoring
@@ -144,4 +144,4 @@ Professional Real Estate Analytics Platform - All Rights Reserved
 
 ---
 
-**Built with ❤️ for the Indian Real Estate Market**
+**Professional Real Estate Analytics Platform**
