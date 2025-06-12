@@ -21,7 +21,7 @@ class FastRealEstatePredictor:
                 max_depth=15,
                 min_samples_split=10,
                 min_samples_leaf=5,
-                max_features='sqrt'
+                max_features=None
             ),
             'random_forest': RandomForestRegressor(
                 random_state=42, 
@@ -29,7 +29,7 @@ class FastRealEstatePredictor:
                 max_depth=15,
                 min_samples_split=10,
                 min_samples_leaf=5,
-                max_features='sqrt',
+                max_features=None,
                 bootstrap=True,
                 n_jobs=-1
             ),

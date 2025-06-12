@@ -737,7 +737,25 @@ def show_prediction_interface(data):
                     predictor = FastRealEstatePredictor()
                     
                     # Train model with current data
+                    st.info("Training three ML models: Decision Tree, Random Forest, and XGBoost...")
                     training_metrics = predictor.train_model(data)
+                    
+                    # Display model performance if available
+                    if 'all_scores' in training_metrics and not training_metrics.get('cached', False):
+                        st.success(f"Best performing model: {training_metrics.get('best_model', 'Unknown')}")
+                        
+                        # Show performance comparison
+                        with st.expander("📊 Model Performance Comparison"):
+                            scores_data = []
+                            for model_name, scores in training_metrics['all_scores'].items():
+                                scores_data.append({
+                                    'Model': model_name.replace('_', ' ').title(),
+                                    'R² Score': f"{scores['r2_score']:.3f}",
+                                    'MAE (₹)': f"{scores['mae']:,.0f}"
+                                })
+                            
+                            scores_df = pd.DataFrame(scores_data)
+                            st.dataframe(scores_df, use_container_width=True, hide_index=True)
                     
                     # Make prediction
                     prediction, all_predictions = predictor.predict(input_data)
