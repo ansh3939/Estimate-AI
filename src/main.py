@@ -572,7 +572,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("Analyze Property →", key="analyze_btn", use_container_width=True):
+        if st.button("Analyze Property", key="analyze_btn", use_container_width=True):
             st.session_state.active_section = 'prediction'
             # Clear previous results to show cards first
             if 'prediction_results' in st.session_state:
@@ -589,7 +589,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("View Insights →", key="insights_btn", use_container_width=True):
+        if st.button("View Insights", key="insights_btn", use_container_width=True):
             st.session_state.active_section = 'investment'
             st.rerun()
     
@@ -603,7 +603,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        if st.button("Calculate EMI →", key="emi_btn", use_container_width=True):
+        if st.button("Calculate EMI", key="emi_btn", use_container_width=True):
             st.session_state.active_section = 'financial'
             st.rerun()
     
@@ -622,7 +622,7 @@ def main():
             </div>
             """, unsafe_allow_html=True)
             
-            if st.button("View Trends →", key="trends_btn", use_container_width=True):
+            if st.button("View Trends", key="trends_btn", use_container_width=True):
                 st.session_state.active_section = 'trends'
                 st.rerun()
         
@@ -636,7 +636,7 @@ def main():
             </div>
             """, unsafe_allow_html=True)
             
-            if st.button("Track Portfolio →", key="portfolio_btn", use_container_width=True):
+            if st.button("Track Portfolio", key="portfolio_btn", use_container_width=True):
                 st.session_state.active_section = 'portfolio'
                 st.rerun()
     
@@ -1235,7 +1235,7 @@ def show_floating_chat_icon():
 
 def show_portfolio_tracker():
     """Display portfolio tracking interface for existing properties"""
-    st.header("📊 Property Portfolio Tracker")
+    st.header("Property Portfolio Tracker")
     st.markdown("Track your existing property values, analyze growth performance, and get buy/sell/hold recommendations.")
     
     # Initialize portfolio analyzer
@@ -1266,7 +1266,7 @@ def show_portfolio_tracker():
         purchase_price = st.number_input("Purchase Price (₹)", min_value=100000, max_value=50000000, value=5000000, step=100000)
         purchase_date = st.date_input("Purchase Date", value=pd.to_datetime('2020-01-01'))
         
-        analyze_button = st.button("📈 Analyze My Property", type="primary")
+        analyze_button = st.button("Analyze My Property", type="primary")
     
     with col2:
         if analyze_button:
@@ -1291,7 +1291,7 @@ def show_portfolio_tracker():
                 recommendation = portfolio_analyzer.generate_hold_sell_recommendation(property_analysis, property_data)
                 
                 # Display results
-                st.subheader("📊 Property Analysis Results")
+                st.subheader("Property Analysis Results")
                 
                 # Key metrics
                 col_metric1, col_metric2, col_metric3 = st.columns(3)
@@ -1338,7 +1338,7 @@ def show_portfolio_tracker():
                 """, unsafe_allow_html=True)
                 
                 # Future projections
-                st.subheader("📈 Future Value Projections")
+                st.subheader("Future Value Projections")
                 
                 proj_col1, proj_col2 = st.columns(2)
                 with proj_col1:
@@ -1348,7 +1348,7 @@ def show_portfolio_tracker():
 
 def show_investment_analyzer():
     """Display investment opportunity analyzer"""
-    st.header("💰 Investment Opportunity Analyzer")
+    st.header("Investment Opportunity Analyzer")
     st.markdown("Evaluate whether a property at a specific price is a good investment opportunity.")
     
     # Initialize components
@@ -1378,7 +1378,7 @@ def show_investment_analyzer():
         st.subheader("Investment Parameters")
         asking_price = st.number_input("Asking Price (₹)", min_value=100000, max_value=50000000, value=5000000, step=100000, key="inv_price")
         
-        analyze_investment_button = st.button("🎯 Analyze Investment", type="primary")
+        analyze_investment_button = st.button("Analyze Investment", type="primary")
     
     with col2:
         if analyze_investment_button:
@@ -1400,7 +1400,7 @@ def show_investment_analyzer():
                 )
                 
                 # Display results
-                st.subheader("💡 Investment Analysis")
+                st.subheader("Investment Analysis")
                 
                 # Value comparison
                 col_val1, col_val2 = st.columns(2)
@@ -1444,7 +1444,7 @@ def show_investment_analyzer():
                 """, unsafe_allow_html=True)
                 
                 # ROI projections
-                st.subheader("📊 ROI Projections")
+                st.subheader("ROI Projections")
                 
                 roi_col1, roi_col2, roi_col3 = st.columns(3)
                 with roi_col1:
