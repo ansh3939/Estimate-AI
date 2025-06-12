@@ -23,7 +23,7 @@ from src.analyzers.appreciation_analyzer import PropertyAppreciationAnalyzer
 
 # Page configuration
 st.set_page_config(
-    page_title="AI Real Estate Price Predictor",
+    page_title="Real Estate Price Predictor",
     page_icon="🏢",
     layout="wide",
     initial_sidebar_state="expanded"
