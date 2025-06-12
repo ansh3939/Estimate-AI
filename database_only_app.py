@@ -1524,15 +1524,14 @@ def show_appreciation_trends():
         comparison_df = appreciation_analyzer.compare_cities_performance(selected_cities, years_for_analysis)
         
         # Display comparison table with styling
-        st.dataframe(
-            comparison_df.style.format({
-                'Avg Annual Growth (%)': '{:.1f}%',
-                'CAGR (%)': '{:.1f}%',
-                'Volatility': '{:.1f}',
-                'Cumulative Return (%)': '{:.1f}%'
-            }).background_gradient(subset=['Avg Annual Growth (%)', 'CAGR (%)', 'Cumulative Return (%)']),
-            use_container_width=True
-        )
+        styled_df = comparison_df.style.format({
+            'Avg Annual Growth (%)': '{:.1f}%',
+            'CAGR (%)': '{:.1f}%', 
+            'Volatility': '{:.1f}',
+            'Cumulative Return (%)': '{:.1f}%'
+        })
+        
+        st.dataframe(styled_df, use_container_width=True)
         
         # Focus city detailed analysis
         if focus_city:
