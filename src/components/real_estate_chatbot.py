@@ -8,15 +8,17 @@ import re
 
 class RealEstateChatbot:
     def __init__(self):
-        """Initialize the Real Estate Assistant with comprehensive expertise"""
+        """Initialize the AI-Powered Real Estate Assistant with comprehensive expertise"""
+        # the newest OpenAI model is "gpt-4o" which was released May 13, 2024.
+        # do not change this unless explicitly requested by the user
         self.client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
         self.model = "gpt-4o"
         self.fallback_knowledge = self._build_knowledge_base()
         self.conversation_memory = []
         self.user_preferences = {}
         
-        # Professional system prompt with comprehensive real estate expertise
-        self.system_prompt = """You are a professional real estate expert with decades of experience in the Indian property market. You possess comprehensive knowledge across all aspects of real estate:
+        # Advanced AI system prompt with comprehensive real estate expertise
+        self.system_prompt = """You are ARIA (Advanced Real Estate Intelligence Assistant), an AI-powered real estate expert with comprehensive knowledge of the Indian property market. You possess advanced capabilities across all aspects of real estate:
 
 **CORE EXPERTISE:**
 • Property Investment Strategy & Portfolio Management

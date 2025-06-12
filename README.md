@@ -12,7 +12,7 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 - **Property Appreciation Trends**: Historical market analysis with future projections
 - **Portfolio Management**: Track existing properties with performance analytics
 - **EMI Calculator**: Sophisticated loan planning with amortization schedules
-- **Real Estate Assistant**: Intelligent real estate advisor with context awareness
+- **AI-Powered Real Estate Assistant**: ChatGPT-powered real estate advisor with context awareness
 
 ### Advanced Analytics
 - **Market Intelligence**: Real-time market trends and sentiment analysis
@@ -40,7 +40,7 @@ A professional Streamlit-powered real estate analytics platform delivering intel
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **ML Framework**: scikit-learn, XGBoost
 - **Data Visualization**: Plotly, Pandas
-- **Natural Language Processing**: OpenAI GPT-4o
+- **AI Integration**: OpenAI GPT-4o
 - **Deployment**: Cloud Platform
 
 ## 📊 Data Coverage
@@ -96,10 +96,10 @@ streamlit run src/main.py --server.port 5000
 2. Input existing property purchase details
 3. Get current valuation and hold/sell recommendations
 
-## 🤖 Real Estate Assistant
+## 🤖 AI Real Estate Assistant
 
-Advanced Real Estate Intelligence Assistant provides:
-- Context-aware conversations
+Advanced AI-powered Real Estate Intelligence Assistant provides:
+- Context-aware conversations using ChatGPT
 - Market expertise and regulatory knowledge
 - Investment strategy recommendations
 - Real-time query processing with sentiment analysis
