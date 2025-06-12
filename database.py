@@ -127,7 +127,7 @@ class DatabaseManager:
                 bhk=input_data['BHK'],
                 property_type=input_data['Property_Type'],
                 furnishing=input_data['Furnishing'],
-                predicted_price=prediction_result['predicted_price'],
+                predicted_price=prediction_result['prediction'],
                 model_used=prediction_result.get('model_used', 'Unknown'),
                 investment_score=prediction_result.get('investment_score'),
                 all_predictions=json.dumps(prediction_result.get('all_predictions', {}))

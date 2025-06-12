@@ -757,7 +757,8 @@ def show_prediction_interface(data):
                         'investment_score': investment_score,
                         'investment_recommendation': investment_recommendation,
                         'input_data': input_data,
-                        'training_metrics': training_metrics
+                        'training_metrics': training_metrics,
+                        'model_used': 'FastRealEstatePredictor'
                     }
                     
                     # Save to database
