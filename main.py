@@ -330,7 +330,7 @@ def load_database_data():
         if len(data) < 100:
             st.warning(f"Limited data available: {len(data)} properties")
         else:
-            st.success(f"✅ Successfully loaded {len(data)} properties from database")
+            st.success(f"Successfully loaded {len(data)} properties from database")
         
         return data
         
@@ -376,10 +376,10 @@ def main():
     # Navigation (Visual indicator only)
     st.markdown("""
     <div class="nav-pills">
-        <div class="nav-pill {}">🏠 Property Prediction</div>
-        <div class="nav-pill {}">📊 Portfolio Tracker</div>
-        <div class="nav-pill {}">💰 Investment Analyzer</div>
-        <div class="nav-pill {}">📈 Market Trends</div>
+        <div class="nav-pill {}">Property Property Prediction</div>
+        <div class="nav-pill {}">Analytics Portfolio Tracker</div>
+        <div class="nav-pill {}">Investment Investment Analyzer</div>
+        <div class="nav-pill {}">Market Market Trends</div>
         <div class="nav-pill {}">🧮 EMI Calculator</div>
         <div class="nav-pill {}">🤖 AI Assistant</div>
     </div>
@@ -396,16 +396,16 @@ def main():
     col1, col2, col3, col4, col5, col6 = st.columns(6)
     
     with col1:
-        if st.button("🏠 Property Prediction"):
+        if st.button("Property Property Prediction"):
             st.session_state.page = 'prediction'
     with col2:
-        if st.button("📊 Portfolio Tracker"):
+        if st.button("Analytics Portfolio Tracker"):
             st.session_state.page = 'portfolio'
     with col3:
-        if st.button("💰 Investment Analyzer"):
+        if st.button("Investment Investment Analyzer"):
             st.session_state.page = 'investment'
     with col4:
-        if st.button("📈 Market Trends"):
+        if st.button("Market Market Trends"):
             st.session_state.page = 'trends'
     with col5:
         if st.button("🧮 EMI Calculator"):
@@ -493,7 +493,7 @@ def show_emi_calculator():
         st.markdown("### Quick Info")
         st.markdown("""
         <div class="info-box">
-        <h4>💡 Tips:</h4>
+        <h4>Tips Tips:</h4>
         <ul>
         <li>Lower interest rates save lakhs over tenure</li>
         <li>Shorter tenure = less total interest</li>
@@ -504,7 +504,7 @@ def show_emi_calculator():
         """, unsafe_allow_html=True)
     
     # Calculate EMI
-    if st.button("📊 Calculate EMI", key="calc_emi"):
+    if st.button("Analytics Calculate EMI", key="calc_emi"):
         calculator = EMICalculator()
         
         # Basic EMI calculation
@@ -512,7 +512,7 @@ def show_emi_calculator():
         
         # Display results
         st.markdown("---")
-        st.markdown("## 📊 EMI Calculation Results")
+        st.markdown("## Analytics EMI Calculation Results")
         
         col1, col2, col3, col4 = st.columns(4)
         
@@ -554,7 +554,7 @@ def show_emi_calculator():
                 loan_amount, interest_rate, tenure_years, prepayment_amount, prepayment_month
             )
             
-            st.markdown("### 💰 Prepayment Benefits")
+            st.markdown("### Investment Prepayment Benefits")
             
             col1, col2, col3 = st.columns(3)
             
@@ -583,7 +583,7 @@ def show_emi_calculator():
                 """, unsafe_allow_html=True)
         
         # Amortization schedule
-        st.markdown("### 📋 First Year Payment Schedule")
+        st.markdown("### Schedule First Year Payment Schedule")
         
         schedule = calculator.generate_amortization_schedule(loan_amount, interest_rate, tenure_years, 12)
         
@@ -633,7 +633,7 @@ def show_prediction_results():
     results = st.session_state.prediction_results
     
     st.markdown("---")
-    st.markdown("## 🎯 Prediction Results")
+    st.markdown("## Target Prediction Results")
     
     col1, col2 = st.columns([2, 1])
     
@@ -665,7 +665,7 @@ def show_prediction_results():
     with col2:
         # Price range estimate
         if 'prediction' in results:
-            st.markdown("### 🎯 Price Range Estimate")
+            st.markdown("### Target Price Range Estimate")
             
             base_prediction = results['prediction']
             # Calculate a realistic range based on ±10-15% variation
@@ -686,7 +686,7 @@ def show_prediction_results():
         
         # Feature importance
         if 'feature_importance' in results and results['feature_importance']:
-            st.markdown("### 🎯 Key Factors")
+            st.markdown("### Target Key Factors")
             
             # Sort by importance
             importance_items = sorted(results['feature_importance'].items(), 
@@ -708,7 +708,7 @@ def show_prediction_interface(data):
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("## 🏠 Property Details")
+        st.markdown("## Property Property Details")
         
         # Location inputs
         col_a, col_b = st.columns(2)
@@ -746,7 +746,7 @@ def show_prediction_interface(data):
             selected_furnishing = st.selectbox("Furnishing", furnishing_options, key="pred_furnishing")
         
         # Predict button
-        if st.button("🎯 Predict Property Value", key="predict_btn", use_container_width=True):
+        if st.button("Target Predict Property Value", key="predict_btn", use_container_width=True):
             with st.spinner("Analyzing property data..."):
                 try:
                     # Prepare input data
@@ -805,11 +805,11 @@ def show_prediction_interface(data):
                     st.rerun()
                     
                 except Exception as e:
-                    st.error(f"❌ Prediction failed: {str(e)}")
+                    st.error(f" Prediction failed: {str(e)}")
                     st.info("Please check your inputs and try again")
     
     with col2:
-        st.markdown("### 📊 Market Overview")
+        st.markdown("### Analytics Market Overview")
         
         # Quick stats for selected city
         city_data = data[data['City'] == selected_city]
@@ -871,13 +871,13 @@ def show_portfolio_tracker(data):
     """Display portfolio tracking interface for existing properties"""
     st.markdown('<div class="slide-in">', unsafe_allow_html=True)
     
-    st.markdown("## 📊 Portfolio Tracker")
+    st.markdown("## Analytics Portfolio Tracker")
     st.markdown("Track your existing property investments and get market insights")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("### 🏠 Your Property Details")
+        st.markdown("### Property Your Property Details")
         
         # Property purchase details
         col_a, col_b = st.columns(2)
@@ -928,7 +928,7 @@ def show_portfolio_tracker(data):
                                           key="portfolio_purchase_year")
     
     with col2:
-        st.markdown("### 💡 Portfolio Tips")
+        st.markdown("### Tips Portfolio Tips")
         st.markdown("""
         <div class="info-box">
         <h4>Track Performance:</h4>
@@ -941,7 +941,7 @@ def show_portfolio_tracker(data):
         </div>
         """, unsafe_allow_html=True)
     
-    if st.button("📈 Analyze Portfolio Performance", key="analyze_portfolio"):
+    if st.button("Market Analyze Portfolio Performance", key="analyze_portfolio"):
         with st.spinner("Analyzing your property portfolio..."):
             try:
                 # Prepare property data
@@ -979,7 +979,7 @@ def show_portfolio_tracker(data):
                 
                 # Display results
                 st.markdown("---")
-                st.markdown("## 📊 Portfolio Analysis Results")
+                st.markdown("## Analytics Portfolio Analysis Results")
                 
                 col1, col2, col3, col4 = st.columns(4)
                 
@@ -1026,14 +1026,14 @@ def show_portfolio_tracker(data):
                 rec_color = "#43e97b" if recommendation['recommendation'] == "HOLD" else "#f093fb" if recommendation['recommendation'] == "SELL" else "#4facfe"
                 st.markdown(f"""
                 <div class="chart-container">
-                    <h3>🎯 Investment Recommendation: <span style="color: {rec_color};">{recommendation['recommendation']}</span></h3>
+                    <h3>Target Investment Recommendation: <span style="color: {rec_color};">{recommendation['recommendation']}</span></h3>
                     <p><strong>Reasoning:</strong> {recommendation['reasoning']}</p>
                     <p><strong>Confidence:</strong> {recommendation['confidence_score']:.0f}%</p>
                 </div>
                 """, unsafe_allow_html=True)
                 
                 # Market timing analysis
-                st.markdown("### ⏰ Market Timing Analysis")
+                st.markdown("### Timing Market Timing Analysis")
                 timing_analysis = portfolio_analyzer.generate_market_timing_analysis(property_city)
                 
                 col1, col2 = st.columns(2)
@@ -1057,7 +1057,7 @@ def show_portfolio_tracker(data):
                 # Performance chart
                 years_held = 2024 - purchase_year
                 if years_held > 0:
-                    st.markdown("### 📈 Investment Performance Over Time")
+                    st.markdown("### Market Investment Performance Over Time")
                     
                     # Create performance chart
                     years = list(range(purchase_year, 2025))
@@ -1087,7 +1087,7 @@ def show_portfolio_tracker(data):
                     st.plotly_chart(fig, use_container_width=True)
                 
             except Exception as e:
-                st.error(f"❌ Portfolio analysis failed: {str(e)}")
+                st.error(f" Portfolio analysis failed: {str(e)}")
                 st.info("Please check your inputs and try again")
     
     st.markdown('</div>', unsafe_allow_html=True)
@@ -1096,13 +1096,13 @@ def show_investment_analyzer(data):
     """Display investment opportunity analyzer"""
     st.markdown('<div class="slide-in">', unsafe_allow_html=True)
     
-    st.markdown("## 💰 Investment Opportunity Analyzer")
+    st.markdown("## Investment Investment Opportunity Analyzer")
     st.markdown("Analyze potential investment properties and opportunities")
     
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("### 🎯 Target Property Analysis")
+        st.markdown("### Target Target Property Analysis")
         
         # Investment criteria
         col_a, col_b = st.columns(2)
@@ -1135,7 +1135,7 @@ def show_investment_analyzer(data):
                                         key="risk_tolerance")
         
         # Property specifications for analysis
-        st.markdown("### 🏠 Property Specifications")
+        st.markdown("### Property Property Specifications")
         
         col_c, col_d = st.columns(2)
         
@@ -1161,7 +1161,7 @@ def show_investment_analyzer(data):
             target_furnishing = st.selectbox("Furnishing", furnishing_options, key="investment_furnishing")
     
     with col2:
-        st.markdown("### 💡 Investment Tips")
+        st.markdown("### Tips Investment Tips")
         st.markdown("""
         <div class="info-box">
         <h4>Smart Investing:</h4>
@@ -1186,7 +1186,7 @@ def show_investment_analyzer(data):
             </div>
             """, unsafe_allow_html=True)
     
-    if st.button("🔍 Analyze Investment Opportunity", key="analyze_investment"):
+    if st.button("Search Analyze Investment Opportunity", key="analyze_investment"):
         with st.spinner("Analyzing investment opportunity..."):
             try:
                 # Prepare target property data
@@ -1213,13 +1213,13 @@ def show_investment_analyzer(data):
                         target_property, investment_budget, predictor
                     )
                 except Exception as analysis_error:
-                    st.error(f"❌ Investment analysis failed: {str(analysis_error)}")
+                    st.error(f" Investment analysis failed: {str(analysis_error)}")
                     st.info("Please check your inputs and try again")
                     return
                 
                 # Display results
                 st.markdown("---")
-                st.markdown("## 📊 Investment Analysis Results")
+                st.markdown("## Analytics Investment Analysis Results")
                 
                 col1, col2, col3, col4 = st.columns(4)
                 
@@ -1267,14 +1267,14 @@ def show_investment_analyzer(data):
                 
                 st.markdown(f"""
                 <div class="chart-container">
-                    <h3>🎯 Investment Recommendation</h3>
+                    <h3>Target Investment Recommendation</h3>
                     <h2 style="color: {rec_color};">{recommendation}</h2>
                     <p><strong>Analysis:</strong> {investment_analysis['detailed_analysis']}</p>
                 </div>
                 """, unsafe_allow_html=True)
                 
                 # Risk assessment
-                st.markdown("### ⚠️ Risk Assessment")
+                st.markdown("###  Risk Assessment")
                 
                 col1, col2 = st.columns(2)
                 
@@ -1304,7 +1304,7 @@ def show_investment_analyzer(data):
                 
                 # Projected returns over time
                 if investment_horizon > 1:
-                    st.markdown("### 📈 Projected Investment Returns")
+                    st.markdown("### Market Projected Investment Returns")
                     
                     years = list(range(1, investment_horizon + 1))
                     investment_values = []
@@ -1333,7 +1333,7 @@ def show_investment_analyzer(data):
                     st.plotly_chart(fig, use_container_width=True)
                 
             except Exception as e:
-                st.error(f"❌ Investment analysis failed: {str(e)}")
+                st.error(f" Investment analysis failed: {str(e)}")
                 st.info("Please check your inputs and try again")
     
     st.markdown('</div>', unsafe_allow_html=True)
@@ -1342,7 +1342,7 @@ def show_appreciation_trends():
     """Display property appreciation trends and historical analysis"""
     st.markdown('<div class="slide-in">', unsafe_allow_html=True)
     
-    st.markdown("## 📈 Property Appreciation Trends")
+    st.markdown("## Market Property Appreciation Trends")
     st.markdown("Analyze historical property appreciation and market trends")
     
     # Initialize appreciation analyzer
@@ -1351,7 +1351,7 @@ def show_appreciation_trends():
     col1, col2 = st.columns([2, 1])
     
     with col1:
-        st.markdown("### 🎯 Analysis Parameters")
+        st.markdown("### Target Analysis Parameters")
         
         col_a, col_b = st.columns(2)
         
@@ -1383,7 +1383,7 @@ def show_appreciation_trends():
                                               key="appreciation_investment")
     
     with col2:
-        st.markdown("### 📊 Market Insights")
+        st.markdown("### Analytics Market Insights")
         st.markdown("""
         <div class="info-box">
         <h4>Historical Trends:</h4>
@@ -1397,7 +1397,7 @@ def show_appreciation_trends():
         </div>
         """, unsafe_allow_html=True)
     
-    if st.button("📈 Generate Appreciation Analysis", key="analyze_appreciation"):
+    if st.button("Market Generate Appreciation Analysis", key="analyze_appreciation"):
         with st.spinner("Generating comprehensive market analysis..."):
             try:
                 if not selected_cities:
@@ -1406,7 +1406,7 @@ def show_appreciation_trends():
                 
                 # City comparison analysis
                 st.markdown("---")
-                st.markdown("## 📊 City Performance Comparison")
+                st.markdown("## Analytics City Performance Comparison")
                 
                 comparison_df = appreciation_analyzer.compare_cities_performance(selected_cities, analysis_years)
                 
@@ -1430,14 +1430,14 @@ def show_appreciation_trends():
                         """, unsafe_allow_html=True)
                 
                 # Appreciation trends chart
-                st.markdown("### 📈 Historical Appreciation Trends")
+                st.markdown("### Market Historical Appreciation Trends")
                 
                 trends_chart = appreciation_analyzer.create_appreciation_trends_chart(selected_cities)
                 st.plotly_chart(trends_chart, use_container_width=True)
                 
                 # Detailed analysis for focus city
                 if focus_city:
-                    st.markdown(f"### 🎯 Detailed Analysis: {focus_city}")
+                    st.markdown(f"### Target Detailed Analysis: {focus_city}")
                     
                     focus_metrics = appreciation_analyzer.calculate_appreciation_metrics(focus_city, analysis_years)
                     
@@ -1472,7 +1472,7 @@ def show_appreciation_trends():
                     
                     st.markdown(f"""
                     <div class="chart-container">
-                        <h3>🎯 Investment Recommendation: <span style="color: #667eea;">{recommendations['overall_rating']}</span></h3>
+                        <h3>Target Investment Recommendation: <span style="color: #667eea;">{recommendations['overall_rating']}</span></h3>
                         <p><strong>Best Investment Strategy:</strong> {recommendations['best_strategy']}</p>
                         <p><strong>Expected Return:</strong> {recommendations['expected_annual_return']:.1f}% annually</p>
                         <p><strong>Recommendation:</strong> {recommendations['recommendation_text']}</p>
@@ -1480,7 +1480,7 @@ def show_appreciation_trends():
                     """, unsafe_allow_html=True)
                     
                     # Future projection chart
-                    st.markdown(f"### 🔮 Future Value Projection ({focus_city})")
+                    st.markdown(f"### Future Future Value Projection ({focus_city})")
                     
                     projection_chart = appreciation_analyzer.create_future_projection_chart(
                         focus_city, investment_amount, 10
@@ -1488,14 +1488,14 @@ def show_appreciation_trends():
                     st.plotly_chart(projection_chart, use_container_width=True)
                 
                 # Market insights and recommendations
-                st.markdown("### 💡 Market Insights & Recommendations")
+                st.markdown("### Tips Market Insights & Recommendations")
                 
                 col1, col2 = st.columns(2)
                 
                 with col1:
                     st.markdown("""
                     <div class="success-box">
-                        <h4>🏆 Top Performing Markets</h4>
+                        <h4>Top Top Performing Markets</h4>
                         <p>Based on historical data and growth potential:</p>
                         <ul>
                         <li><strong>Bangalore:</strong> Tech sector driven growth</li>
@@ -1508,7 +1508,7 @@ def show_appreciation_trends():
                 with col2:
                     st.markdown("""
                     <div class="warning-box">
-                        <h4>⚠️ Investment Considerations</h4>
+                        <h4> Investment Considerations</h4>
                         <ul>
                         <li>Market cycles vary by city</li>
                         <li>Infrastructure development impacts</li>
@@ -1519,7 +1519,7 @@ def show_appreciation_trends():
                     """, unsafe_allow_html=True)
                 
             except Exception as e:
-                st.error(f"❌ Appreciation analysis failed: {str(e)}")
+                st.error(f" Appreciation analysis failed: {str(e)}")
                 st.info("Please try again with different parameters")
                 
                 # Add debugging information for development
@@ -1527,7 +1527,7 @@ def show_appreciation_trends():
                     st.info("Debug: Issue with investment recommendations - checking data structure")
                     
                 # Fallback: Show basic city information
-                st.markdown("### 📊 Basic City Information")
+                st.markdown("### Analytics Basic City Information")
                 for city in selected_cities[:3]:
                     try:
                         basic_metrics = appreciation_analyzer.calculate_appreciation_metrics(city, analysis_years)
