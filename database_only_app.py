@@ -1422,10 +1422,13 @@ def show_investment_analyzer():
                     "STRONG AVOID": "🔴"
                 }.get(investment_analysis['investment_recommendation'], "🟡")
                 
+                # Clean the reasoning text to remove any HTML tags
+                clean_reasoning = investment_analysis['reasoning'].replace('<', '&lt;').replace('>', '&gt;')
+                
                 st.markdown(f"""
                 <div style="padding: 1rem; background-color: #f0f8f0; border-radius: 10px; border-left: 5px solid #2E7D32;">
                     <h4>{rec_color} {investment_analysis['investment_recommendation']}</h4>
-                    <p>{investment_analysis['reasoning']}</p>
+                    <p>{clean_reasoning}</p>
                     <p><strong>Confidence Score:</strong> {investment_analysis['confidence_score']:.0f}%</p>
                 </div>
                 """, unsafe_allow_html=True)
