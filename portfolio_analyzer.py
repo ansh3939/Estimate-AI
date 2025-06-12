@@ -46,15 +46,16 @@ class PropertyPortfolioAnalyzer:
         
         # Calculate appreciation
         purchase_price = purchase_data['purchase_price']
-        purchase_date = datetime.strptime(purchase_data['purchase_date'], '%Y-%m-%d')
-        years_held = (datetime.now() - purchase_date).days / 365.25
+        purchase_year = purchase_data.get('purchase_year', 2020)
+        current_year = datetime.now().year
+        years_held = max(1, current_year - purchase_year)  # At least 1 year
         
         # Calculate actual growth
         total_growth = ((current_prediction - purchase_price) / purchase_price) * 100
         annual_growth = total_growth / years_held if years_held > 0 else 0
         
         # Market benchmark growth
-        city = purchase_data['City']
+        city = purchase_data.get('city', purchase_data.get('City', 'Mumbai'))
         expected_annual_growth = self.city_growth_rates.get(city, 7.5)
         expected_current_value = purchase_price * (1 + expected_annual_growth/100) ** years_held
         expected_total_growth = ((expected_current_value - purchase_price) / purchase_price) * 100

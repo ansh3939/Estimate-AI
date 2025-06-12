@@ -588,7 +588,16 @@ def show_emi_calculator():
         schedule = calculator.generate_amortization_schedule(loan_amount, interest_rate, tenure_years, 12)
         
         schedule_df = pd.DataFrame(schedule)
-        schedule_df['Month'] = range(1, len(schedule_df) + 1)
+        
+        # Rename columns to match expected format
+        schedule_df = schedule_df.rename(columns={
+            'month': 'Month',
+            'principal': 'Principal', 
+            'interest': 'Interest',
+            'emi': 'Total Payment',
+            'outstanding': 'Balance'
+        })
+        
         schedule_df = schedule_df[['Month', 'Principal', 'Interest', 'Total Payment', 'Balance']]
         
         # Format numbers

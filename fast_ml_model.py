@@ -134,8 +134,26 @@ class FastRealEstatePredictor:
         
         print("Training all models: Decision Tree, Random Forest, and XGBoost...")
         
+        # Map column names to expected format
+        column_mapping = {
+            'city': 'City',
+            'district': 'District', 
+            'sub_district': 'Sub_District',
+            'area_sqft': 'Area_SqFt',
+            'bhk': 'BHK',
+            'property_type': 'Property_Type',
+            'furnishing': 'Furnishing',
+            'price_inr': 'Price_INR'
+        }
+        
+        # Rename columns in training data
+        mapped_data = data.copy()
+        for old_name, new_name in column_mapping.items():
+            if old_name in mapped_data.columns:
+                mapped_data = mapped_data.rename(columns={old_name: new_name})
+        
         # Prepare features
-        enhanced_data = self._create_simple_features(data)
+        enhanced_data = self._create_simple_features(mapped_data)
         enhanced_data = self._encode_categorical_features(enhanced_data, fit=True)
         
         # Select features
@@ -196,8 +214,26 @@ class FastRealEstatePredictor:
         if not self.model_trained or self.best_model is None:
             raise ValueError("Models not trained yet!")
         
-        # Create DataFrame from input
-        input_df = pd.DataFrame([input_data])
+        # Map lowercase column names to expected format
+        column_mapping = {
+            'city': 'City',
+            'district': 'District', 
+            'sub_district': 'Sub_District',
+            'area_sqft': 'Area_SqFt',
+            'bhk': 'BHK',
+            'property_type': 'Property_Type',
+            'furnishing': 'Furnishing',
+            'price_inr': 'Price_INR'
+        }
+        
+        # Convert input data to expected column names
+        mapped_data = {}
+        for key, value in input_data.items():
+            mapped_key = column_mapping.get(key, key)
+            mapped_data[mapped_key] = value
+        
+        # Create DataFrame from mapped input
+        input_df = pd.DataFrame([mapped_data])
         
         # Create features
         enhanced_input = self._create_simple_features(input_df)
