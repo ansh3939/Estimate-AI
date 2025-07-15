@@ -387,9 +387,6 @@ def main():
         if st.button("Investment Analyzer", key="nav_investment", type="primary" if st.session_state.page == 'investment' else "secondary"):
             st.session_state.page = 'investment'
     with col4:
-        if st.button("Market Trends", key="nav_trends", type="primary" if st.session_state.page == 'trends' else "secondary"):
-            st.session_state.page = 'trends'
-    with col5:
         if st.button("EMI Calculator", key="nav_emi", type="primary" if st.session_state.page == 'emi' else "secondary"):
             st.session_state.page = 'emi'
     
@@ -400,8 +397,6 @@ def main():
         show_portfolio_tracker(data)
     elif st.session_state.page == 'investment':
         show_investment_analyzer(data)
-    elif st.session_state.page == 'trends':
-        show_appreciation_trends()
     elif st.session_state.page == 'emi':
         show_emi_calculator()
     
