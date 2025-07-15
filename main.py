@@ -2,7 +2,7 @@ import streamlit as st
 
 # Page configuration - MUST be first Streamlit command
 st.set_page_config(
-    page_title="Real Estate Price Predictor",
+    page_title="EstiMate AI",
     page_icon="RE",
     layout="wide"
 )
@@ -31,7 +31,6 @@ from database import db_manager
 from fast_ml_model import FastRealEstatePredictor
 from investment_analyzer import InvestmentAnalyzer
 from emi_calculator import EMICalculator
-from real_estate_chatbot import RealEstateChatbot
 from portfolio_analyzer import PropertyPortfolioAnalyzer
 from appreciation_analyzer import PropertyAppreciationAnalyzer
 
@@ -279,8 +278,6 @@ if 'page' not in st.session_state:
     st.session_state.page = 'prediction'
 if 'prediction_results' not in st.session_state:
     st.session_state.prediction_results = None
-if 'show_chatbot' not in st.session_state:
-    st.session_state.show_chatbot = False
 
 @st.cache_data
 def load_database_data():
@@ -318,8 +315,6 @@ def load_database_data():
         
         if len(data) < 100:
             st.warning(f"Limited data available: {len(data)} properties")
-        else:
-            st.success(f"Successfully loaded {len(data)} properties from database")
         
         return data
         
@@ -357,13 +352,13 @@ def main():
     # Header
     st.markdown("""
     <div class="main-header">
-        <h1>Real Estate Price Predictor</h1>
+        <h1>EstiMate AI</h1>
         <p>Professional Property Analytics Platform with ML-Powered Predictions</p>
     </div>
     """, unsafe_allow_html=True)
     
     # Interactive Navigation
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
+    col1, col2, col3, col4, col5 = st.columns(5)
     
     with col1:
         if st.button("Property Prediction", key="nav_prediction", type="primary" if st.session_state.page == 'prediction' else "secondary"):
@@ -380,9 +375,6 @@ def main():
     with col5:
         if st.button("EMI Calculator", key="nav_emi", type="primary" if st.session_state.page == 'emi' else "secondary"):
             st.session_state.page = 'emi'
-    with col6:
-        if st.button("AI Assistant", key="nav_chatbot", type="primary" if st.session_state.page == 'chatbot' else "secondary"):
-            st.session_state.page = 'chatbot'
     
     # Show selected page
     if st.session_state.page == 'prediction':
@@ -395,11 +387,6 @@ def main():
         show_appreciation_trends()
     elif st.session_state.page == 'emi':
         show_emi_calculator()
-    elif st.session_state.page == 'chatbot':
-        show_chatbot_interface()
-    
-    # Show floating chat icon
-    show_floating_chat_icon()
     
     # Show prediction results if available
     if st.session_state.prediction_results and st.session_state.page == 'prediction':
@@ -409,7 +396,7 @@ def show_emi_calculator():
     """Display EMI calculator interface"""
     st.markdown('<div class="slide-in">', unsafe_allow_html=True)
     
-    st.markdown("## 🧮 EMI Calculator")
+    st.markdown("## EMI Calculator")
     st.markdown("Calculate your monthly EMI and analyze loan details")
     
     col1, col2 = st.columns([2, 1])
@@ -440,24 +427,6 @@ def show_emi_calculator():
                                          value=20,
                                          step=1,
                                          help="Typical home loan tenure is 15-25 years")
-            
-            # Optional prepayment
-            prepayment_amount = st.number_input("One-time Prepayment (₹)", 
-                                              min_value=0, 
-                                              max_value=10000000, 
-                                              value=0,
-                                              step=50000,
-                                              help="Optional prepayment amount")
-        
-        if prepayment_amount > 0:
-            prepayment_month = st.number_input("Prepayment Month", 
-                                             min_value=1, 
-                                             max_value=tenure_years*12, 
-                                             value=12,
-                                             step=1,
-                                             help="Month when prepayment will be made")
-        else:
-            prepayment_month = 0
     
     with col2:
         st.markdown("### Quick Info")
@@ -518,40 +487,6 @@ def show_emi_calculator():
             </div>
             """, unsafe_allow_html=True)
         
-        # Prepayment analysis
-        if prepayment_amount > 0:
-            prepayment_result = calculator.calculate_prepayment_savings(
-                loan_amount, interest_rate, tenure_years, prepayment_amount, prepayment_month
-            )
-            
-            st.markdown("### Investment Prepayment Benefits")
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.markdown(f"""
-                <div class="success-box">
-                    <h4>Interest Saved</h4>
-                    <h3>₹{prepayment_result['interest_saved']:,.0f}</h3>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            with col2:
-                st.markdown(f"""
-                <div class="success-box">
-                    <h4>Time Saved</h4>
-                    <h3>{prepayment_result['time_saved_months']:.0f} months</h3>
-                </div>
-                """, unsafe_allow_html=True)
-            
-            with col3:
-                st.markdown(f"""
-                <div class="success-box">
-                    <h4>New Tenure</h4>
-                    <h3>{prepayment_result['new_tenure_months']:.0f} months</h3>
-                </div>
-                """, unsafe_allow_html=True)
-        
         # Amortization schedule
         st.markdown("### Schedule First Year Payment Schedule")
         
@@ -578,20 +513,6 @@ def show_emi_calculator():
         
         # Payment breakdown chart
 
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-
-def show_chatbot_interface():
-    """Display the AI chatbot interface"""
-    st.markdown('<div class="slide-in">', unsafe_allow_html=True)
-    
-    # Initialize chatbot
-    if 'chatbot' not in st.session_state:
-        st.session_state.chatbot = RealEstateChatbot()
-        st.session_state.chatbot.initialize_chat_history()
-    
-    # Render chatbot interface
-    st.session_state.chatbot.render_chatbot_interface()
     
     st.markdown('</div>', unsafe_allow_html=True)
 
@@ -795,15 +716,6 @@ def show_prediction_interface(data):
         """, unsafe_allow_html=True)
     
     st.markdown('</div>', unsafe_allow_html=True)
-
-def show_floating_chat_icon():
-    """Display static floating chat icon in bottom right corner"""
-    if not st.session_state.show_chatbot:
-        st.markdown("""
-        <div class="floating-chat" onclick="alert('Click the AI Assistant button above to access the chatbot!')">
-            <span style="font-size: 24px;">🤖</span>
-        </div>
-        """, unsafe_allow_html=True)
 
 def show_portfolio_tracker(data):
     """Display portfolio tracking interface for existing properties"""
@@ -1273,205 +1185,6 @@ def show_investment_analyzer(data):
             except Exception as e:
                 st.error(f" Investment analysis failed: {str(e)}")
                 st.info("Please check your inputs and try again")
-    
-    st.markdown('</div>', unsafe_allow_html=True)
-
-def show_appreciation_trends():
-    """Display property appreciation trends and historical analysis"""
-    st.markdown('<div class="slide-in">', unsafe_allow_html=True)
-    
-    st.markdown("## Market Property Appreciation Trends")
-    st.markdown("Analyze historical property appreciation and market trends")
-    
-    # Initialize appreciation analyzer
-    appreciation_analyzer = PropertyAppreciationAnalyzer()
-    
-    col1, col2 = st.columns([2, 1])
-    
-    with col1:
-        st.markdown("### Target Analysis Parameters")
-        
-        col_a, col_b = st.columns(2)
-        
-        with col_a:
-            # City selection for analysis
-            major_cities = ["Mumbai", "Delhi", "Bangalore", "Chennai", "Hyderabad", "Pune", "Kolkata", "Ahmedabad"]
-            selected_cities = st.multiselect("Select Cities for Comparison", 
-                                           major_cities, 
-                                           default=["Mumbai", "Delhi", "Bangalore"],
-                                           key="appreciation_cities")
-            
-            analysis_years = st.number_input("Analysis Period (Years)", 
-                                           min_value=1, 
-                                           max_value=20, 
-                                           value=5,
-                                           step=1,
-                                           key="appreciation_years")
-        
-        with col_b:
-            focus_city = st.selectbox("Focus City for Detailed Analysis", 
-                                    selected_cities if selected_cities else major_cities[:1],
-                                    key="focus_city")
-            
-            investment_amount = st.number_input("Hypothetical Investment (₹)", 
-                                              min_value=1000000, 
-                                              max_value=50000000, 
-                                              value=5000000,
-                                              step=500000,
-                                              key="appreciation_investment")
-    
-    with col2:
-        st.markdown("### Historical Trends")
-        st.markdown("""
-        <div class="info-box">
-        <h4>Market Performance:</h4>
-        <ul>
-        <li>Mumbai: Premium market leader</li>
-        <li>Bangalore: Tech hub growth</li>
-        <li>Delhi NCR: Consistent performer</li>
-        <li>Chennai: Stable appreciation</li>
-        <li>Pune: Emerging hotspot</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    if st.button("Market Generate Appreciation Analysis", key="analyze_appreciation"):
-        with st.spinner("Generating comprehensive market analysis..."):
-            try:
-                if not selected_cities:
-                    st.error("Please select at least one city for analysis")
-                    return
-                
-                # City comparison analysis
-                st.markdown("---")
-                st.markdown("## Analytics City Performance Comparison")
-                
-                comparison_df = appreciation_analyzer.compare_cities_performance(selected_cities, analysis_years)
-                
-                # Display comparison table
-                st.dataframe(comparison_df, use_container_width=True)
-                
-                # Performance metrics for each city
-                col1, col2, col3, col4 = st.columns(4)
-                
-                for i, city in enumerate(selected_cities[:4]):
-                    city_metrics = appreciation_analyzer.calculate_appreciation_metrics(city, analysis_years)
-                    
-                    with [col1, col2, col3, col4][i]:
-                        color = "#43e97b" if city_metrics['average_annual_growth'] > 8 else "#f093fb" if city_metrics['average_annual_growth'] > 5 else "#ff6b6b"
-                        st.markdown(f"""
-                        <div class="metric-card">
-                            <h4>{city}</h4>
-                            <h3 style="color: {color};">{city_metrics['average_annual_growth']:.1f}%</h3>
-                            <small>Annual Growth</small>
-                        </div>
-                        """, unsafe_allow_html=True)
-                
-                # Appreciation trends chart
-                st.markdown("### Market Historical Appreciation Trends")
-                
-                trends_chart = appreciation_analyzer.create_appreciation_trends_chart(selected_cities)
-                st.plotly_chart(trends_chart, use_container_width=True)
-                
-                # Detailed analysis for focus city
-                if focus_city:
-                    st.markdown(f"### Target Detailed Analysis: {focus_city}")
-                    
-                    focus_metrics = appreciation_analyzer.calculate_appreciation_metrics(focus_city, analysis_years)
-                    
-                    col1, col2, col3 = st.columns(3)
-                    
-                    with col1:
-                        st.markdown(f"""
-                        <div class="metric-card">
-                            <h4>Average Growth</h4>
-                            <h3>{focus_metrics['average_annual_growth']:.1f}%</h3>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    with col2:
-                        st.markdown(f"""
-                        <div class="metric-card">
-                            <h4>Market Phase</h4>
-                            <h3>{focus_metrics['market_phase']}</h3>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    with col3:
-                        st.markdown(f"""
-                        <div class="metric-card">
-                            <h4>Risk Level</h4>
-                            <h3>{focus_metrics['risk_level']}</h3>
-                        </div>
-                        """, unsafe_allow_html=True)
-                    
-                    # Investment recommendations
-                    recommendations = appreciation_analyzer.get_investment_recommendations(focus_city, analysis_years)
-                    
-                    st.markdown(f"""
-                    <div class="chart-container">
-                        <h3>Target Investment Recommendation: <span style="color: #667eea;">{recommendations['overall_rating']}</span></h3>
-                        <p><strong>Best Investment Strategy:</strong> {recommendations['best_strategy']}</p>
-                        <p><strong>Expected Return:</strong> {recommendations['expected_annual_return']:.1f}% annually</p>
-                        <p><strong>Recommendation:</strong> {recommendations['recommendation_text']}</p>
-                    </div>
-                    """, unsafe_allow_html=True)
-                    
-                    # Future projection chart
-                    st.markdown(f"### Future Future Value Projection ({focus_city})")
-                    
-                    projection_chart = appreciation_analyzer.create_future_projection_chart(
-                        focus_city, investment_amount, 10
-                    )
-                    st.plotly_chart(projection_chart, use_container_width=True)
-                
-                # Market insights and recommendations
-                st.markdown("### Tips Market Insights & Recommendations")
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.markdown("""
-                    <div class="success-box">
-                        <h4>Top Top Performing Markets</h4>
-                        <p>Based on historical data and growth potential:</p>
-                        <ul>
-                        <li><strong>Bangalore:</strong> Tech sector driven growth</li>
-                        <li><strong>Mumbai:</strong> Financial capital premium</li>
-                        <li><strong>Pune:</strong> Emerging IT hub</li>
-                        </ul>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-                with col2:
-                    st.markdown("""
-                    <div class="warning-box">
-                        <h4> Investment Considerations</h4>
-                        <ul>
-                        <li>Market cycles vary by city</li>
-                        <li>Infrastructure development impacts</li>
-                        <li>Economic policy changes</li>
-                        <li>Local demand-supply dynamics</li>
-                        </ul>
-                    </div>
-                    """, unsafe_allow_html=True)
-                
-            except Exception as e:
-                st.error(f" Appreciation analysis failed: {str(e)}")
-                st.info("Please try again with different parameters")
-                
-                # Add debugging information for development
-                if str(e).find("expected_annual_return") != -1:
-                    st.info("Debug: Issue with investment recommendations - checking data structure")
-                    
-                # Fallback: Show basic city information
-                st.markdown("### Analytics Basic City Information")
-                for city in selected_cities[:3]:
-                    try:
-                        basic_metrics = appreciation_analyzer.calculate_appreciation_metrics(city, analysis_years)
-                        st.info(f"**{city}**: Average growth {basic_metrics.get('average_annual_growth', 7.5):.1f}% annually")
-                    except:
-                        st.info(f"**{city}**: Market data temporarily unavailable")
     
     st.markdown('</div>', unsafe_allow_html=True)
 
