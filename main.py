@@ -374,19 +374,18 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Interactive Navigation
-    col1, col2, col3, col4, col5 = st.columns(5)
-    
-    with col1:
+    # Navigation Bar Alignment Fix
+    nav_cols = st.columns(4)
+    with nav_cols[0]:
         if st.button("Property Prediction", key="nav_prediction", type="primary" if st.session_state.page == 'prediction' else "secondary"):
             st.session_state.page = 'prediction'
-    with col2:
+    with nav_cols[1]:
         if st.button("Portfolio Tracker", key="nav_portfolio", type="primary" if st.session_state.page == 'portfolio' else "secondary"):
             st.session_state.page = 'portfolio'
-    with col3:
+    with nav_cols[2]:
         if st.button("Investment Analyzer", key="nav_investment", type="primary" if st.session_state.page == 'investment' else "secondary"):
             st.session_state.page = 'investment'
-    with col4:
+    with nav_cols[3]:
         if st.button("EMI Calculator", key="nav_emi", type="primary" if st.session_state.page == 'emi' else "secondary"):
             st.session_state.page = 'emi'
     
