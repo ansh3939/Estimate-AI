@@ -342,6 +342,23 @@ def get_sub_districts(data, city, district):
     filtered_data = data[(data['City'] == city) & (data['District'] == district)]
     return sorted(filtered_data['Sub_District'].unique().tolist())
 
+# Helper function for Indian currency formatting
+
+def format_inr(number):
+    s = str(int(number))
+    if len(s) <= 3:
+        return s
+    else:
+        last_three = s[-3:]
+        rest = s[:-3]
+        parts = []
+        while len(rest) > 2:
+            parts.append(rest[-2:])
+            rest = rest[:-2]
+        if rest:
+            parts.append(rest)
+        return ','.join(parts[::-1]) + ',' + last_three
+
 def main():
     # Load data
     data = load_database_data()
@@ -537,8 +554,8 @@ def show_prediction_results():
         st.markdown(f"""
         <div class="prediction-result">
             <h2>Predicted Property Value Range</h2>
-            <h1>₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}</h1>
-            <p>Best Estimate: ₹{base_prediction:,.0f}</p>
+            <h1>₹{format_inr(lower_bound)} - ₹{format_inr(upper_bound)}</h1>
+            <p>Best Estimate: ₹{format_inr(base_prediction)}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -566,8 +583,8 @@ def show_prediction_results():
             st.markdown(f"""
             <div class="price-range-card">
                 <h4>Estimated Property Value Range</h4>
-                <h2>₹{lower_bound:,.0f} - ₹{upper_bound:,.0f}</h2>
-                <p>Best Estimate: ₹{base_prediction:,.0f}</p>
+                <h2>₹{format_inr(lower_bound)} - ₹{format_inr(upper_bound)}</h2>
+                <p>Best Estimate: ₹{format_inr(base_prediction)}</p>
             </div>
             """, unsafe_allow_html=True)
             
