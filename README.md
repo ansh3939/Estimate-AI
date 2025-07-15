@@ -44,7 +44,7 @@ EstiMate AI is a professional property analytics platform with ML-powered predic
 - `investment_analyzer.py` — Investment analysis
 - `portfolio_analyzer.py` — Portfolio tracking
 - `appreciation_analyzer.py` — Appreciation analysis (if present)
-- `complete_property_dataset.csv` — Sample property data
+- `complete_property_dataset.csv` — property data
 
 ## License
 This project is open source and available under the MIT License.
