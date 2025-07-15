@@ -12,27 +12,29 @@ EstiMate AI is a professional property analytics platform with ML-powered predic
 ## Getting Started
 
 ### Prerequisites
-- Python 3.8+
-- pip
+- Python 3.8 or higher
+- pip (Python package manager)
 
-### Installation
-1. Clone the repository:
+### Installation & Setup
+1. **Clone the repository:**
    ```bash
    git clone https://github.com/ansh3939/Estimate-AI.git
    cd Estimate-AI
    ```
-2. Install dependencies:
+2. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
    ```
-   *(If `requirements.txt` is missing, install: streamlit, pandas, numpy, scikit-learn, xgboost, sqlalchemy, psycopg2-binary)*
+3. **Run the web application:**
+   ```bash
+   streamlit run main.py
+   ```
+   The app will be available at [http://localhost:8501](http://localhost:8501) by default.
 
-### Usage
-Run the web application with:
-```bash
-streamlit run main.py
-```
-The app will be available at [http://localhost:8502](http://localhost:8502) (or the port you specify).
+### Notes
+- Make sure you have an internet connection for the first run (to download dependencies).
+- If you want to use a different port, add `--server.port <port>` to the run command.
+- If you encounter any issues, ensure all dependencies are installed and you are using a compatible Python version.
 
 ## Project Structure
 - `main.py` — Main Streamlit app
